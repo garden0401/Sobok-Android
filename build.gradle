@@ -21,6 +21,9 @@ buildscript {
 
         //koin
         koin_version = "2.2.3"
+
+        // room
+        room_version = "2.4.0"
     }
     repositories {
         google()
