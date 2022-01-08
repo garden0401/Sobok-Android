@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/font/pretendard.xml" value="0.2838541666666667" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/activity_main.xml" value="0.24974358974358973" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_pill_add_calendar.xml" value="0.2390625" />
       </map>
     </option>
   </component>
