@@ -3,9 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_alarm.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_home.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_plus.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_share.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/font/font_pretendard.xml" value="0.2838541666666667" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/font/pretendard.xml" value="0.2838541666666667" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/activity_main.xml" value="0.24974358974358973" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/activity_pill_add_reject.xml" value="0.25364583333333335" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_home.xml" value="0.25364583333333335" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_notice.xml" value="0.25364583333333335" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_pill_add_calendar.xml" value="0.2390625" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_share.xml" value="0.25364583333333335" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/menu/menu_bottom_navi.xml" value="0.25364583333333335" />
       </map>
     </option>
   </component>
