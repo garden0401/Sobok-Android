@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/selector_menu_home"
+        android:title="@string/menu_home" />
+
+    <item
+        android:id="@+id/shareFragment"
+        android:icon="@drawable/selector_menu_share"
+        android:title="@string/menu_share" />
+
+    <item
+        android:id="@+id/noticeFragment"
+        android:icon="@drawable/selector_menu_alarm"
+        android:title="@string/menu_notice" />
+
+    <item
+        android:id="@+id/menu_pill_add"
+        android:title="@string/menu_pill_add" />
+</menu>

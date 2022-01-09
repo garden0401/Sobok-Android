@@ -12,34 +12,34 @@
         android:theme="@style/Theme.SobokAndroid">
         <activity
             android:name=".presentation.view.pill.add.PillAddRejectActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.view.pill.PillEditActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.view.pill.PillReceiveActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.view.share.request.ShareRequestActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.view.pill.add.PillAddCalendarActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.view.pill.add.PillAddActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.view.share.ShareNameEditActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.view.user.SignUpActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.view.user.SignInActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.view.splash.SplashActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.view.MainActivity"
             android:exported="true">
