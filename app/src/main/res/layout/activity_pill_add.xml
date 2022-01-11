@@ -10,16 +10,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         tools:context=".presentation.view.pill.add.PillAddActivity">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_semi_bold"
-            android:text="다음"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-        </Button>
 
         <ImageView
             android:id="@+id/iv_cancel"
@@ -32,12 +26,12 @@
             app:srcCompat="@drawable/ic_close_48" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_add_pill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
             android:layout_marginTop="12dp"
-            android:text="내 약 추가하기"
+            android:text="@string/add_pill"
             android:textColor="@color/gray900_sub"
             android:textSize="17sp"
             app:layout_constraintStart_toEndOf="@+id/iv_cancel"
@@ -49,6 +43,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_cancel" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_fill_mint"
+            android:text="@string/save"
+            android:textColor="@color/white_sub"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

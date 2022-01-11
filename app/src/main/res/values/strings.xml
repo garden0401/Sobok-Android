@@ -7,4 +7,5 @@
     <string name="save">저장</string>
     <string name="add_new_pill">새로운 약 추가하기</string>
     <string name="can_save_5pills">복약 중인 약을 포함해 \n 최대 5개까지 저장할 수 있어요</string>
+    <string name="add_pill">내 약 추가하기</string>
 </resources>
