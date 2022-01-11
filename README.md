@@ -45,7 +45,7 @@
 ## 폴더링 구조
 
 <p float="left">
-<img src= "https://user-images.githubusercontent.com/49150980/148904533-22916e4c-22da-4b38-a665-b0106a6d8f4d.png" width="30%" height="30%">
+<img src= https://user-images.githubusercontent.com/49150980/148904533-22916e4c-22da-4b38-a665-b0106a6d8f4d.png width="30%" height="30%">
 </p>
 
 
