@@ -1,6 +1,7 @@
 # 💊SobokSobok-Android💊
 
-![img](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fd61696f0-027d-4467-a1f0-db3a3cb0e1b5%2FApp_icon.png?table=block&id=ef067ba7-ac7d-4f13-950b-0c68c2e91a6e&spaceId=aa0aaf11-e668-4c68-b9d3-f30c4b566991&width=2000&userId=223d637f-7cab-47c8-b165-f41ea99f4cb7&cache=v2)
+<img width="455" alt="소복소복로고" src="https://user-images.githubusercontent.com/49150980/148910311-4beb159b-241b-43c3-9715-fae2bc818fcf.png">
+
 
 ## Contributor
 
