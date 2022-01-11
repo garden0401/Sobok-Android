@@ -1,14 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraingLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".presentation.view.pill.add.PillAddFinishFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tv_person_take_pill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/person_take_pill"
+        android:textColor="@color/black_sub"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_add_pill_count_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/rectangle_fill_lightmint_radius8dp"
+        android:padding="6dp"
+        android:text="@string/pill_count_msg"
+        android:textAlignment="center"
+        android:textColor="@color/dark_mint_main"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_person_take_pill"
+        app:layout_constraintTop_toBottomOf="@+id/tv_person_take_pill" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_pill_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/rectangle_border_gray"
+        android:paddingBottom="11dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_add_pill_count_msg"
+        app:layout_constraintStart_toStartOf="@+id/tv_add_pill_count_msg"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_pill_count_msg"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_pill_add_pill_info" />
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_fill_gray100"
+        app:layout_constraintEnd_toEndOf="@+id/rcv_pill_list"
+        app:layout_constraintStart_toStartOf="@+id/rcv_pill_list"
+        app:layout_constraintTop_toBottomOf="@+id/rcv_pill_list">
+
+        <TextView
+            android:id="@+id/tv_add_new_pill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rectangle_fill_gray100"
+            android:text="@string/add_new_pill"
+            android:textSize="18sp"
+            android:textColor="@color/gray500_sub"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add_new_pill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_add_new_pill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_frame_48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_pill_count_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/can_save_5pills"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/btn_save"
+        app:layout_constraintStart_toStartOf="@+id/btn_save"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_fill_mint"
+        android:text="@string/save"
+        android:textColor="@color/white_sub"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rcv_pill_list"
+        app:layout_constraintStart_toStartOf="@+id/rcv_pill_list" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
