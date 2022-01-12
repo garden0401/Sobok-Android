@@ -7,21 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ActivityPillAddBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class PillAddBottomSheetFragment : Fragment() {
-
+class PillAddBottomSheetFragment : BottomSheetDialogFragment(){
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_pill_add_bottom_sheet, container, false)
-    }
-
-    private fun gotoPillAddInfo() {
-        val pillAddInfo = PillAddInfo()
-
-
     }
 
 }
