@@ -3,6 +3,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- 약추가 -->
+    <string name="person_take_pill">내가 먹을 약아에요</string>
+    <string name="pill_count_msg">1개 더 추가할 수 있어요</string>
+    <string name="save">저장</string>
+    <string name="add_new_pill">새로운 약 추가하기</string>
+    <string name="can_save_5pills">복약 중인 약을 포함해 \n 최대 5개까지 저장할 수 있어요</string>
+    <string name="add_pill">내 약 추가하기</string>
+
     <!-- Main -->
     <string name="menu_home">홈</string>
     <string name="menu_share">공유</string>
