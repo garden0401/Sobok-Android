@@ -16,10 +16,15 @@
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_pill_add_calendar.xml" value="0.2390625" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_share.xml" value="0.25364583333333335" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/menu/menu_bottom_navi.xml" value="0.25364583333333335" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_fill_gray200.xml" value="0.36974358974358973" />
         <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_fill_gray_horizon.xml" value="0.36974358974358973" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/activity_pill_add.xml" value="0.17477203647416414" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/selector_menu_plus.xml" value="0.36974358974358973" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/activity_main.xml" value="0.4466666666666667" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/activity_pill_add.xml" value="0.3333333333333333" />
         <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/fragment_fill_add_bottom_sheet.xml" value="0.32065217391304346" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/fragment_pill_add_finish.xml" value="0.17477203647416414" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/fragment_pill_add_bottom_sheet.xml" value="0.32065217391304346" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/fragment_pill_add_finish.xml" value="0.4466666666666667" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/fragment_pill_add_info.xml" value="0.32065217391304346" />
       </map>
     </option>
   </component>
