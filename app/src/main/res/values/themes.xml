@@ -14,4 +14,9 @@
         <!-- Customize your theme here. -->
         <item name="android:includeFontPadding">false</item>
     </style>
+
+    <style name="PillAddTitle" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textColor">@color/gray800_sub</item>
+        <item name="android:textSize">15sp</item>
+    </style>
 </resources>
