@@ -3,27 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_alarm.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_home.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_plus.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_share.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/font/font_pretendard.xml" value="0.2838541666666667" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/font/pretendard.xml" value="0.2838541666666667" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/activity_main.xml" value="0.24974358974358973" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/activity_pill_add_reject.xml" value="0.25364583333333335" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_home.xml" value="0.25364583333333335" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_notice.xml" value="0.25364583333333335" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_pill_add_calendar.xml" value="0.2390625" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/circle_fill_red.xml" value="0.17407407407407408" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/ic_close_48.xml" value="1.6178571428571429" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/ic_frame_48.xml" value="0.36974358974358973" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2359375" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/oval_fill_mint.xml" value="0.2328125" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/oval_fill_orange.xml" value="0.2328125" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/oval_fill_pink.xml" value="0.2328125" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/oval_fill_purple.xml" value="0.2328125" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_border_gray.xml" value="0.2296875" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_fill_gray.xml" value="0.22916666666666666" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_fill_gray150.xml" value="0.36974358974358973" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_fill_lightmint.xml" value="0.22916666666666666" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_fill_lightmint_radius8dp.xml" value="0.2296875" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_fill_mint.xml" value="0.21302083333333333" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/activity_main.xml" value="0.21557971014492755" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/activity_pill_add.xml" value="0.22" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/fragment_pill_add_finish.xml" value="0.3333333333333333" />
-        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/item_pill_add_pill_info.xml" value="0.4466666666666667" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_share.xml" value="0.25364583333333335" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/menu/menu_bottom_navi.xml" value="0.25364583333333335" />
       </map>
     </option>
   </component>
