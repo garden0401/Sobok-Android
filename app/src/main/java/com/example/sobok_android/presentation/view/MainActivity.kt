@@ -1,7 +1,6 @@
 package com.example.sobok_android.presentation.view
 
 import android.os.Bundle
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -9,7 +8,6 @@ import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ActivityMainBinding
 import com.example.sobok_android.presentation.base.BindingActivity
 import com.example.sobok_android.presentation.view.pill.add.PillAddBottomSheetFragment
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -18,7 +16,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         super.onCreate(savedInstanceState)
         setNavigation()
 
-
+        gotoPillAdd()
     }
 
     private fun setNavigation() {
@@ -29,9 +27,9 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     private fun gotoPillAdd() {
         val pillAddBtn = binding.button
+        val bottomSheet = PillAddBottomSheetFragment()
 
         pillAddBtn.setOnClickListener {
-            val bottomSheet = PillAddBottomSheetFragment()
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
         }
     }
