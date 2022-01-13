@@ -16,5 +16,6 @@
     <string name="menu_share">공유</string>
     <string name="menu_notice">알림</string>
     <string name="menu_pill_add">약추가</string>
+    <string name="pill_add_msg">약추가</string>
 
 </resources>
