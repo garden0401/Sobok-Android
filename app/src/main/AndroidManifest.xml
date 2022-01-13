@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SobokAndroid">
         <activity
+            android:name=".PillAddFinishActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.pill.add.PillAddRejectActivity"
             android:exported="false" />
         <activity
