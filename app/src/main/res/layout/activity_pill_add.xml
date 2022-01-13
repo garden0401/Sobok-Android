@@ -10,9 +10,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
         tools:context=".presentation.view.pill.add.PillAddActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,14 +41,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <ScrollView
+            android:id="@+id/pill_add_scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:paddingHorizontal="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_tab_constraintLayout">
+            app:layout_constraintTop_toBottomOf="@id/top_tab_constraintLayout">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout8"
@@ -122,31 +121,24 @@
                     app:layout_constraintStart_toStartOf="@+id/tv_selected_pill_person"
                     app:layout_constraintTop_toBottomOf="@+id/tv_selected_pill_person" />
 
-                <TextView
-                    android:id="@+id/tv_pill_name"
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_pill_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/rectangle_border_gray"
-                    android:paddingStart="16dp"
-                    android:paddingTop="15dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="14dp"
-                    android:text="@string/pill_add_write_pill_name"
-                    android:textColor="@color/gray400_sub"
-                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_pill_name_msg"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_pill_name_msg" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_pill_name_msg"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_pill_add_pill_name" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:background="@drawable/rectangle_fill_gray100_border_gray150"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_pill_name">
+                    app:layout_constraintTop_toBottomOf="@+id/rcv_pill_name">
 
                     <TextView
                         android:id="@+id/tv_add_more_pill"
@@ -213,6 +205,7 @@
                         android:background="@drawable/ic_more_48"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -290,6 +283,37 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/pill_cycle_more_constraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/rectangle_border_gray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pill_cycle_constraintLayout">
+
+                    <TextView
+                        android:layout_width="302dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="15dp"
+                        android:text="월, 수"
+                        android:textColor="@color/black_sub"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_pill_cycle_more"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_pill_cycle_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_more_48"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <TextView
                     android:id="@+id/tv_pill_time_msg"
                     android:layout_width="wrap_content"
@@ -298,47 +322,26 @@
                     android:text="@string/pill_add_pill_time_msg"
                     android:textAppearance="@style/PillAddTitle"
                     app:layout_constraintStart_toStartOf="@+id/pill_cycle_constraintLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/pill_cycle_constraintLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/pill_cycle_more_constraintLayout" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/pill_time_constraintLayout"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_pill_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/rectangle_border_mint_radius12dp"
                     app:layout_constraintStart_toStartOf="@+id/tv_pill_time_msg"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_pill_time_msg">
+                    app:layout_constraintTop_toBottomOf="@+id/tv_pill_time_msg"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_pill_add_pill_time" />
 
-                    <TextView
-                        android:id="@+id/pill_time"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingTop="15dp"
-                        android:paddingEnd="16dp"
-                        android:paddingBottom="14dp"
-                        android:text="@string/pill_add_pill_time"
-                        android:textColor="@color/black_sub"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toStartOf="@+id/iv_time_cancel"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/iv_time_cancel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_close_48"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
                     android:background="@drawable/rectangle_fill_gray100_border_gray150"
-                    app:layout_constraintTop_toBottomOf="@id/pill_time_constraintLayout">
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rcv_pill_time">
 
                     <ImageView
                         android:id="@+id/iv_plus"
@@ -359,6 +362,8 @@
             android:id="@+id/btn_save_constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:paddingHorizontal="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -383,6 +388,5 @@
                 app:layout_goneMarginTop="14dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
