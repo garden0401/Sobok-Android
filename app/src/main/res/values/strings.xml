@@ -17,5 +17,7 @@
     <string name="menu_notice">알림</string>
     <string name="menu_pill_add">약추가</string>
     <string name="pill_add_msg">약추가</string>
+    <string name="pill_add_bottom_sheet_add_my_pill">내 약 추가</string>
+    <string name="pill_add_bottom_sheet_send_pill">다른 사람에게 약 전송</string>
 
 </resources>
