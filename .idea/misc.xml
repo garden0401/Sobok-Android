@@ -16,6 +16,33 @@
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_pill_add_calendar.xml" value="0.2390625" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_share.xml" value="0.25364583333333335" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/menu/menu_bottom_navi.xml" value="0.25364583333333335" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/ic_close_48.xml" value="0.37552083333333336" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/ic_frame.xml" value="0.37552083333333336" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/ic_more_48.xml" value="0.1" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_border_gray.xml" value="0.37552083333333336" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_border_mint.xml" value="0.37552083333333336" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_border_mint_radius12dp.xml" value="0.37552083333333336" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_fill_gray100.xml" value="0.37552083333333336" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_fill_gray200.xml" value="0.36974358974358973" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_fill_gray_horizon.xml" value="0.36974358974358973" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/rectangle_fill_lightmint_radius8dp.xml" value="0.37552083333333336" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/selector_menu_alarm.xml" value="0.37552083333333336" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/selector_menu_home.xml" value="0.37552083333333336" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/selector_menu_plus.xml" value="0.36974358974358973" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/selector_pill_add_date.xml" value="0.37552083333333336" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/drawable/selector_pill_add_date_text.xml" value="0.37552083333333336" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/activity_main.xml" value="0.4466666666666667" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/activity_pill_add.xml" value="0.3333333333333333" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/activity_pill_add_finish.xml" value="0.3333333333333333" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/activity_pill_add_finish2.xml" value="0.3079710144927536" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/fragment_fill_add_bottom_sheet.xml" value="0.32065217391304346" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/fragment_pill_add_bottom_sheet.xml" value="0.32065217391304346" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/fragment_pill_add_finish.xml" value="0.3333333333333333" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/fragment_pill_add_info.xml" value="0.3333333333333333" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/fragment_pill_add_name.xml" value="0.3079710144927536" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/item_pill_add_pill_info.xml" value="0.42418426103646834" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/item_pill_add_pill_name.xml" value="0.3079710144927536" />
+        <entry key="..\:/GitHub/Sobok-Android/app/src/main/res/layout/item_pill_add_pill_time.xml" value="0.3079710144927536" />
       </map>
     </option>
   </component>
