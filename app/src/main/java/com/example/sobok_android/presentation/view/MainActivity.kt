@@ -16,7 +16,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         super.onCreate(savedInstanceState)
         setNavigation()
 
-        gotoPillAdd()
+        navigateToPillAdd()
     }
 
     private fun setNavigation() {
@@ -25,11 +25,10 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         binding.bnvMain.setupWithNavController(navController)
     }
 
-    private fun gotoPillAdd() {
-        val pillAddBtn = binding.button
+    private fun navigateToPillAdd() {
         val bottomSheet = PillAddBottomSheetFragment()
 
-        pillAddBtn.setOnClickListener {
+        binding.button.setOnClickListener {
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
         }
     }

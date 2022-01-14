@@ -22,16 +22,21 @@ class PillAddBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val intent = Intent(requireContext(), PillAddActivity::class.java)
+
 
         binding.clPillAddMyPill.setOnClickListener {
-            startActivity(intent)
+            navigateToPillAdd()
         }
         binding.clPillAddSendPill.setOnClickListener {
-            startActivity(intent)
+            navigateToPillAdd()
         }
         binding.ivCancel.setOnClickListener {
             dismiss()
         }
+    }
+
+    private fun navigateToPillAdd() {
+        val intent = Intent(requireContext(), PillAddActivity::class.java)
+        startActivity(intent)
     }
 }
