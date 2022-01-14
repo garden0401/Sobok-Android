@@ -1,4 +1,4 @@
-package com.example.sobok_android.di
+package com.example.sobok_android.presentation.di
 
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
