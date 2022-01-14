@@ -48,7 +48,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/cl_pill_add_my_pill"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_fill_gray100"
@@ -87,8 +87,8 @@
         android:text="@string/can_save_5pills"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/cl_pill_add_my_pill"
+        app:layout_constraintStart_toStartOf="@+id/cl_pill_add_my_pill" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
