@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/CustomBottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <TextView
+            android:id="@+id/tv_add_pill_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:text="@string/pill_add_msg"
+            android:textColor="@color/black_sub"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/cl_pill_add_my_pill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="9dp"
+            android:background="@drawable/ic_close_48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_pill_add_my_pill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingBottom="19dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_add_pill_msg">
+
+            <ImageView
+                android:id="@+id/iv_my_fill_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="19dp"
+                android:background="@drawable/ic_my_fill_plus"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/pill_add_bottom_sheet_add_my_pill"
+                android:textColor="@color/black_sub"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_my_fill_plus"
+                app:layout_constraintStart_toEndOf="@+id/iv_my_fill_plus"
+                app:layout_constraintTop_toTopOf="@+id/iv_my_fill_plus" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_pill_add_send_pill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="19dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_pill_add_my_pill">
+
+            <ImageView
+                android:id="@+id/iv_fill_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="19dp"
+                android:background="@drawable/ic_fill_send"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/pill_add_bottom_sheet_send_pill"
+                android:textColor="@color/black_sub"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_fill_send"
+                app:layout_constraintStart_toEndOf="@+id/iv_fill_send"
+                app:layout_constraintTop_toTopOf="@+id/iv_fill_send" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
