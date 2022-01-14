@@ -1,180 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.view.pill.add.PillAddFinishActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/top_tab_constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
 
-        <ImageView
-            android:id="@+id/iv_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="1dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back_48" />
-
-        <TextView
-            android:id="@+id/tv_add_pill"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="내 약 목록"
-            android:textColor="@color/gray900_sub"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_tab_constraintLayout">
+        android:layout_height="match_parent"
+        tools:context=".presentation.view.pill.add.PillAddFinishActivity">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_top_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/iv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_48" />
+
+            <TextView
+                android:id="@+id/tv_add_pill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/pill_add_finish_my_pill_list_msg"
+                android:textColor="@color/gray900_sub"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_top_tab">
+
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tv_person_take_pill"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/person_take_pill"
-                    android:textColor="@color/black_sub"
-                    android:textSize="15sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_add_pill_count_msg"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
-                    android:background="@drawable/rectangle_fill_lightmint_radius8dp"
-                    android:padding="6dp"
-                    android:text="@string/pill_count_msg"
-                    android:textAlignment="center"
-                    android:textColor="@color/dark_mint_main"
-                    android:textSize="15sp"
-                    app:layout_constraintStart_toStartOf="@+id/tv_person_take_pill"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_person_take_pill" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_pill_list"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
-                    android:background="@drawable/rectangle_border_gray"
-                    android:nestedScrollingEnabled="false"
-                    android:paddingBottom="11dp"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_add_pill_count_msg"
-                    app:layout_constraintStart_toStartOf="@+id/tv_add_pill_count_msg"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_add_pill_count_msg"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_pill_add_pill_info" />
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
-                    android:background="@drawable/rectangle_fill_gray100_border_gray150"
-                    app:layout_constraintEnd_toEndOf="@+id/rcv_pill_list"
-                    app:layout_constraintStart_toStartOf="@+id/rcv_pill_list"
-                    app:layout_constraintTop_toBottomOf="@+id/rcv_pill_list">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/tv_add_new_pill"
-                        android:layout_width="0dp"
+                        android:id="@+id/tv_person_take_pill"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@drawable/rectangle_fill_gray100_border_gray150"
-                        android:text="@string/add_new_pill"
-                        android:textColor="@color/gray500_sub"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_add_new_pill"
+                        android:text="@string/person_take_pill"
+                        android:textColor="@color/black_sub"
+                        android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/btn_add_new_pill"
+                    <TextView
+                        android:id="@+id/tv_add_pill_count_msg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:background="@drawable/rectangle_fill_lightmint_radius8dp"
+                        android:padding="6dp"
+                        android:text="@string/pill_count_msg"
+                        android:textAlignment="center"
+                        android:textColor="@color/dark_mint_main"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_person_take_pill"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_person_take_pill" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcv_pill_list"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:background="@drawable/rectangle_border_gray"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingBottom="11dp"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_add_pill_count_msg"
+                        app:layout_constraintStart_toStartOf="@+id/tv_add_pill_count_msg"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_add_pill_count_msg"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_pill_add_pill_info" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:background="@drawable/rectangle_fill_gray100_border_gray150"
+                        app:layout_constraintEnd_toEndOf="@+id/rcv_pill_list"
+                        app:layout_constraintStart_toStartOf="@+id/rcv_pill_list"
+                        app:layout_constraintTop_toBottomOf="@+id/rcv_pill_list">
+
+                        <TextView
+                            android:id="@+id/tv_add_new_pill"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/rectangle_fill_gray100_border_gray150"
+                            android:text="@string/add_new_pill"
+                            android:textColor="@color/gray500_sub"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_add_new_pill"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/btn_add_new_pill"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_frame_48"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tv_pill_count_msg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_frame_48"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_marginTop="16dp"
+                        android:text="@string/can_save_5pills"
+                        android:textAlignment="center"
+                        app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+                        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/tv_pill_count_msg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/can_save_5pills"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-                    app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
+            </androidx.core.widget.NestedScrollView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_save_constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_finish"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rectangle_fill_mint"
+                    android:paddingStart="24dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/pill_add_finish"
+                    android:textAlignment="center"
+                    android:textColor="@color/white_sub"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginTop="14dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.core.widget.NestedScrollView>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btn_save_constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:id="@+id/tv_finish"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rectangle_fill_mint"
-                android:paddingStart="24dp"
-                android:paddingTop="12dp"
-                android:paddingEnd="24dp"
-                android:paddingBottom="12dp"
-                android:text="@string/pill_add_finish"
-                android:textAlignment="center"
-                android:textColor="@color/white_sub"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_goneMarginTop="14dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

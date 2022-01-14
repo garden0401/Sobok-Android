@@ -13,7 +13,7 @@
         tools:context=".presentation.view.pill.add.PillAddActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/top_tab_constraintLayout"
+            android:id="@+id/cl_top_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,10 +50,10 @@
             android:layout_height="0dp"
             android:paddingHorizontal="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/top_tab_constraintLayout">
+            app:layout_constraintTop_toBottomOf="@id/cl_top_tab">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout8"
+                android:id="@+id/cl_pill_add_inside_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +70,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/pill_person_constraintLayout"
+                    android:id="@+id/cl_pill_person"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -108,8 +108,8 @@
                     android:text="@string/pill_add_selected_pill_person_msg"
                     android:textColor="@color/gray200_sub"
                     android:textSize="15sp"
-                    app:layout_constraintStart_toStartOf="@+id/pill_person_constraintLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/pill_person_constraintLayout" />
+                    app:layout_constraintStart_toStartOf="@+id/cl_pill_person"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_pill_person" />
 
                 <TextView
                     android:id="@+id/tv_pill_name_msg"
@@ -297,7 +297,7 @@
                         android:layout_height="24dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="15dp"
-                        android:text="월, 수"
+                        android:text="@string/pill_add_pill_cycle_text"
                         android:textColor="@color/black_sub"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toStartOf="@+id/iv_pill_cycle_more"
