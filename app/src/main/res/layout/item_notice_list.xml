@@ -27,7 +27,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:textSize="15sp"
             android:textColor="#333738"
-            android:text="지민지민님이 캘린더 공유를 요청했어요 테스트"
+            android:text="지민지민님이 캘린더 공유를 요청했어요 테스"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="22dp"
             app:layout_constraintStart_toEndOf="@id/iv_notice_list_state_img"
