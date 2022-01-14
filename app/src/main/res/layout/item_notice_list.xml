@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_notice_list_state_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_calendar_alarm_mint"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="26dp"
+            android:layout_marginStart="18dp" />
+
+        <TextView
+            android:id="@+id/tv_notice_list_state_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:textSize="15sp"
+            android:textColor="#333738"
+            android:text="지민지민님이 캘린더 공유를 요청했어요 테스트"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="22dp"
+            app:layout_constraintStart_toEndOf="@id/iv_notice_list_state_img"
+            android:layout_marginStart="9dp" />
+
+        <TextView
+            android:id="@+id/tv_notice_list_state_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:textSize="12sp"
+            android:textColor="#a1a9ae"
+            android:text="오후 12:35"
+            app:layout_constraintTop_toBottomOf="@id/tv_notice_list_state_msg"
+            app:layout_constraintStart_toEndOf="@id/iv_notice_list_state_img"
+            android:layout_marginStart="9dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_notice_reject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_notice_btn_reject"
+            android:text="거절"
+            android:textColor="#00abb6"
+            android:textSize="13sp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            app:layout_constraintTop_toBottomOf="@id/iv_notice_list_state_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_notice_accept"
+            android:layout_marginTop="13dp"
+            android:layout_marginStart="18dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_notice_accept"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_notice_btn_accept"
+            android:text="수락"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            app:layout_constraintStart_toEndOf="@+id/btn_notice_reject"
+            app:layout_constraintTop_toBottomOf="@id/iv_notice_list_state_img"
+            android:layout_marginTop="13dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="18dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#eff2f4"
+            app:layout_constraintTop_toBottomOf="@id/btn_notice_reject"
+            android:layout_marginTop="22dp"
+            app:layout_constraintStart_toStartOf="@id/btn_notice_reject"
+            app:layout_constraintEnd_toEndOf="@id/btn_notice_accept"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
