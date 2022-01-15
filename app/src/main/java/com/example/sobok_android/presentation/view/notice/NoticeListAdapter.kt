@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sobok_android.databinding.ItemNoticeListBinding
+import com.example.sobok_android.domain.model.notice.NoticeListData
+import com.example.sobok_android.presentation.view.notice.model.NoticeInfoData
 
 class NoticeListAdapter : RecyclerView.Adapter<NoticeListAdapter.NoticeListViewHolder>() {
 
-    private val _noticeList = mutableListOf<NoticeListData>()
+    private val _noticeList = mutableListOf<NoticeInfoData>()
 
-    var noticeList: List<NoticeListData> =  _noticeList
+    var noticeList: List<NoticeInfoData> =  _noticeList
         set(value) {
             _noticeList.clear()
             _noticeList.addAll(value)
@@ -35,8 +37,8 @@ class NoticeListAdapter : RecyclerView.Adapter<NoticeListAdapter.NoticeListViewH
 
     class NoticeListViewHolder(private val binding : ItemNoticeListBinding)
         : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data : NoticeListData) {
-            binding.tvNoticeListStateTime.text = data.noticeTime
+        fun onBind(data : NoticeInfoData) {
+            binding.noticeInfoData = data
         }
     }
 }
