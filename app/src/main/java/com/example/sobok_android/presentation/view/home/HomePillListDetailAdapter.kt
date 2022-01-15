@@ -1,5 +1,6 @@
 package com.example.sobok_android.presentation.view.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,12 @@ class HomePillListDetailAdapter : RecyclerView.Adapter<HomePillListDetailAdapter
             notifyDataSetChanged()
         }
 
+    private var stickerClickListener : ((Boolean) -> Unit)? = null
+
+    fun setStickerClickListener(listener: (Boolean) -> Unit) {
+        stickerClickListener = listener
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -35,7 +42,7 @@ class HomePillListDetailAdapter : RecyclerView.Adapter<HomePillListDetailAdapter
 
     override fun getItemCount(): Int = _homePillListDetail.size
 
-    class HomePillListDetailViewHolder(private val binding : ItemHomePillListDetailBinding)
+    inner class HomePillListDetailViewHolder(private val binding : ItemHomePillListDetailBinding)
         : RecyclerView.ViewHolder(binding.root) {
             fun onBind(data : HomePillListData.PillDetailData) {
                 binding.tvHomePillListPillName.text = data.pillName
@@ -43,6 +50,22 @@ class HomePillListDetailAdapter : RecyclerView.Adapter<HomePillListDetailAdapter
                 binding.ivHomePillListStickerOne.setImageResource(R.drawable.rectangle_pill_list_sticker_example)
                 binding.ivHomePillListColor.setImageResource(R.drawable.oval_pill_list_color)
                 binding.tvHomePillListStickerCount.text = data.stickerCount
+
+
+
+                    binding.ivHomePillListStickerOne.setOnClickListener {
+                        stickerClickListener?.invoke(true)
+                        Log.d("detailAdapter", "true")
+                    }
+
+                binding.tvHomePillListPillName.setOnClickListener {
+                    stickerClickListener?.invoke(true)
+                    Log.d("tvtv", "click")
+                }
+
+
+
+
+                }
             }
     }
-}

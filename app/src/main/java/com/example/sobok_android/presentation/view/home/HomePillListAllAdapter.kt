@@ -1,5 +1,6 @@
 package com.example.sobok_android.presentation.view.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,12 @@ class HomePillListAllAdapter : RecyclerView.Adapter<HomePillListAllAdapter.HomeP
             _homePillListAll.addAll(value)
             notifyDataSetChanged()
         }
+
+    private var stickerClickListener : ((Boolean) -> Unit)? = null
+
+    fun setStickerClickListener(listener: (Boolean) -> Unit) {
+        stickerClickListener = listener
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -34,7 +41,7 @@ class HomePillListAllAdapter : RecyclerView.Adapter<HomePillListAllAdapter.HomeP
 
     override fun getItemCount(): Int = _homePillListAll.size
 
-    class HomePillListAllViewHolder(private val binding : ItemHomePillListAllBinding)
+    inner class HomePillListAllViewHolder(private val binding : ItemHomePillListAllBinding)
         : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data : HomePillListData) {
             binding.tvHomePillListTime.text = data.scheduleTime
@@ -42,6 +49,10 @@ class HomePillListAllAdapter : RecyclerView.Adapter<HomePillListAllAdapter.HomeP
             HomePillListDetailAdapter().apply {
                 homePillListDetail = data.scheduleList
                 binding.rvHomePillListDetail.adapter = this
+                setStickerClickListener {
+                    stickerClickListener?.invoke(it)
+                    Log.d("bigAdapter", "true{$it}")
+                }
 
             }
         }
