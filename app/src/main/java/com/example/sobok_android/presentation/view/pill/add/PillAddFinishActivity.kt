@@ -22,6 +22,7 @@ class PillAddFinishActivity :
         getPillList()
         setPillList()
         observePillList()
+        navigateToPillAdd()
         navigateToHome()
     }
 
@@ -46,8 +47,15 @@ class PillAddFinishActivity :
         }
     }
 
-    private fun navigateToHome() {
+    private fun navigateToPillAdd() {
         binding.clAddNewPill.setOnClickListener {
+            val intent = Intent(this, PillAddActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun navigateToHome() {
+        binding.tvFinish.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
