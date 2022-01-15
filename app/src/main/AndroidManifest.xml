@@ -12,10 +12,7 @@
         android:theme="@style/Theme.SobokAndroid">
         <activity
             android:name=".presentation.view.pill.add.PillAddFinishActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PillAddFinishActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".presentation.view.pill.add.PillAddRejectActivity"
             android:exported="false" />
