@@ -14,9 +14,6 @@
             android:name=".presentation.view.pill.add.PillAddFinishActivity"
             android:exported="false" />
         <activity
-            android:name=".PillAddFinishActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.view.pill.add.PillAddRejectActivity"
             android:exported="false" />
         <activity
@@ -33,7 +30,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.view.pill.add.PillAddActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".presentation.view.share.ShareNameEditActivity"
             android:exported="false" />
