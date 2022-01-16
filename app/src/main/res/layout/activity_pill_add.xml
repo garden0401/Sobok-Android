@@ -132,7 +132,7 @@
                     tools:listitem="@layout/item_pill_add_pill_name" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout3"
+                    android:id="@+id/cl_add_pill_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangle_fill_gray100_border_gray150"
@@ -173,11 +173,11 @@
                     android:text="@string/pill_add_pill_date_msg"
                     android:textAppearance="@style/PillAddTitle"
                     android:textSize="15sp"
-                    app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+                    app:layout_constraintStart_toStartOf="@+id/cl_add_pill_name"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_add_pill_name" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/pill_date_constraintLayout"
+                    android:id="@+id/cl_pill_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -216,11 +216,11 @@
                     android:layout_marginTop="44dp"
                     android:text="@string/pill_add_pill_cycle_msg"
                     android:textAppearance="@style/PillAddTitle"
-                    app:layout_constraintStart_toStartOf="@+id/pill_date_constraintLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/pill_date_constraintLayout" />
+                    app:layout_constraintStart_toStartOf="@+id/cl_pill_date"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_pill_date" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/pill_cycle_constraintLayout"
+                    android:id="@+id/cl_pill_cycle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -290,7 +290,7 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/rectangle_border_gray"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/pill_cycle_constraintLayout">
+                    app:layout_constraintTop_toBottomOf="@id/cl_pill_cycle">
 
                     <TextView
                         android:layout_width="302dp"
@@ -321,7 +321,7 @@
                     android:layout_marginTop="44dp"
                     android:text="@string/pill_add_pill_time_msg"
                     android:textAppearance="@style/PillAddTitle"
-                    app:layout_constraintStart_toStartOf="@+id/pill_cycle_constraintLayout"
+                    app:layout_constraintStart_toStartOf="@+id/cl_pill_cycle"
                     app:layout_constraintTop_toBottomOf="@+id/pill_cycle_more_constraintLayout" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -336,6 +336,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_add_pill_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="11dp"
