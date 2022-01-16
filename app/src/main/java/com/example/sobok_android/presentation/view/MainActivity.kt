@@ -8,6 +8,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ActivityMainBinding
 import com.example.sobok_android.presentation.base.BindingActivity
+import com.example.sobok_android.presentation.view.home.HomeStickerBottomSheetAdapter
 import com.example.sobok_android.presentation.view.home.HomeStickerBottomSheetFragment
 import com.example.sobok_android.presentation.view.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,6 +24,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         initHomeStickerBottomSheet()
         setNavigation()
         observeIsStickerClickEvent()
+
     }
 
     private fun initHomeStickerBottomSheet() {
@@ -43,8 +45,10 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             Log.d("checkobserve", "${it}")
             if(it){
                 homeStickerBottomSheet.show(supportFragmentManager, homeStickerBottomSheet.tag)
+
             }
         }
 
     }
+
 }
