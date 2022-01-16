@@ -8,8 +8,9 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/CustomBottomSheet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         tools:context=".presentation.view.home.HomeStickerBottomSheet">
 
         <TextView
