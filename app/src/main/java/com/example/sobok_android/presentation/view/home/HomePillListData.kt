@@ -8,7 +8,7 @@ data class HomePillListData(
         val pillName : String,
         val isCheck : Boolean,
 //        val stickerImg : List<String>,
-//        val color : String,
-        val stickerCount : String
+        val color : String,
+//        val stickerCount : String
     )
 }

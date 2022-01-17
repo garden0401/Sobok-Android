@@ -3,10 +3,7 @@ package com.example.sobok_android.presentation.view.home
 import android.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sobok_android.R
@@ -57,8 +54,8 @@ class HomePillListDetailAdapter :
             binding.tvHomePillListPillName.text = data.pillName
             binding.ivHomePillListCheck.isSelected = data.isCheck
             binding.ivHomePillListStickerOne.setImageResource(R.drawable.rectangle_pill_list_sticker_example)
-            binding.ivHomePillListColor.setImageResource(R.drawable.oval_pill_list_color)
-            binding.tvHomePillListStickerCount.text = data.stickerCount
+            binding.pillColor = data.color
+//            binding.tvHomePillListStickerCount.text = data.stickerCount
 
             binding.ivHomePillListStickerOne.setOnClickListener {
                 stickerClickListener?.invoke(true)

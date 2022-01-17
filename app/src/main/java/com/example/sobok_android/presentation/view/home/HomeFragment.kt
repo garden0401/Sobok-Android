@@ -18,8 +18,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private lateinit var homePillListAllAdapter: HomePillListAllAdapter
 
     // 고차함수써보기
+    // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
     private val mainViewModel : MainViewModel by sharedViewModel()
-    private lateinit var editView : View
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,37 +38,21 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         binding.rvHomePillListAll.adapter = homePillListAllAdapter
 
-
+        // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
        homePillListAllAdapter.setStickerClickListener {
             mainViewModel.setIsStickerClick(it)
             Log.d("lala", "success${it}")
         }
 
-        // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
-        homePillListAllAdapter.setEditContextClickListener { click, view ->
-            mainViewModel.setIsEditContextClick(click)
-            Log.d("popupHome", "success${view}")
-            editView = view
-
-        }
-
-        // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
-        mainViewModel.isEditContextClick.observe(this) {
-            if (it && ::editView.isInitialized) {
-                Log.d("popup", "success")
-                initSetPopup()
-            }
-
-        }
 
 
         homePillListAllAdapter.homePillListAll =
             listOf(
                 HomePillListData("7시",
                     listOf(
-                        HomePillListData.PillDetailData("홍삼", true, "5"),
-                        HomePillListData.PillDetailData("홍상2", false,"6"),
-                        HomePillListData.PillDetailData("홍상3", false,"4"),)),
+                        HomePillListData.PillDetailData("홍삼", true, "1"),
+                        HomePillListData.PillDetailData("홍상2", false,"2"),
+                        HomePillListData.PillDetailData("홍상3", false,"3"),)),
                 HomePillListData("12시",
                     listOf(
                         HomePillListData.PillDetailData("텐텐", false,"4"),
@@ -77,22 +61,22 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                     listOf(
                         HomePillListData.PillDetailData("비타민", false,"1"),
                         HomePillListData.PillDetailData("비타민2", false,"3"),
-                        HomePillListData.PillDetailData("텐텐2", true,"9"),
-                        HomePillListData.PillDetailData("비타민3", true,"8"),)),
+                        HomePillListData.PillDetailData("텐텐2", true,"4"),
+                        HomePillListData.PillDetailData("비타민3", true,"2"),)),
                 HomePillListData("18시",
                     listOf(
-                        HomePillListData.PillDetailData("비타민", false,"1"),
-                        HomePillListData.PillDetailData("비타민3", true,"8"),)),
-                HomePillListData("18시",
-                    listOf(
-                        HomePillListData.PillDetailData("비타민", false,"1"),
-                        HomePillListData.PillDetailData("비타민2", false,"3"),
-                        HomePillListData.PillDetailData("비타민3", true,"8"),)),
+                        HomePillListData.PillDetailData("비타민", false,"5"),
+                        HomePillListData.PillDetailData("비타민3", true,"2"),)),
                 HomePillListData("18시",
                     listOf(
                         HomePillListData.PillDetailData("비타민", false,"1"),
                         HomePillListData.PillDetailData("비타민2", false,"3"),
-                        HomePillListData.PillDetailData("비타민3", true,"8"),)),
+                        HomePillListData.PillDetailData("비타민3", true,"2"),)),
+                HomePillListData("18시",
+                    listOf(
+                        HomePillListData.PillDetailData("비타민", false,"4"),
+                        HomePillListData.PillDetailData("비타민2", false,"5"),
+                        HomePillListData.PillDetailData("비타민3", true,"2"),)),
             )
         binding.isEdit = true
 
@@ -105,29 +89,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
 
-    // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
-    private fun initSetPopup() {
-        var popup = PopupMenu(requireContext(), editView)
-        popup.menuInflater?.inflate(R.menu.popup_home_pill_list_edit, popup.menu)
 
-        popup.setOnMenuItemClickListener {
-            when (it?.itemId) {
-                R.id.pill_edit -> {
-                    // 다이얼로그
-                    return@setOnMenuItemClickListener true
-                }
-                R.id.pill_delete -> {
-                    return@setOnMenuItemClickListener true
-                }
-                R.id.pill_stop -> {
-                    return@setOnMenuItemClickListener true
-
-                }
-            }
-            return@setOnMenuItemClickListener false
-        }
-        popup.show()
-    }
 
 
 
