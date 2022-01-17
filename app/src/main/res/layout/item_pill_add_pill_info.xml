@@ -1,98 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="13dp"
-    android:layout_marginBottom="11dp"
-    android:background="@drawable/rectangle_border_gray">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_pill_color"
-        android:layout_width="8dp"
-        android:layout_height="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
-        android:background="@drawable/oval_fill_orange"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="pillInfo"
+            type="com.example.sobok_android.domain.model.pill.pilladd.PillListData.PillInfo" />
 
-    <TextView
-        android:id="@+id/tv_item_pill_name"
-        android:layout_width="0dp"
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="@string/pill_info_pill_name"
-        android:textColor="@color/black_sub"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_pill_color"
-        app:layout_constraintEnd_toStartOf="@+id/iv_close"
-        app:layout_constraintStart_toEndOf="@+id/iv_pill_color"
-        app:layout_constraintTop_toTopOf="@+id/iv_pill_color" />
+        android:paddingBottom="13dp"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/rectangle_border_gray">
 
-    <ImageView
-        android:id="@+id/iv_calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/ic_union"
-        app:layout_constraintStart_toStartOf="@+id/iv_pill_color"
-        app:layout_constraintTop_toBottomOf="@+id/iv_pill_color" />
+        <ImageView
+            android:id="@+id/iv_pill_color"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="23dp"
+            android:background="@drawable/oval_fill_orange"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/iv_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_close_48"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_item_pill_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{pillInfo.pillName}"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/black_sub"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_pill_color"
+            app:layout_constraintEnd_toStartOf="@+id/iv_close"
+            app:layout_constraintStart_toEndOf="@+id/iv_pill_color"
+            app:layout_constraintTop_toTopOf="@+id/iv_pill_color" />
 
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:text="@string/pill_info_date"
-        android:textColor="@color/gray500_sub"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_calendar"
-        app:layout_constraintStart_toEndOf="@+id/iv_calendar"
-        app:layout_constraintTop_toTopOf="@+id/iv_calendar" />
+        <ImageView
+            android:id="@+id/iv_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_union"
+            app:layout_constraintStart_toStartOf="@+id/iv_pill_color"
+            app:layout_constraintTop_toBottomOf="@+id/iv_pill_color" />
 
-    <TextView
-        android:id="@+id/tv_cycle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="1dp"
-        android:text="@string/pill_info_cycle"
-        android:textSize="15sp"
-        android:textColor="@color/gray700_sub"
-        app:layout_constraintStart_toEndOf="@+id/iv_line"
-        app:layout_constraintTop_toTopOf="@+id/iv_line" />
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_close_48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:textSize="15sp"
-        android:textColor="@color/gray700_sub"
-        android:text="@string/pill_info_time"
-        app:layout_constraintStart_toStartOf="@+id/tv_cycle"
-        app:layout_constraintTop_toBottomOf="@+id/tv_cycle" />
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:text="@{pillInfo.start + ` - ` + pillInfo.end}"
+            android:textColor="@color/gray500_sub"
+            android:textSize="14sp"
+            android:fontFamily="@font/pretendard_medium"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_calendar"
+            app:layout_constraintStart_toEndOf="@+id/iv_calendar"
+            app:layout_constraintTop_toTopOf="@+id/iv_calendar" />
 
-    <ImageView
-        android:id="@+id/iv_line"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/gray500_sub"
-        app:layout_constraintStart_toStartOf="@+id/iv_calendar"
-        app:layout_constraintTop_toBottomOf="@+id/iv_calendar"
-        app:layout_constraintBottom_toBottomOf="@id/tv_time"/>
+        <TextView
+            android:id="@+id/tv_cycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="1dp"
+            android:text="@{pillInfo.cycle}"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:textSize="15sp"
+            android:textColor="@color/gray700_sub"
+            app:layout_constraintStart_toEndOf="@+id/iv_line"
+            app:layout_constraintTop_toTopOf="@+id/iv_line" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textSize="15sp"
+            android:textColor="@color/gray700_sub"
+            pillTime="@{pillInfo.timeList}"
+            android:fontFamily="@font/pretendard_medium"
+            app:layout_constraintStart_toStartOf="@+id/tv_cycle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cycle" />
+
+        <ImageView
+            android:id="@+id/iv_line"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/gray500_sub"
+            app:layout_constraintStart_toStartOf="@+id/iv_calendar"
+            app:layout_constraintTop_toBottomOf="@+id/iv_calendar"
+            app:layout_constraintBottom_toBottomOf="@id/tv_time" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

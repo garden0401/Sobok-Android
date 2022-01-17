@@ -10,12 +10,17 @@ import android.widget.NumberPicker.OnValueChangeListener
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ActivityPillAddBinding
 import com.example.sobok_android.presentation.base.BindingActivity
+import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activity_pill_add) {
+
+    private val pillAddViewModel : PillAddViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -192,7 +197,7 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
             dialog.show()
         }
 
-        binding.pillDateConstraintLayout.setOnClickListener {
+        binding.clPillDate.setOnClickListener {
             // 특정간격 피커
             val builder = MaterialDatePicker.Builder.dateRangePicker()
             builder.setTitleText(title)
