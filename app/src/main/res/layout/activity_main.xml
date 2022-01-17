@@ -21,6 +21,14 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/bnv_main"/>
 
+        <Button
+            android:id="@+id/btn_poor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="거지버튼"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bnv_main"
             android:layout_width="match_parent"
