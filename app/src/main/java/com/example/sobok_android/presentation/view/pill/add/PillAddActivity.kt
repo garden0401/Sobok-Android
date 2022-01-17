@@ -53,8 +53,10 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
         }
 
         // 여기서 viewModel 함수 불러온다
-        binding.constraintLayout3.setOnClickListener {
+        binding.clAddPillName.setOnClickListener {
             // 함께 먹는 약 추가..
+            binding.rcvPillName
+            // 리스트.add(todo)
         }
 
 
@@ -214,7 +216,7 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
 
         // 약 복약시간 리사이클러뷰..의 삭제 추가
 
-        binding.clPillAddAddTime.setOnClickListener {
+        binding.clAddPillTime.setOnClickListener {
             // 시간 추가
         }
     }
