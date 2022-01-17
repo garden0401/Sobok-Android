@@ -93,7 +93,7 @@ class HomePillListDetailAdapter :
                             //복약 중단 다이어로그
                             val builder = AlertDialog.Builder(view.context)
                             builder.setTitle("정말로 복약을 중단하나요?")
-                                .setMessage("복약을 중단하면 내일부터 약 알림이 오지 않아요")
+                                .setMessage("복약을 중단하면 내일부터 약 알림이 오지 않아요.")
                                 .setPositiveButton("취소") { dialog, id ->
                                     //클릭리스너
                                     dialog.cancel()
@@ -110,7 +110,7 @@ class HomePillListDetailAdapter :
                             //약 삭제 다이어로그
                             val builder = AlertDialog.Builder(view.context)
                             builder.setTitle("정말로 약을 삭제하나요?")
-                                .setMessage("해당 약에 대한 전체 복약 기록이 사라지고 알림도 오지 않아요")
+                                .setMessage("해당 약에 대한 전체 복약 기록이 사라지고 알림도 오지 않아요.")
                                 .setPositiveButton("취소") { dialog, id ->
                                     //클릭리스너
                                     dialog.cancel()
