@@ -1,60 +1,86 @@
 package com.example.sobok_android.presentation.view.share.request
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.view.KeyEvent
+import android.view.KeyEvent.ACTION_DOWN
 import android.view.View
-import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import androidx.navigation.fragment.findNavController
 import com.example.sobok_android.R
+import com.example.sobok_android.databinding.FragmentShareRequestSearchBinding
+import com.example.sobok_android.presentation.base.BindingFragment
+import com.example.sobok_android.presentation.view.share.request.viewmodel.ShareRequestViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ShareRequestSearchFragment :
+    BindingFragment<FragmentShareRequestSearchBinding>(R.layout.fragment_share_request_search) {
+    private val shareRequestViewModel: ShareRequestViewModel by viewModel()
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ShareRequestSearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ShareRequestSearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setEtSearchSetOnKeyListener()
+        setDeleteClickListener()
+        observeUserName()
+        observeSearchResult()
+        setTvShareRequestSearchResult()
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private fun navigateToShareRequestSaveFragment() {
+        findNavController().navigate(R.id.action_shareRequestSearchFragment_to_shareRequestSaveFragment)
+    }
+
+    private fun setEtSearchSetOnKeyListener() {
+        binding.etShareRequestSearch.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == ACTION_DOWN) {
+                val inputMethodManager: InputMethodManager =
+                    requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(
+                    binding.etShareRequestSearch.windowToken,
+                    0
+                )
+                shareRequestViewModel.setUserName(binding.etShareRequestSearch.text.toString())
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_share_request_search, container, false)
+    private fun getSearchResult() {
+        shareRequestViewModel.getSearchResult()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ShareRequestSearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ShareRequestSearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun observeUserName() {
+        shareRequestViewModel.userName.observe(viewLifecycleOwner) {
+            getSearchResult()
+        }
+    }
+
+    private fun setDeleteClickListener() {
+        binding.ivShareRequestSearchDelete.setOnClickListener {
+            binding.etShareRequestSearch.text = null
+        }
+    }
+
+
+    private fun observeSearchResult() {
+        shareRequestViewModel.searchResult.observe(viewLifecycleOwner) {
+            when (it.data.isEmpty()) {
+                true -> binding.isEmpty = true
+                else -> {
+                    binding.isEmpty = false
+                    //TODO:2021-01-18 추후 수정 예정 -> 멤버 리스트 개수 조정
+                    binding.nickName = it.data[0].memberName
                 }
             }
+        }
     }
+
+    private fun setTvShareRequestSearchResult() {
+        binding.tvShareRequestSearchResult.setOnClickListener {
+            navigateToShareRequestSaveFragment()
+        }
+    }
+
 }
