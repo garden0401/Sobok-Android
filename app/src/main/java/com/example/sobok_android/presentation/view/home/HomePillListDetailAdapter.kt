@@ -1,5 +1,6 @@
 package com.example.sobok_android.presentation.view.home
 
+import android.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,18 +25,13 @@ class HomePillListDetailAdapter :
             notifyDataSetChanged()
         }
 
+    // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
     private var stickerClickListener: ((Boolean) -> Unit)? = null
 
     fun setStickerClickListener(listener: (Boolean) -> Unit) {
         stickerClickListener = listener
     }
 
-    // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
-    private var editContextClickListener: ((Boolean, View) -> Unit)? = null
-
-    fun setEditContextClickListener(listener: (Boolean, View) -> Unit) {
-        editContextClickListener = listener
-    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -69,50 +65,70 @@ class HomePillListDetailAdapter :
                 Log.d("detailAdapter", "true")
             }
 
+            // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
             binding.tvHomePillListPillName.setOnClickListener {
                 stickerClickListener?.invoke(true)
                 Log.d("tvtv", "click")
             }
 
-//            // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
-//            binding.ivHomePillListEdit.setOnClickListener {
-//                Log.d("popupDetail", "success${it}")
-//                editContextClickListener?.invoke(true, it)
-//
-//                    var popup = PopupMenu(it.context, it)
-//                    popup.menuInflater?.inflate(R.menu.popup_home_pill_list_edit, popup.menu)
-//
-//                    popup.setOnMenuItemClickListener {
-//                        when (it?.itemId) {
-//                            R.id.pill_edit -> {
-//                                // 다이얼로그
-//                                return@setOnMenuItemClickListener true
-//                            }
-//                            R.id.pill_delete -> {
-//                                return@setOnMenuItemClickListener true
-//                            }
-//                            R.id.pill_stop -> {
-//                                return@setOnMenuItemClickListener true
-//
-//                            }
-//                        }
-//                        return@setOnMenuItemClickListener false
-//                    }
-//                    popup.show()
-
-
-//            }
 
             // 약 리스트 체크 & 체크 취소
             binding.ivHomePillListCheck.setOnClickListener {
                 binding.ivHomePillListCheck.isSelected = !binding.ivHomePillListCheck.isSelected
             }
 
-            // 약 리스트 수정 클릭시 팝업
-//            binding.ivHomePillListEdit.setOnClickListener {
-//                var popup = PopupMenu(this, binding.ivHomePillListEdit)
-//                menuInflater
-//            }
+            //약 리스트 수정 클릭시 팝업
+            binding.ivHomePillListEdit.setOnClickListener {view->
+                var popup = PopupMenu(view.context, view)
+                popup.menuInflater?.inflate(R.menu.popup_home_pill_list_edit, popup.menu)
+
+                popup.setOnMenuItemClickListener {
+                    when (it?.itemId) {
+                        R.id.pill_edit -> {
+                            //약수정 intent로 약수정 뷰로 넘기기
+
+                            return@setOnMenuItemClickListener true
+                        }
+                        R.id.pill_stop -> {
+                            //복약 중단 다이어로그
+                            val builder = AlertDialog.Builder(view.context)
+                            builder.setTitle("정말로 복약을 중단하나요?")
+                                .setMessage("복약을 중단하면 내일부터 약 알림이 오지 않아요")
+                                .setPositiveButton("취소") { dialog, id ->
+                                    //클릭리스너
+                                    dialog.cancel()
+                                }
+                                .setNegativeButton("복약 중단"
+                                ) { dialog, id ->
+                                    //클릭리스너
+                                }
+                            builder.show()
+
+                            return@setOnMenuItemClickListener true
+                        }
+                        R.id.pill_delete -> {
+                            //약 삭제 다이어로그
+                            val builder = AlertDialog.Builder(view.context)
+                            builder.setTitle("정말로 약을 삭제하나요?")
+                                .setMessage("해당 약에 대한 전체 복약 기록이 사라지고 알림도 오지 않아요")
+                                .setPositiveButton("취소") { dialog, id ->
+                                    //클릭리스너
+                                    dialog.cancel()
+                                }
+                                .setNegativeButton("삭제"
+                                ) { dialog, id ->
+                                    //클릭리스너
+                                }
+                            builder.show()
+
+                            return@setOnMenuItemClickListener true
+
+                        }
+                    }
+                    return@setOnMenuItemClickListener false
+                }
+                popup.show()
+            }
 
 
 
