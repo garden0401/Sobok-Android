@@ -2,6 +2,7 @@ package com.example.sobok_android.presentation.view.home
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sobok_android.databinding.ItemHomePillListAllBinding
@@ -22,6 +23,13 @@ class HomePillListAllAdapter : RecyclerView.Adapter<HomePillListAllAdapter.HomeP
 
     fun setStickerClickListener(listener: (Boolean) -> Unit) {
         stickerClickListener = listener
+    }
+
+    // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
+    private var editContextClickListener: ((Boolean, View) -> Unit)? = null
+
+    fun setEditContextClickListener(listener: (Boolean, View) -> Unit) {
+        editContextClickListener = listener
     }
 
     override fun onCreateViewHolder(
@@ -52,6 +60,11 @@ class HomePillListAllAdapter : RecyclerView.Adapter<HomePillListAllAdapter.HomeP
                 setStickerClickListener {
                     stickerClickListener?.invoke(it)
                     Log.d("bigAdapter", "true{$it}")
+                }
+
+                // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
+                setEditContextClickListener { isClick, View ->
+                    editContextClickListener?.invoke(isClick, View)
                 }
 
             }

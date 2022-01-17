@@ -2,7 +2,9 @@ package com.example.sobok_android.presentation.view.home
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
+import android.widget.PopupMenu
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentHomeBinding
 import com.example.sobok_android.presentation.base.BindingFragment
@@ -15,7 +17,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private lateinit var homePillListAllAdapter: HomePillListAllAdapter
 
+    // 고차함수써보기
     private val mainViewModel : MainViewModel by sharedViewModel()
+    private lateinit var editView : View
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,17 +27,40 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         initAdapter()
 
-        }
+
+
+
+    }
+
 
     private fun initAdapter(){
         homePillListAllAdapter = HomePillListAllAdapter()
 
         binding.rvHomePillListAll.adapter = homePillListAllAdapter
 
-        homePillListAllAdapter.setStickerClickListener {
+
+       homePillListAllAdapter.setStickerClickListener {
             mainViewModel.setIsStickerClick(it)
             Log.d("lala", "success${it}")
         }
+
+        // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
+        homePillListAllAdapter.setEditContextClickListener { click, view ->
+            mainViewModel.setIsEditContextClick(click)
+            Log.d("popupHome", "success${view}")
+            editView = view
+
+        }
+
+        // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
+        mainViewModel.isEditContextClick.observe(this) {
+            if (it && ::editView.isInitialized) {
+                Log.d("popup", "success")
+                initSetPopup()
+            }
+
+        }
+
 
         homePillListAllAdapter.homePillListAll =
             listOf(
@@ -67,7 +94,41 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                         HomePillListData.PillDetailData("비타민2", false,"3"),
                         HomePillListData.PillDetailData("비타민3", true,"8"),)),
             )
+        binding.isEdit = true
+
+        // 메인 약 리스트 수정버튼<->완료 버튼
+        binding.tvBtnHomePillListEdit.setOnClickListener {
+            binding.isEdit = !binding.isEdit!!
+        }
+
+
     }
+
+
+    // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
+    private fun initSetPopup() {
+        var popup = PopupMenu(requireContext(), editView)
+        popup.menuInflater?.inflate(R.menu.popup_home_pill_list_edit, popup.menu)
+
+        popup.setOnMenuItemClickListener {
+            when (it?.itemId) {
+                R.id.pill_edit -> {
+                    // 다이얼로그
+                    return@setOnMenuItemClickListener true
+                }
+                R.id.pill_delete -> {
+                    return@setOnMenuItemClickListener true
+                }
+                R.id.pill_stop -> {
+                    return@setOnMenuItemClickListener true
+
+                }
+            }
+            return@setOnMenuItemClickListener false
+        }
+        popup.show()
+    }
+
 
 
 }

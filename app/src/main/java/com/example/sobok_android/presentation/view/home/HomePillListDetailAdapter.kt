@@ -2,8 +2,11 @@ package com.example.sobok_android.presentation.view.home
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ItemHomePillListDetailBinding
@@ -25,6 +28,13 @@ class HomePillListDetailAdapter :
 
     fun setStickerClickListener(listener: (Boolean) -> Unit) {
         stickerClickListener = listener
+    }
+
+    // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
+    private var editContextClickListener: ((Boolean, View) -> Unit)? = null
+
+    fun setEditContextClickListener(listener: (Boolean, View) -> Unit) {
+        editContextClickListener = listener
     }
 
     override fun onCreateViewHolder(
@@ -54,12 +64,6 @@ class HomePillListDetailAdapter :
             binding.ivHomePillListColor.setImageResource(R.drawable.oval_pill_list_color)
             binding.tvHomePillListStickerCount.text = data.stickerCount
 
-            // 약 리스트 체크 & 체크 취소
-            binding.ivHomePillListCheck.setOnClickListener {
-                binding.ivHomePillListCheck.isSelected = !binding.ivHomePillListCheck.isSelected
-            }
-
-
             binding.ivHomePillListStickerOne.setOnClickListener {
                 stickerClickListener?.invoke(true)
                 Log.d("detailAdapter", "true")
@@ -70,8 +74,49 @@ class HomePillListDetailAdapter :
                 Log.d("tvtv", "click")
             }
 
-            // 스피너 어댑터 설정
-            // binding.spHomePillList.adapter = ArrayAdapter.createFromResource(this, R.array.spinnerList, android.R.layout.simple_spinner_item)
+//            // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
+//            binding.ivHomePillListEdit.setOnClickListener {
+//                Log.d("popupDetail", "success${it}")
+//                editContextClickListener?.invoke(true, it)
+//
+//                    var popup = PopupMenu(it.context, it)
+//                    popup.menuInflater?.inflate(R.menu.popup_home_pill_list_edit, popup.menu)
+//
+//                    popup.setOnMenuItemClickListener {
+//                        when (it?.itemId) {
+//                            R.id.pill_edit -> {
+//                                // 다이얼로그
+//                                return@setOnMenuItemClickListener true
+//                            }
+//                            R.id.pill_delete -> {
+//                                return@setOnMenuItemClickListener true
+//                            }
+//                            R.id.pill_stop -> {
+//                                return@setOnMenuItemClickListener true
+//
+//                            }
+//                        }
+//                        return@setOnMenuItemClickListener false
+//                    }
+//                    popup.show()
+
+
+//            }
+
+            // 약 리스트 체크 & 체크 취소
+            binding.ivHomePillListCheck.setOnClickListener {
+                binding.ivHomePillListCheck.isSelected = !binding.ivHomePillListCheck.isSelected
+            }
+
+            // 약 리스트 수정 클릭시 팝업
+//            binding.ivHomePillListEdit.setOnClickListener {
+//                var popup = PopupMenu(this, binding.ivHomePillListEdit)
+//                menuInflater
+//            }
+
+
+
+
 
 
         }

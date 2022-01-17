@@ -46,6 +46,17 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="2dp"/>
+        
+        // 임시 팝업
+        <ImageView
+            android:id="@+id/iv_home_pill_list_edit"
+            android:src="@drawable/ic_edit_40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_home_pill_list_check"/>
+
 
         <TextView
             android:id="@+id/tv_home_pill_list_plus"

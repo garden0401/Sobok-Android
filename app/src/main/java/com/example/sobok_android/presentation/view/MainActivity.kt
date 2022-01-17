@@ -19,7 +19,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
+    // 고차함수 써보기
     private val mainViewModel: MainViewModel by viewModel()
+
     private lateinit var homeStickerBottomSheet: HomeStickerBottomSheetFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +29,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         initHomeStickerBottomSheet()
         setNavigation()
         observeIsStickerClickEvent()
-        setPop()
+//        setPop()
 
     }
 
@@ -54,33 +56,31 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             }
         }
 
+
     }
 
-    // 약 리스트 수정 클릭시 팝업(임시로 홈프래그먼트에 띄워보기)
-    private fun setPop() {
-        binding.btnPoor.setOnClickListener {
-            var popup = PopupMenu(this, binding.btnPoor)
-            menuInflater?.inflate(R.menu.popup_home_pill_list_edit, popup.menu)
-
-            popup.setOnMenuItemClickListener {
-                when (it?.itemId) {
-                    R.id.pill_edit -> {
-                        // 다이얼로그
-                        return@setOnMenuItemClickListener true
-                    }
-                    R.id.pill_delete -> {
-                        return@setOnMenuItemClickListener true
-                    }
-                    R.id.pill_stop -> {
-                        return@setOnMenuItemClickListener true
-
-                    }
-                }
-                return@setOnMenuItemClickListener false
-            }
-            popup.show()
-        }
-    }
-
+//    // 약 리스트 수정 클릭시 팝업(임시로 홈프래그먼트에 띄워보기)
+//    private fun initSetPopup() {
+//        var popup = PopupMenu(this, findViewById(R.id.iv_home_pill_list_edit))
+//        menuInflater?.inflate(R.menu.popup_home_pill_list_edit, popup.menu)
+//
+//        popup.setOnMenuItemClickListener {
+//            when (it?.itemId) {
+//                R.id.pill_edit -> {
+//                    // 다이얼로그
+//                    return@setOnMenuItemClickListener true
+//                }
+//                R.id.pill_delete -> {
+//                    return@setOnMenuItemClickListener true
+//                }
+//                R.id.pill_stop -> {
+//                    return@setOnMenuItemClickListener true
+//
+//                }
+//            }
+//            return@setOnMenuItemClickListener false
+//        }
+//        popup.show()
+//    }
 
 }
