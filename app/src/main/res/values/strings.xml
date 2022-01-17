@@ -4,7 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- 약추가 -->
-    <string name="person_take_pill">내가 먹을 약아에요</string>
+    <string name="person_take_pill">내가 먹을 약이에요</string>
     <string name="pill_count_msg">1개 더 추가할 수 있어요</string>
     <string name="pill_add_save">저장</string>
     <string name="add_new_pill">새로운 약 추가하기</string>
@@ -37,5 +37,6 @@
     <string name="pill_info_date">2022.01.01 - 2022.01.02</string>
     <string name="pill_info_cycle">1주에 한번</string>
     <string name="pill_info_time">오후 11:00, 오후 12:00, 오후 10:00</string>
+    <string name="pill_add_finish_save">저장</string>
 
 </resources>
