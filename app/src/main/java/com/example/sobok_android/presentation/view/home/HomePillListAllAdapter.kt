@@ -19,18 +19,20 @@ class HomePillListAllAdapter : RecyclerView.Adapter<HomePillListAllAdapter.HomeP
             notifyDataSetChanged()
         }
 
+    // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
     private var stickerClickListener : ((Boolean) -> Unit)? = null
 
     fun setStickerClickListener(listener: (Boolean) -> Unit) {
         stickerClickListener = listener
     }
 
-    // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
-    private var editContextClickListener: ((Boolean, View) -> Unit)? = null
+    // 홈(메인) 수정<->완료, 수정 터치 시 체크 버튼<->컨텍스트 버튼
+    private var _isEdit : Boolean = true
 
-    fun setEditContextClickListener(listener: (Boolean, View) -> Unit) {
-        editContextClickListener = listener
+    fun setIsEdit(value: Boolean) {
+        _isEdit = value
     }
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -57,15 +59,15 @@ class HomePillListAllAdapter : RecyclerView.Adapter<HomePillListAllAdapter.HomeP
             HomePillListDetailAdapter().apply {
                 homePillListDetail = data.scheduleList
                 binding.rvHomePillListDetail.adapter = this
+                // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
                 setStickerClickListener {
                     stickerClickListener?.invoke(it)
                     Log.d("bigAdapter", "true{$it}")
                 }
 
-                // 홈(메인) 약 리스트 수정시 context 버튼 클릭-popup menu 띄우기 (고차함수 써보기)
-                setEditContextClickListener { isClick, View ->
-                    editContextClickListener?.invoke(isClick, View)
-                }
+                // 홈(메인) 수정<->완료, 수정 터치 시 체크 버튼<->컨텍스트 버튼
+                setIsEdit(_isEdit)
+
 
             }
         }

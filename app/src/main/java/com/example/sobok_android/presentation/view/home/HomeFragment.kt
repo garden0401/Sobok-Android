@@ -8,6 +8,7 @@ import android.widget.PopupMenu
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentHomeBinding
 import com.example.sobok_android.presentation.base.BindingFragment
+import com.example.sobok_android.presentation.view.home.viewmodel.HomeViewModel
 import com.example.sobok_android.presentation.view.viewmodel.MainViewModel
 import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -21,12 +22,16 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
     private val mainViewModel : MainViewModel by sharedViewModel()
 
+    // 홈(메인) 수정<->완료, 수정 터치 시 체크 버튼<->컨텍스트 버튼
+    private var _isEdit : Boolean = true
+    private val homeViewModel : HomeViewModel by viewModel()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()
-
+        observeIsEditClickEvent()
 
 
 
@@ -81,8 +86,22 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         binding.isEdit = true
 
         // 메인 약 리스트 수정버튼<->완료 버튼
-        binding.tvBtnHomePillListEdit.setOnClickListener {
-            binding.isEdit = !binding.isEdit!!
+//        binding.tvBtnHomePillListEdit.setOnClickListener {
+//            binding.isEdit = !binding.isEdit!!
+//        }
+
+
+
+
+
+
+
+    }
+
+    // 홈(메인) 수정<->완료, 수정 터치 시 체크 버튼<->컨텍스트 버튼
+    private fun observeIsEditClickEvent() {
+        homeViewModel.isEditClick.observe(this) {
+            homePillListAllAdapter.setIsEdit(_isEdit)
         }
 
 

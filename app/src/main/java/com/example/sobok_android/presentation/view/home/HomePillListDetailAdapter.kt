@@ -29,6 +29,13 @@ class HomePillListDetailAdapter :
         stickerClickListener = listener
     }
 
+    // 홈(메인) 수정<->완료, 수정 터치 시 체크 버튼<->컨텍스트 버튼
+    private var _isEdit : Boolean = true
+
+    fun setIsEdit(value: Boolean) {
+        _isEdit = value
+    }
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -78,7 +85,7 @@ class HomePillListDetailAdapter :
                     builder.setTitle("복약하지 않은 약인가요?")
                         .setMessage("복약을 취소하면 소중한 사람들의 응원도 같이 삭제되어요.")
                         .setPositiveButton("복약 취소") { dialog, id ->
-                            // 복약 취소 행
+                            // 복약 취소 행동
                         }
                         .setNegativeButton("취소"
                         ) { dialog, id ->
@@ -145,6 +152,9 @@ class HomePillListDetailAdapter :
                 popup.show()
             }
 
+
+            // 홈(메인) 수정<->완료, 수정 터치 시 체크 버튼<->컨텍스트 버튼
+            binding.isEdit = _isEdit
 
 
 

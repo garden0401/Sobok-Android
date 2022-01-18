@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="isEdit"
+            type="Boolean" />
 
     </data>
 
@@ -17,7 +20,7 @@
             android:id="@+id/tv_btn_home_pill_list_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="수정"
+            android:text="@{isEdit ? @string/edit : @string/edit_finish}"
             android:fontFamily="@font/pretendard_semi_bold"
             android:textColor="#676e74"
             android:textSize="15sp"
@@ -25,6 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="19dp"
             android:layout_marginEnd="20dp"/>
+
 
 <!--        <ScrollView-->
 <!--            android:layout_width="match_parent"-->

@@ -7,6 +7,11 @@
         <entry key="app/src/main/res/drawable/ic_check_select_56.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/ic_fill_alarm_gray.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/drawable/oval_pill_list_color.xml" value="0.27037037037037037" />
+        <entry key="app/src/main/res/drawable/oval_pill_list_color_1.xml" value="0.28425925925925927" />
+        <entry key="app/src/main/res/drawable/oval_pill_list_color_2.xml" value="0.28425925925925927" />
+        <entry key="app/src/main/res/drawable/oval_pill_list_color_3.xml" value="0.28425925925925927" />
+        <entry key="app/src/main/res/drawable/oval_pill_list_color_4.xml" value="0.28425925925925927" />
+        <entry key="app/src/main/res/drawable/oval_pill_list_color_5.xml" value="0.28425925925925927" />
         <entry key="app/src/main/res/drawable/rectangle_notice_btn_accept.xml" value="0.26296296296296295" />
         <entry key="app/src/main/res/drawable/rectangle_notice_btn_reject.xml" value="0.26296296296296295" />
         <entry key="app/src/main/res/drawable/rectangle_notice_list.xml" value="0.21851851851851853" />
