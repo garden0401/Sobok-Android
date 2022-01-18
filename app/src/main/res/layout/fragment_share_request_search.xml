@@ -14,9 +14,15 @@
         <variable
             name="nickName"
             type="String" />
+
+
+        <variable
+            name="isEditable"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_share_request_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.view.share.request.ShareRequestSearchFragment">
@@ -61,6 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
+                android:clickable="false"
                 android:hint="@string/share_request_search_nickname"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
@@ -80,6 +87,7 @@
                 android:layout_marginVertical="3dp"
                 android:layout_marginEnd="3dp"
                 android:src="@drawable/ic_text_close_48"
+                android:visibility="@{isEditable? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -120,7 +128,7 @@
 
         <TextView
             android:id="@+id/tv_share_request_search_result"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/pretendard_semi_bold"
@@ -128,6 +136,7 @@
             android:textColor="@color/gray900_sub"
             android:textSize="18sp"
             android:visibility="@{isEmpty ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@id/cl_share_request_search_bar"
             app:layout_constraintStart_toStartOf="@id/cl_share_request_search_bar"
             app:layout_constraintTop_toBottomOf="@id/cl_share_request_search_bar" />
 
