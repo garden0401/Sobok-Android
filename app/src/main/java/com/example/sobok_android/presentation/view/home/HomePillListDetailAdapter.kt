@@ -29,11 +29,12 @@ class HomePillListDetailAdapter :
         stickerClickListener = listener
     }
 
-    // 홈(메인) 수정<->완료, 수정 터치 시 체크 버튼<->컨텍스트 버튼
+     //홈(메인) 수정<->완료, 수정 터치 시 체크 버튼<->컨텍스트 버튼
     private var _isEdit : Boolean = true
 
     fun setIsEdit(value: Boolean) {
         _isEdit = value
+        Log.d("detailedit" , "${value}")
     }
 
 

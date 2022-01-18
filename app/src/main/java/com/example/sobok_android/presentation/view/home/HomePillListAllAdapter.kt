@@ -31,6 +31,8 @@ class HomePillListAllAdapter : RecyclerView.Adapter<HomePillListAllAdapter.HomeP
 
     fun setIsEdit(value: Boolean) {
         _isEdit = value
+        Log.d("alladpaterEdit","${value}")
+        notifyDataSetChanged()
     }
 
 
@@ -58,6 +60,7 @@ class HomePillListAllAdapter : RecyclerView.Adapter<HomePillListAllAdapter.HomeP
 
             HomePillListDetailAdapter().apply {
                 homePillListDetail = data.scheduleList
+
                 binding.rvHomePillListDetail.adapter = this
                 // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
                 setStickerClickListener {
@@ -67,6 +70,9 @@ class HomePillListAllAdapter : RecyclerView.Adapter<HomePillListAllAdapter.HomeP
 
                 // 홈(메인) 수정<->완료, 수정 터치 시 체크 버튼<->컨텍스트 버튼
                 setIsEdit(_isEdit)
+                Log.d("*****AllAdapter", "${_isEdit}")
+
+
 
 
             }
