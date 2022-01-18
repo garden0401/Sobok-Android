@@ -11,6 +11,9 @@
         <variable
             name="isEdit"
             type="Boolean" />
+        <variable
+            name="pillInfo"
+            type="com.example.sobok_android.data.model.response.share.ResSharePillListData.ScheduleInfo.PillInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +24,7 @@
 
         <ImageView
             android:id="@+id/iv_home_pill_list_color"
-            pillListColor="@{pillColor}"
+            pillListColor="@{pillInfo.color}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +36,7 @@
             android:id="@+id/tv_home_pill_list_pill_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="홍삼"
+            tools:text="@{pillInfo.pillName}"
             android:fontFamily="@font/pretendard_medium"
             android:textSize="18sp"
             android:textColor="#1f2022"
@@ -42,6 +45,7 @@
             android:layout_marginStart="34dp"
             android:layout_marginTop="19dp" />
 
+        //체크표시 버튼
         <ImageView
             android:id="@+id/iv_home_pill_list_check"
             android:src="@drawable/selector_home_pill_list_check"
@@ -54,7 +58,7 @@
             android:layout_marginEnd="2dp"
             android:visibility="@{isEdit ? View.INVISIBLE : View.VISIBLE}"/>
         
-
+        //context 버튼
         <ImageView
             android:id="@+id/iv_home_pill_list_edit"
             android:src="@drawable/ic_edit_40"
@@ -65,6 +69,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="6dp"
             android:visibility="@{isEdit ? View.VISIBLE : View.INVISIBLE}" />
+
+        // 공유탭 부분
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <TextView
