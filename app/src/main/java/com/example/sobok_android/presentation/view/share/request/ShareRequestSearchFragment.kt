@@ -1,34 +1,44 @@
 package com.example.sobok_android.presentation.view.share.request
 
+import android.app.Activity
+import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.KeyEvent.ACTION_DOWN
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import androidx.navigation.fragment.findNavController
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentShareRequestSearchBinding
 import com.example.sobok_android.presentation.base.BindingFragment
 import com.example.sobok_android.presentation.view.share.request.viewmodel.ShareRequestViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ShareRequestSearchFragment :
     BindingFragment<FragmentShareRequestSearchBinding>(R.layout.fragment_share_request_search) {
-    private val shareRequestViewModel: ShareRequestViewModel by viewModel()
+    private val shareRequestViewModel: ShareRequestViewModel by sharedViewModel()
+    private lateinit var shareRequestActivity: Activity
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setClShareRequestSearchBarClickListener()
+        setIsShareRequestSearch()
         setEtSearchSetOnKeyListener()
         setDeleteClickListener()
         observeUserName()
         observeSearchResult()
         setTvShareRequestSearchResult()
+        setEtShareRequestSaveClearFocus()
+        setEtShareRequestOnFocusChangeListener()
+    }
+
+    private fun setIsShareRequestSearch() {
+        shareRequestViewModel.setIsShareRequestSearch(true)
     }
 
     private fun navigateToShareRequestSaveFragment() {
-        findNavController().navigate(R.id.action_shareRequestSearchFragment_to_shareRequestSaveFragment)
+        shareRequestActivity = activity as ShareRequestActivity
+        (shareRequestActivity as ShareRequestActivity).replaceSaveFragment()
     }
 
     private fun setEtSearchSetOnKeyListener() {
@@ -70,8 +80,8 @@ class ShareRequestSearchFragment :
                 true -> binding.isEmpty = true
                 else -> {
                     binding.isEmpty = false
-                    //TODO:2021-01-18 추후 수정 예정 -> 멤버 리스트 개수 조정
                     binding.nickName = it.data[0].memberName
+                    shareRequestViewModel.memberId = it.data[0].memberId
                 }
             }
         }
@@ -80,6 +90,41 @@ class ShareRequestSearchFragment :
     private fun setTvShareRequestSearchResult() {
         binding.tvShareRequestSearchResult.setOnClickListener {
             navigateToShareRequestSaveFragment()
+            shareRequestViewModel.memberName = binding.tvShareRequestSearchResult.text.toString()
+        }
+    }
+
+    private fun setClShareRequestSearchBarClickListener() {
+        binding.clShareRequestSearchBar.setOnClickListener {
+            binding.etShareRequestSearch.isSelected = true
+        }
+    }
+
+    private fun setEtShareRequestSaveClearFocus() {
+        binding.clShareRequestSearch.setOnTouchListener { v, event ->
+            binding.etShareRequestSearch.clearFocus()
+            hideKeyBoard()
+            return@setOnTouchListener false
+        }
+    }
+
+    private fun hideKeyBoard() {
+        val inputMethodManager: InputMethodManager =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(
+            binding.etShareRequestSearch.windowToken,
+            0
+        )
+    }
+
+    private fun setEtShareRequestOnFocusChangeListener() {
+        binding.etShareRequestSearch.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                binding.isEditable = true
+            } else {
+                binding.isEditable = false
+                hideKeyBoard()
+            }
         }
     }
 
