@@ -11,6 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class PillAddBottomSheetFragment : BottomSheetDialogFragment() {
     lateinit var _binding: FragmentPillAddBottomSheetBinding
     private val binding get() = _binding!!
+    var isMyPill: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,19 +25,31 @@ class PillAddBottomSheetFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+
         binding.clPillAddMyPill.setOnClickListener {
-            navigateToPillAdd()
+            navigateToMyPillAdd()
         }
         binding.clPillAddSendPill.setOnClickListener {
-            navigateToPillAdd()
+            navigateToSendPillAdd()
         }
         binding.ivCancel.setOnClickListener {
             dismiss()
         }
     }
 
-    private fun navigateToPillAdd() {
+    private fun navigateToMyPillAdd() {
         val intent = Intent(requireContext(), PillAddActivity::class.java)
+        intent.putExtra("isMyPill", true)
         startActivity(intent)
+    }
+
+    private fun navigateToSendPillAdd() {
+        val intent = Intent(requireContext(), PillAddActivity::class.java)
+        intent.putExtra("isMyPill", false)
+        startActivity(intent)
+    }
+
+    fun getMyPIll() : Boolean{
+        return isMyPill
     }
 }

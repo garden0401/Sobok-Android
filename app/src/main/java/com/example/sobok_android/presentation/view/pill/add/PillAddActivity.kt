@@ -12,6 +12,7 @@ import android.widget.NumberPicker.OnValueChangeListener
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ActivityPillAddBinding
 import com.example.sobok_android.presentation.base.BindingActivity
+import com.example.sobok_android.presentation.view.MainActivity
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillNameAdapter
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillTimeAdapter
 import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
@@ -21,11 +22,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activity_pill_add) {
+class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activity_pill_add){
 
     private val pillAddViewModel: PillAddViewModel by viewModel()
     private lateinit var pillNameAdapter: PillNameAdapter
     private lateinit var pillTimeAdapter: PillTimeAdapter
+    private lateinit var pillBottomSheetDialogFragment: PillAddBottomSheetFragment
 
 
     val nameList = arrayListOf<String>()
@@ -40,6 +42,8 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
         binding.tvPillDateSpecificPeriod.isSelected = false
         binding.pillCycleMoreConstraintLayout.visibility = View.GONE
         binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE
+
+        // pillPerson 값 넣어주기
 
         initPillNameAdapter()
         initPillTimeAdapter()
@@ -57,7 +61,19 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
         showDialogPillDate()
         showDialogPillTime()
 
+
+        var _isMyPill: Boolean = false
+        val intent = intent
+        _isMyPill = intent.getBooleanExtra("isMyPill", _isMyPill)
+
+        if(_isMyPill) {
+            binding.ivPillPersonMore.visibility = View.GONE
+            binding.clPillPerson.isClickable = false
+        }
+
+
         binding.clTop.setOnTouchListener { v, event ->
+            binding.tvPillName.clearFocus()
             binding.rcvPillName.clearFocus()
             return@setOnTouchListener false
         }
@@ -74,15 +90,11 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
             }
         }
 
-        /*
-        private fun navigateToHome() {
-        binding.tvFinish.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+        navigateToHome()
+
+
     }
-         */
-    }
+
     private fun initPillNameAdapter() {
         pillNameAdapter = PillNameAdapter()
         binding.rcvPillName.adapter = pillNameAdapter
@@ -91,6 +103,13 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
     private fun initPillTimeAdapter() {
         pillTimeAdapter = PillTimeAdapter()
         binding.rcvPillTime.adapter = pillTimeAdapter
+    }
+
+    private fun navigateToHome() {
+        binding.ivCancel.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun showDialogPillTime() {
@@ -262,7 +281,8 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
                 binding.pillCycleMoreConstraintLayout.visibility = View.VISIBLE // 해당 피커 활성화
                 binding.tvPillDateEveryday.isSelected = false // 첫번째 버튼 비활성화
                 binding.tvPillDateSpecificPeriod.isSelected = false // 두번째 버튼 비활성화
-                binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE // 피커 열린게 있으면 닫기
+                binding.pillCycleSpecificMoreConstraintLayout.visibility =
+                    View.GONE // 피커 열린게 있으면 닫기
             }
         }
     }
@@ -274,16 +294,15 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
     }
 
 
-
     private fun showDialogPillPerson() {
         binding.clPillPerson.setOnClickListener {
             lateinit var dialog: AlertDialog
-            val array = arrayOf("나", "엄마", "수현언니", "정원언니", "안드짱")
+            val pillPersonArray = arrayOf("엄마", "수현언니", "정원언니", "안드짱")
             val builder = AlertDialog.Builder(this)
-            builder.setSingleChoiceItems(array, -1) { _, which ->
-                val name = array[which]
+            builder.setSingleChoiceItems(pillPersonArray, -1) { _, which ->
+                val name = pillPersonArray[which]
                 binding.tvPillAddNameDialog.text = name
-                binding.tvSelectedPillPerson.text = name + "가 먹을 약이에요"
+                binding.tvSelectedPillPerson.text = name + "에게 전송할 약이에요"
                 dialog.dismiss()
             }
             dialog = builder.create()
@@ -298,7 +317,8 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
                 binding.tvPillDateSpecificDay.isSelected = false // 첫번째 버튼 비활성화
                 binding.tvPillDateSpecificPeriod.isSelected = false // 두번째 버튼 비활성화
                 binding.pillCycleMoreConstraintLayout.visibility = View.GONE
-                binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE // 피커 열린게 있으면 닫기
+                binding.pillCycleSpecificMoreConstraintLayout.visibility =
+                    View.GONE // 피커 열린게 있으면 닫기
             }
         }
     }
