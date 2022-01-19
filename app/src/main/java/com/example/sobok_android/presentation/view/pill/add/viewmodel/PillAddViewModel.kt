@@ -1,7 +1,6 @@
 package com.example.sobok_android.presentation.view.pill.add.viewmodel
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,11 +12,16 @@ import kotlinx.coroutines.launch
 class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
 
     private val _pillList = MutableLiveData<PillListData>()
+    private val _pillTime = MutableLiveData<List<String>>()
     val pillList: LiveData<PillListData> get() = _pillList
+    private val _isComplete = MutableLiveData<Boolean>()
+    val isComplete: LiveData<Boolean> get() = _isComplete
 
-    fun setPillList(position: Int) {
-        _pillList.value!!.pillList.removeAt(position)
-        _pillList.value = PillListData(_pillList.value!!.pillList)
+    fun setIsComplete(complete: Boolean) {
+        _isComplete.value = complete
+        Log.d("완료버튼", "완료버튼")
+
+        // 매개변수로 받은 bool 값을 내부 변수에 넣어준다.
     }
 
     fun getPillList() = viewModelScope.launch {
@@ -29,9 +33,4 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
                 Log.d("server-pill-add-read-fail", "실패할일이 없다")
             }
     }
-
-
-
-
-
 }

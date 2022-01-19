@@ -1,6 +1,8 @@
 package com.example.sobok_android.presentation.view.pill.add
 
 import android.app.AlertDialog
+import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,8 @@ import android.widget.NumberPicker.OnValueChangeListener
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ActivityPillAddBinding
 import com.example.sobok_android.presentation.base.BindingActivity
+import com.example.sobok_android.presentation.view.pill.add.adapter.PillNameAdapter
+import com.example.sobok_android.presentation.view.pill.add.adapter.PillTimeAdapter
 import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,106 +23,116 @@ import java.util.*
 
 class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activity_pill_add) {
 
-    private val pillAddViewModel : PillAddViewModel by viewModel()
+    private val pillAddViewModel: PillAddViewModel by viewModel()
+    private lateinit var pillNameAdapter: PillNameAdapter
+    private lateinit var pillTimeAdapter: PillTimeAdapter
+
+
+    val nameList = arrayListOf<String>()
+
+    var periodString = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val everyday = binding.tvPillDateEveryday
-        val specificDay = binding.tvPillDateSpecificDay
-        val specificDayPicker = binding.pillCycleMoreConstraintLayout
-        val specificPeriod = binding.tvPillDateSpecificPeriod
-        val specificPeriodPicker = binding.pillCycleSpecificMoreConstraintLayout
+        binding.tvPillDateEveryday.isSelected = true
+        binding.tvPillDateSpecificDay.isSelected = false
+        binding.tvPillDateSpecificPeriod.isSelected = false
+        binding.pillCycleMoreConstraintLayout.visibility = View.GONE
+        binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE
 
-        var periodString = ""
+        initPillNameAdapter()
+        initPillTimeAdapter()
 
-        everyday.isSelected = true
-        specificDay.isSelected = false
-        specificPeriod.isSelected = false
-        specificDayPicker.visibility = View.GONE
-        specificPeriodPicker.visibility = View.GONE
+        showDialogPillPerson()
+        addPillPerson()
 
-        binding.clPillPerson.setOnClickListener {
-            lateinit var dialog: AlertDialog
-            val array = arrayOf("나", "엄마", "수현언니", "정원언니", "안드짱")
-            val builder = AlertDialog.Builder(this)
-            builder.setSingleChoiceItems(array, -1) { _, which ->
-                val name = array[which]
-                binding.tvPillAddNameDialog.text = name
-                binding.tvSelectedPillPerson.text = name + "가 먹을 약이에요"
-                dialog.dismiss()
-            }
-            dialog = builder.create()
-            dialog.show()
+        cycleEveryday()
+        cycleSpecificDay()
+        cycleSpecificPeriod()
+
+        showDialogSpecificDay()
+        showDialogSpecificPeriod()
+
+        showDialogPillDate()
+        showDialogPillTime()
+
+        binding.clTop.setOnTouchListener { v, event ->
+            binding.rcvPillName.clearFocus()
+            return@setOnTouchListener false
         }
 
-        // 여기서 viewModel 함수 불러온다
-        binding.clAddPillName.setOnClickListener {
-            // 함께 먹는 약 추가..
-            binding.rcvPillName
-            // 리스트.add(todo)
+        binding.btnSaveConstraintLayout.setOnClickListener {
+            pillAddViewModel.setIsComplete(true)
         }
 
-
-        everyday.setOnClickListener {
-            if (!everyday.isSelected) {
-                everyday.isSelected = true // this 전환
-                specificDay.isSelected = false // 첫번째 버튼 비활성화
-                specificPeriod.isSelected = false // 두번째 버튼 비활성화
-                specificDayPicker.visibility = View.GONE
-                specificPeriodPicker.visibility = View.GONE // 피커 열린게 있으면 닫기
+        pillAddViewModel.isComplete.observe(this) {
+            if (it) {
+                // 데이터 값을 보내줘라.. 뷰모델로..........
+                val intent = Intent(this, PillAddFinishActivity::class.java)
+                startActivity(intent)
             }
         }
 
-        specificDay.setOnClickListener {
-            // 특정요일 버튼 선택
-            if (!specificDay.isSelected) {
-                specificDay.isSelected = true // this 전환
-                specificDayPicker.visibility = View.VISIBLE // 해당 피커 활성화
-                everyday.isSelected = false // 첫번째 버튼 비활성화
-                specificPeriod.isSelected = false // 두번째 버튼 비활성화
-                specificPeriodPicker.visibility = View.GONE // 피커 열린게 있으면 닫기
-            }
-
+        /*
+        private fun navigateToHome() {
+        binding.tvFinish.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
+    }
+         */
+    }
+    private fun initPillNameAdapter() {
+        pillNameAdapter = PillNameAdapter()
+        binding.rcvPillName.adapter = pillNameAdapter
+    }
 
-        specificPeriod.setOnClickListener {
-            // 특정간격 버튼 선택
-            if (!specificPeriod.isSelected) {
-                specificPeriod.isSelected = true // this 전환
-                specificPeriodPicker.visibility = View.VISIBLE // 해당 피커 활성화
-                everyday.isSelected = false // 첫번째 버튼 비활성화
-                specificDay.isSelected = false // 두번째 버튼 비활성화
-                specificDayPicker.visibility = View.GONE // 피커 열린게 있으면 닫기
+    private fun initPillTimeAdapter() {
+        pillTimeAdapter = PillTimeAdapter()
+        binding.rcvPillTime.adapter = pillTimeAdapter
+    }
+
+    private fun showDialogPillTime() {
+        binding.clAddPillTime.setOnClickListener {
+            val cal = Calendar.getInstance()
+
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+
+                pillTimeAdapter.makeText(SimpleDateFormat("HH:mm").format(cal.time))
+            }
+
+            TimePickerDialog(
+                this,
+                timeSetListener,
+                cal.get(Calendar.HOUR_OF_DAY),
+                cal.get(Calendar.MINUTE),
+                true
+            ).show()
+        }
+    }
+
+    private fun showDialogPillDate() {
+        binding.clPillDate.setOnClickListener {
+            // 특정간격 피커
+            val builder = MaterialDatePicker.Builder.dateRangePicker()
+            builder.setTitleText(title)
+            //
+            val picker = builder.build()
+            picker.show(supportFragmentManager, picker.toString())
+            picker.addOnNegativeButtonClickListener { picker.dismiss() }
+            picker.addOnPositiveButtonClickListener {
+                val startDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.first)
+                val endDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.second)
+                binding.tvPillDate.text = "$startDate ~ $endDate"
             }
         }
-        specificDayPicker.setOnClickListener {
-            lateinit var dialog: AlertDialog
-            val arrayColors = arrayOf("월", "화", "수", "목", "금", "토", "일")
-            val arrayChecked = booleanArrayOf(false, false, false, false, false, false, false)
-            val builder = AlertDialog.Builder(this)
+    }
 
-            builder.setMultiChoiceItems(arrayColors, arrayChecked) { _, which, isChecked ->
-                arrayChecked[which] = isChecked
-            }
-
-            binding.tvPillAddSpecificDay.text = ""
-
-            builder.setPositiveButton("OK") { _, _ ->
-                for (i in arrayColors.indices) {
-                    val checked = arrayChecked[i]
-                    if (checked) {
-                        binding.tvPillAddSpecificDay.text =
-                            "${binding.tvPillAddSpecificDay.text} ${arrayColors[i]}"
-                    }
-                }
-            }
-            dialog = builder.create()
-            dialog.show()
-        }
-
-
-        specificPeriodPicker.setOnClickListener {
+    private fun showDialogSpecificPeriod() {
+        binding.pillCycleSpecificMoreConstraintLayout.setOnClickListener {
             val dialog = AlertDialog.Builder(this).create()
             val edialog: LayoutInflater = LayoutInflater.from(this)
             val mView: View = edialog.inflate(R.layout.number_picker_dialog, null)
@@ -198,26 +212,94 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
             dialog.create()
             dialog.show()
         }
+    }
 
-        binding.clPillDate.setOnClickListener {
-            // 특정간격 피커
-            val builder = MaterialDatePicker.Builder.dateRangePicker()
-            builder.setTitleText(title)
-            //
-            val picker = builder.build()
-            picker.show(supportFragmentManager, picker.toString())
-            picker.addOnNegativeButtonClickListener { picker.dismiss() }
-            picker.addOnPositiveButtonClickListener {
-                val startDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.first)
-                val endDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.second)
-                binding.tvPillDate.text = "$startDate ~ $endDate"
+    private fun showDialogSpecificDay() {
+        binding.pillCycleMoreConstraintLayout.setOnClickListener {
+            lateinit var dialog: AlertDialog
+            val arrayColors = arrayOf("월", "화", "수", "목", "금", "토", "일")
+            val arrayChecked = booleanArrayOf(false, false, false, false, false, false, false)
+            val builder = AlertDialog.Builder(this)
+
+            builder.setMultiChoiceItems(arrayColors, arrayChecked) { _, which, isChecked ->
+                arrayChecked[which] = isChecked
+            }
+
+            binding.tvPillAddSpecificDay.text = ""
+
+            builder.setPositiveButton("OK") { _, _ ->
+                for (i in arrayColors.indices) {
+                    val checked = arrayChecked[i]
+                    if (checked) {
+                        binding.tvPillAddSpecificDay.text =
+                            "${binding.tvPillAddSpecificDay.text} ${arrayColors[i]}"
+                    }
+                }
+            }
+            dialog = builder.create()
+            dialog.show()
+        }
+    }
+
+    private fun cycleSpecificPeriod() {
+        binding.tvPillDateSpecificPeriod.setOnClickListener {
+            // 특정간격 버튼 선택
+            if (!binding.tvPillDateSpecificPeriod.isSelected) {
+                binding.tvPillDateSpecificPeriod.isSelected = true // this 전환
+                binding.pillCycleSpecificMoreConstraintLayout.visibility = View.VISIBLE // 해당 피커 활성화
+                binding.tvPillDateEveryday.isSelected = false // 첫번째 버튼 비활성화
+                binding.tvPillDateSpecificDay.isSelected = false // 두번째 버튼 비활성화
+                binding.pillCycleMoreConstraintLayout.visibility = View.GONE // 피커 열린게 있으면 닫기
             }
         }
+    }
 
-        // 약 복약시간 리사이클러뷰..의 삭제 추가
+    private fun cycleSpecificDay() {
+        binding.tvPillDateSpecificDay.setOnClickListener {
+            // 특정요일 버튼 선택
+            if (!binding.tvPillDateSpecificDay.isSelected) {
+                binding.tvPillDateSpecificDay.isSelected = true // this 전환
+                binding.pillCycleMoreConstraintLayout.visibility = View.VISIBLE // 해당 피커 활성화
+                binding.tvPillDateEveryday.isSelected = false // 첫번째 버튼 비활성화
+                binding.tvPillDateSpecificPeriod.isSelected = false // 두번째 버튼 비활성화
+                binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE // 피커 열린게 있으면 닫기
+            }
+        }
+    }
 
-        binding.clAddPillTime.setOnClickListener {
-            // 시간 추가
+    private fun addPillPerson() {
+        binding.clAddPillName.setOnClickListener {
+            pillNameAdapter.addItem("")
+        }
+    }
+
+
+
+    private fun showDialogPillPerson() {
+        binding.clPillPerson.setOnClickListener {
+            lateinit var dialog: AlertDialog
+            val array = arrayOf("나", "엄마", "수현언니", "정원언니", "안드짱")
+            val builder = AlertDialog.Builder(this)
+            builder.setSingleChoiceItems(array, -1) { _, which ->
+                val name = array[which]
+                binding.tvPillAddNameDialog.text = name
+                binding.tvSelectedPillPerson.text = name + "가 먹을 약이에요"
+                dialog.dismiss()
+            }
+            dialog = builder.create()
+            dialog.show()
+        }
+    }
+
+    private fun cycleEveryday() {
+        binding.tvPillDateEveryday.setOnClickListener {
+            if (!binding.tvPillDateEveryday.isSelected) {
+                binding.tvPillDateEveryday.isSelected = true // this 전환
+                binding.tvPillDateSpecificDay.isSelected = false // 첫번째 버튼 비활성화
+                binding.tvPillDateSpecificPeriod.isSelected = false // 두번째 버튼 비활성화
+                binding.pillCycleMoreConstraintLayout.visibility = View.GONE
+                binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE // 피커 열린게 있으면 닫기
+            }
         }
     }
 }
