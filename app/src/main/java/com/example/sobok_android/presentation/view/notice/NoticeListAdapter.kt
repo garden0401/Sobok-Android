@@ -1,8 +1,10 @@
 package com.example.sobok_android.presentation.view.notice
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sobok_android.data.model.response.notice.ResNoticeListData
 import com.example.sobok_android.databinding.ItemNoticeListBinding
 import com.example.sobok_android.domain.model.notice.NoticeListData
 import com.example.sobok_android.presentation.view.notice.model.NoticeInfoData
@@ -39,6 +41,40 @@ class NoticeListAdapter : RecyclerView.Adapter<NoticeListAdapter.NoticeListViewH
         : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data : NoticeInfoData) {
             binding.noticeInfoData = data
+
+            //캘린더 알림 수락 다이어로그
+            binding.btnNoticeAccept.setOnClickListener {
+                val builder = AlertDialog.Builder(it.context)
+                builder.setTitle("${data.senderName}님이 캘린더 공유를 요청했어요.")
+                    .setMessage("수락하면 상대방이 ${data.receiverName}님의 캘린더를 볼 수 있어요!")
+                    .setPositiveButton("확인") { dialog, id ->
+                        //클릭리스너
+
+                    }
+                    .setNegativeButton("취소"
+                    ) { dialog, id ->
+                        dialog.cancel()
+                    }
+                builder.show()
+            }
+
+            //캘린더 알림 거절 다이어로그
+            binding.btnNoticeReject.setOnClickListener {
+                val builder = AlertDialog.Builder(it.context)
+                builder.setTitle("${data.senderName}님의 캘린더 공유를 거절할까요?")
+                    .setMessage("거절하면 상대방이 ${data.receiverName}님의 캘린더를 볼 수 없어요.")
+                    .setPositiveButton("확인") { dialog, id ->
+                        //클릭리스너
+
+                    }
+                    .setNegativeButton("취소"
+                    ) { dialog, id ->
+                        dialog.cancel()
+                    }
+                builder.show()
+            }
+
+
         }
     }
 }
