@@ -1,60 +1,167 @@
 package com.example.sobok_android.presentation.view.share.request
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
+import android.view.KeyEvent
 import android.view.View
-import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
+import androidx.core.widget.addTextChangedListener
 import com.example.sobok_android.R
+import com.example.sobok_android.databinding.FragmentShareRequestSaveBinding
+import com.example.sobok_android.presentation.base.BindingFragment
+import com.example.sobok_android.presentation.view.share.request.viewmodel.ShareRequestViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.regex.Pattern
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ShareRequestSaveFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ShareRequestSaveFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class ShareRequestSaveFragment :
+    BindingFragment<FragmentShareRequestSaveBinding>(R.layout.fragment_share_request_save) {
+    private val shareRequestViewModel: ShareRequestViewModel by sharedViewModel()
+    private lateinit var onBackPressedCallback: OnBackPressedCallback
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //TODO: 2022-01-19 editText 터치 영역 수정
+        setIsShareRequestSearch()
+        initNickName()
+        setEtShareRequestSaveTextChangedListener()
+        setEtSearchSetOnKeyListener()
+        setEtShareRequestSaveSetFilters()
+        setDeleteClickListener()
+        setEtShareRequestSaveClearFocus()
+        setEtShareRequestOnFocusChangeListener()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                (requireActivity() as ShareRequestActivity).replaceSearchFragment()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        onBackPressedCallback.remove()
+    }
+
+    private fun setIsShareRequestSearch() {
+        shareRequestViewModel.setIsShareRequestSearch(false)
+    }
+
+    private fun initNickName() {
+        val nickname: String = shareRequestViewModel.memberName
+        binding.nickName = nickname
+        binding.textSize = 0
+        binding.isEditable = false
+        binding.isError = false
+    }
+
+    private fun setEtSearchSetOnKeyListener() {
+        binding.etShareRequestSave.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
+                hideKeyBoard()
+                shareRequestViewModel.setUserName(binding.etShareRequestSave.text.toString())
+                postShareRequest()
+                //TODO:2022-01-19 액티비티 종료
+                //requireActivity().finish()
+                //TODO:2022-01-19 이미 공유된 아이디인 경우 뷰가 없음 [질문]
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("캘린더 공유 요청을 보냈어요!")
+                    .setMessage(
+                        "상대방이 요청을 수락하면,\n" +
+                                "상대방의 캘린더를 볼 수 있어요"
+                    )
+                    .setNegativeButton("확인") { dialog, id ->
+                    }
+                builder.show()
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_share_request_save, container, false)
+    private fun postShareRequest() {
+        shareRequestViewModel.postSearchResult()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ShareRequestSaveFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ShareRequestSaveFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun setEtShareRequestSaveTextChangedListener() {
+        binding.etShareRequestSave.addTextChangedListener {
+            if (it != null) {
+                binding.textSize = it.length
+                if (it.length < 2) {
+                    binding.isError = true
+                    binding.clShareRequestSaveBar.setBackgroundResource(R.drawable.rectangle_border_pill_color_red_radius_12)
+                    binding.tvShareRequestSaveError.text =
+                        getString(R.string.share_request_save_error_more)
+                } else {
+                    binding.isError = false
+                    binding.clShareRequestSaveBar.setBackgroundResource(R.drawable.selector_share_request_search_bar)
                 }
+            } else {
+                binding.isError = false
+                binding.isEditable = false
             }
+        }
+    }
+
+    private fun setEtShareRequestSaveSetFilters() {
+        binding.etShareRequestSave.filters =
+            arrayOf(InputFilter { source, start, end, dest, dstart, dend ->
+                val notSpecialCharPattern: Pattern =
+                    Pattern.compile("^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\u318D\\u119E\\u11A2\\u2022\\u2025a\\u00B7\\uFE55]+$")
+                if (source == "" || notSpecialCharPattern.matcher(source).matches()) {
+                    binding.clShareRequestSaveBar.setBackgroundResource(R.drawable.selector_share_request_search_bar)
+                    binding.isError = false
+                    return@InputFilter source
+                }
+                binding.isError = true
+                binding.tvShareRequestSaveError.text =
+                    getString(R.string.share_request_save_error_special)
+                binding.clShareRequestSaveBar.setBackgroundResource(R.drawable.rectangle_border_pill_color_red_radius_12)
+                ""
+            }, LengthFilter(10))
+    }
+
+    private fun setDeleteClickListener() {
+        binding.ivShareRequestSaveDelete.setOnClickListener {
+            binding.etShareRequestSave.text = null
+        }
+    }
+
+    private fun setEtShareRequestSaveClearFocus() {
+        binding.clShareRequestSave.setOnTouchListener { v, event ->
+            binding.etShareRequestSave.clearFocus()
+            return@setOnTouchListener false
+        }
+    }
+
+    private fun hideKeyBoard() {
+        val inputMethodManager: InputMethodManager =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(
+            binding.etShareRequestSave.windowToken,
+            0
+        )
+    }
+
+    private fun setEtShareRequestOnFocusChangeListener() {
+        binding.etShareRequestSave.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                binding.isEditable = true
+            } else {
+                binding.isError = false
+                binding.isEditable = false
+                binding.clShareRequestSaveBar.isSelected = false
+                binding.clShareRequestSaveBar.setBackgroundResource(R.drawable.selector_share_request_search_bar)
+                hideKeyBoard()
+            }
+        }
     }
 }

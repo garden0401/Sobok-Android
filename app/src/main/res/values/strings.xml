@@ -39,4 +39,16 @@
     <string name="pill_info_time">오후 11:00, 오후 12:00, 오후 10:00</string>
     <string name="pill_add_finish_save">저장</string>
 
+    <!-- Share Request-->
+    <string name="share_request_msg">공유 요청하기</string>
+    <string name="share_request_search_msg">추가할 사람의 닉네임을 입력해 주세요</string>
+    <string name="share_request_search_nickname">닉네임 검색</string>
+    <string name="share_request_search_empty">앗! 검색한 닉네임이 없어요</string>
+    <string name="share_request_save_msg">님을 어떤 이름으로 저장할까요?</string>
+    <string name="share_request_save_notice_msg">내가 저장한 이름은 상대방에게 공개되지 않아요</string>
+    <string name="share_request_save_error_more">2자 이상 입력 가능해요</string>
+    <string name="share_request_save_error_special">특수문자 입력은 불가능해요</string>
+    <string name="share_request_save_text_count">%d/10</string>
+    <string name="share_request_save_hint_msg">2~10자의 한글, 영문, 숫자</string>
+
 </resources>
