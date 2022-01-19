@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerList">
+        <item>약 수정</item>
+        <item>복약 중단</item>
+        <item>약 삭제</item>
+    </string-array>
+
+</resources>

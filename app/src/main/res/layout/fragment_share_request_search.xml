@@ -1,14 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.view.share.request.ShareRequestSearchFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isEmpty"
+            type="Boolean" />
+
+        <variable
+            name="nickName"
+            type="String" />
+
+
+        <variable
+            name="isEditable"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_share_request_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".presentation.view.share.request.ShareRequestSearchFragment">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tv_share_request_search_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="27dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:text="@string/share_request_search_msg"
+            android:textColor="@color/gray800_sub"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_share_request_search_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rectangle_fill_gray_100_radius_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_share_request_search_msg"
+            app:layout_constraintTop_toBottomOf="@id/tv_share_request_search_msg">
+
+            <ImageView
+                android:id="@+id/iv_share_request_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="3dp"
+                android:layout_marginStart="3dp"
+                android:src="@drawable/ic_search_48"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_share_request_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:clickable="false"
+                android:hint="@string/share_request_search_nickname"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLength="10"
+                android:textColor="@color/gray900_sub"
+                android:textColorHint="@color/gray400_sub"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_share_request_search_delete"
+                app:layout_constraintStart_toEndOf="@id/iv_share_request_search"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_share_request_search_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="3dp"
+                android:layout_marginEnd="3dp"
+                android:src="@drawable/ic_text_close_48"
+                android:visibility="@{isEditable? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_share_request_search_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{isEmpty ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_share_request_search_msg">
+
+            <ImageView
+                android:id="@+id/iv_share_request_search_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_illust_oops"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_share_request_search_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/share_request_search_empty"
+                android:textColor="@color/gray500_sub"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/iv_share_request_search_empty"
+                app:layout_constraintStart_toStartOf="@id/iv_share_request_search_empty"
+                app:layout_constraintTop_toBottomOf="@id/iv_share_request_search_empty" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_share_request_search_result"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:text="@{nickName}"
+            android:textColor="@color/gray900_sub"
+            android:textSize="18sp"
+            android:visibility="@{isEmpty ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@id/cl_share_request_search_bar"
+            app:layout_constraintStart_toStartOf="@id/cl_share_request_search_bar"
+            app:layout_constraintTop_toBottomOf="@id/cl_share_request_search_bar" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
