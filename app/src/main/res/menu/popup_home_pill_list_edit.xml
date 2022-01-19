@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/pill_edit"
+        android:title="약 수정"/>
+    <item
+        android:id="@+id/pill_stop"
+        android:title="복약 중단"/>
+    <item
+        android:id="@+id/pill_delete"
+        android:title="약 삭제"/>
+
+</menu>

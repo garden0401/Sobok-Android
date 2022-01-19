@@ -4,22 +4,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="isEditText"
+            type="Boolean" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.view.home.HomeFragment">
+        tools:context=".presentation.view.home.HomeFragment"
+        android:background="#eff2f4">
 
         <TextView
+            android:id="@+id/tv_btn_home_pill_list_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="홈 프래그먼트"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{isEditText ? @string/edit : @string/edit_finish }"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:textColor="#676e74"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="20dp"/>
 
+
+<!--        <ScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_btn_home_pill_list_edit"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent">-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_home_pill_list_all"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_btn_home_pill_list_edit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_home_pill_list_all"
+            tools:itemCount="2"/>
+
+<!--        </ScrollView>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
