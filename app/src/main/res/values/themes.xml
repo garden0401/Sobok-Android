@@ -15,6 +15,7 @@
         <item name="android:includeFontPadding">false</item>
         <!-- Pill Add Bottom Sheet -->
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+        <item name="android:timePickerStyle">@style/MyTimePickerTheme</item>
     </style>
 
 
@@ -37,5 +38,10 @@
         <item name="cornerSizeTopLeft">20dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <!-- Tiem Picker-->
+    <style name="MyTimePickerTheme" parent="android:Widget.Material.Light.TimePicker">
+        <item name="android:timePickerMode">spinner</item>
     </style>
 </resources>
