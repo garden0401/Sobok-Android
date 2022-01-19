@@ -13,7 +13,7 @@
             type="Boolean" />
         <variable
             name="pillInfo"
-            type="com.example.sobok_android.data.model.response.share.ResSharePillListData.ScheduleInfo.PillInfo" />
+            type="com.example.sobok_android.data.model.response.share.response.ResSharePillListData.ScheduleInfo.PillInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -5,13 +5,12 @@ import androidx.databinding.BindingAdapter
 import com.example.sobok_android.R
 import android.util.Log
 import android.widget.TextView
-import androidx.databinding.BindingAdapter
 object BindingAdapter {
     @JvmStatic
     @BindingAdapter("pillListColor")
-    fun setPillColor(imageView: ImageView, color: String) {
+    fun setPillColor(imageView: ImageView, color: String?) {
         with(imageView) {
-            when (color.toInt()) {
+            when (color?.toInt()) {
                 1 -> {
                     setImageResource(R.drawable.oval_pill_list_color_red)
                     visibility = View.VISIBLE
