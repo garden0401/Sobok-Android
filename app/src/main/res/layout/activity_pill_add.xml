@@ -8,6 +8,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.view.pill.add.PillAddActivity">
@@ -125,7 +126,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_selected_pill_person" />
 
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_pill_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -142,6 +143,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_pill_name_msg" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:id="@+id/rcv_pill_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -393,6 +395,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/cl_pickers" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:id="@+id/rcv_pill_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
