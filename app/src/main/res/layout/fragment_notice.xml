@@ -5,6 +5,14 @@
     android:background="#eff2f4">
 
     <data>
+        <import type="android.view.View"/>
+        <variable
+            name="receiverId"
+            type="Integer" />
+
+        <variable
+            name="isEmpty"
+            type="Boolean" />
 
     </data>
 
@@ -17,7 +25,7 @@
             android:id="@+id/tv_notice_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="소중한 지안님의 알림"
+            android:text="소중한 @{receiverId}님의 알림"
             android:fontFamily="@font/pretendard_bold"
             android:textColor="#1f2022"
             android:textSize="24sp"
@@ -33,15 +41,51 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_notice_title"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="26dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_notice_list"
             tools:itemCount="8"
-            android:background="@drawable/rectangle_notice_list"/>
+            android:visibility="@{isEmpty ? View.INVISIBLE : View.VISIBLE}"/>
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_empty_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_notice_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{isEmpty ? View.VISIBLE : View.INVISIBLE}">
+
+            <ImageView
+                android:id="@+id/iv_notice_empty_illust"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="143dp"
+                android:src="@drawable/ic_illust_oops"/>
+
+            <TextView
+                android:id="@+id/tv_notice_empty_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아직 도착한 알림이 없어요!"
+                android:fontFamily="@font/pretendard_regular"
+                android:textSize="16sp"
+                android:textColor="@color/gray500_sub"
+                app:layout_constraintTop_toBottomOf="@id/iv_notice_empty_illust"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
