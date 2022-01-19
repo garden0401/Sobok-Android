@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_share_request"
+    app:startDestination="@id/shareRequestSearchFragment">
+
+    <fragment
+        android:id="@+id/shareRequestSearchFragment"
+        android:name="com.example.sobok_android.presentation.view.share.request.ShareRequestSearchFragment"
+        android:label="ShareRequestSearchFragment">
+        <action
+            android:id="@+id/action_shareRequestSearchFragment_to_shareRequestSaveFragment"
+            app:destination="@id/shareRequestSaveFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareRequestSaveFragment"
+        android:name="com.example.sobok_android.presentation.view.share.request.ShareRequestSaveFragment"
+        android:label="ShareRequestSaveFragment">
+        <action
+            android:id="@+id/action_shareRequestSaveFragment_to_shareRequestSearchFragment2"
+            app:destination="@id/shareRequestSearchFragment" />
+    </fragment>
+</navigation>
