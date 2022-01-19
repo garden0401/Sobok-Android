@@ -51,7 +51,6 @@
         android:id="@+id/cl_pill_add_my_pill"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_fill_gray100"
         app:layout_constraintEnd_toEndOf="@+id/rcv_pill_list"
         app:layout_constraintStart_toStartOf="@+id/rcv_pill_list"
         app:layout_constraintTop_toBottomOf="@+id/rcv_pill_list">
@@ -62,7 +61,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/rectangle_fill_gray100"
             android:text="@string/add_new_pill"
             android:textSize="18sp"
             android:textColor="@color/gray500_sub"
