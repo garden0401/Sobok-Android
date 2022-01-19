@@ -20,7 +20,6 @@ class PillAddFinishActivity :
 
         initPillListAdapter()
         getPillList()
-        setPillList()
         observePillList()
         navigateToPillAdd()
         navigateToHome()
@@ -35,15 +34,10 @@ class PillAddFinishActivity :
         pillAddViewModel.getPillList()
     }
 
-    private fun setPillList() {
-        pillListAdapter.setDeletePillItemListener {
-            pillAddViewModel.setPillList(it)
-        }
-    }
-
     private fun observePillList() {
         pillAddViewModel.pillList.observe(this) {
             pillListAdapter.pillList = it.pillList
+            var a = pillListAdapter.pillList
         }
     }
 
