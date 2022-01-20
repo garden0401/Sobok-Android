@@ -92,27 +92,27 @@
             android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp" />
 
-        <TextView
-            android:id="@+id/tv_double_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="중복확인"
-            android:fontFamily="@font/pretendard_semi_bold"
-            android:textSize="15sp"
-            android:textColor="@color/dark_mint_main"
-            app:layout_constraintTop_toBottomOf="@id/et_sign_up_nick"
-            android:layout_marginTop="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="30dp"/>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_double_check"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="중복확인"-->
+<!--            android:fontFamily="@font/pretendard_semi_bold"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textColor="@color/dark_mint_main"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/et_sign_up_nick"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginEnd="30dp"/>-->
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@color/dark_mint_main"
-            app:layout_constraintTop_toBottomOf="@id/tv_double_check"
-            android:layout_marginTop="1dp"
-            app:layout_constraintEnd_toEndOf="@id/tv_double_check"
-            app:layout_constraintStart_toStartOf="@id/tv_double_check"/>
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="@color/dark_mint_main"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_double_check"-->
+<!--            android:layout_marginTop="1dp"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/tv_double_check"-->
+<!--            app:layout_constraintStart_toStartOf="@id/tv_double_check"/>-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_sign_up_finish"
@@ -123,8 +123,8 @@
             android:fontFamily="@font/pretendard_semi_bold"
             android:textColor="@color/white_sub"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/tv_double_check"
-            android:layout_marginTop="250dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="20dp"
