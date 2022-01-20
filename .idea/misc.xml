@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/ic_emotion_36.xml" value="0.28425925925925927" />
         <entry key="app/src/main/res/drawable/ic_emotion_end_36.xml" value="0.28425925925925927" />
         <entry key="app/src/main/res/drawable/ic_fill_alarm_gray.xml" value="0.2611111111111111" />
+        <entry key="app/src/main/res/drawable/ic_illust_oops.xml" value="0.26875" />
         <entry key="app/src/main/res/drawable/oval_pill_list_color.xml" value="0.27037037037037037" />
         <entry key="app/src/main/res/drawable/oval_pill_list_color_1.xml" value="0.28425925925925927" />
         <entry key="app/src/main/res/drawable/oval_pill_list_color_2.xml" value="0.28425925925925927" />
@@ -32,6 +33,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2203125" />
         <entry key="app/src/main/res/layout/activity_pill_add.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_sign_up_nick_name.xml" value="0.22395833333333334" />
+        <entry key="app/src/main/res/layout/activity_sign_up_welcome.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home_sticker_bottom_sheet.xml" value="0.3098958333333333" />

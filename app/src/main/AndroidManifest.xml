@@ -11,8 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SobokAndroid">
         <activity
+            android:name=".presentation.view.user.SignUpWelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.user.SignUpNickNameActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.pill.add.PillAddFinishActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.view.pill.add.PillAddRejectActivity"
             android:exported="false" />
@@ -51,7 +57,7 @@
         </activity>
         <activity
             android:name=".presentation.view.MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>
