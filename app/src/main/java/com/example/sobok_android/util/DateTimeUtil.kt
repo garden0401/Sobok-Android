@@ -18,6 +18,7 @@ object DateTimeUtil {
     private val simpleUSFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZ yyyy", Locale.US)
     private val dayOfWeekFormat = SimpleDateFormat("E", Locale.KOREA)
     private val dayOfMonthFormat = SimpleDateFormat("dd", Locale.KOREA)
+    private val simpleMonthFormat = SimpleDateFormat("M월", Locale.KOREA)
 
     //2022-01-15 토 22:11:59
     //2021-12-15T00:00:00.000Z
@@ -25,24 +26,8 @@ object DateTimeUtil {
     //Sat Jan 22 00:00:00 GMT 2022
     //simpleUsFormat
 
-    fun isSameDate(usDate: Date, comDate: Date) : Boolean {
-        return simpleDashDateFormat.format(usDate).toString() == simpleDashDateFormat.format(comDate).toString()
-    }
-
-    fun convertDateToSimpleDateFormat(calendar: Calendar): String {
-        return simpleDateFormat.format(calendar.time)
-    }
-
     fun convertCalendarToSimpleDateDetailFormat(calendar: Calendar): String {
         return simpleDateDetailFormat.format(calendar.time)
-    }
-
-    fun convertSimpleDetailDateFormatToSimpleDateFormat(str: String) : String {
-        return simpleDateFormat.format(simpleDateDetailFormat.parse(str).time)
-    }
-
-    fun convertDateToDayOfWeek(date: Date) : String {
-        return dayOfWeekFormat.format(date)
     }
 
     fun convertDateToDayOfMonth(date: Date) : Int {
@@ -63,6 +48,24 @@ object DateTimeUtil {
 
     fun convertUSDateToDashFormatString(date: Date) : String {
         return simpleDashDateFormat.format(date).toString()
+    }
+
+    fun convertDateToMonthFormat(date: Date) : String {
+        return simpleMonthFormat.format(date).toString()
+    }
+
+    //calendar util
+    fun Calendar.isDaySame(calendar: Calendar): Boolean {
+        return get(Calendar.YEAR) == calendar.get(Calendar.YEAR)
+                && get(Calendar.MONTH) == calendar.get(Calendar.MONTH)
+                && get(Calendar.DAY_OF_MONTH) == calendar.get(Calendar.DAY_OF_MONTH)
+    }
+
+    fun convertDateToTodayString(date: Date) : List<String> {
+
+        return listOf(
+
+        )
     }
 
 }

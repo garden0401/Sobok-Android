@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sobok_android.data.model.response.calendar.ResCalendarData
 import com.example.sobok_android.domain.model.calendar.CalendarData
+import com.example.sobok_android.presentation.view.calendar.CalendarDayListData
 import com.example.sobok_android.presentation.view.calendar.CalendarView.Companion.FIRST_POSITION
 import com.example.sobok_android.presentation.view.calendar.MonthView
 import com.example.sobok_android.presentation.view.calendar.adapter.CalendarMonthViewPagerAdapter.Companion.MAX_ITEM_COUNT
@@ -28,9 +29,9 @@ class CalendarWeekViewPagerAdapter(
         _isMonth = value
     }
 
-    private val completeDateList = MutableLiveData<List<CalendarData.CalendarDate?>>()
+    private val completeDateList = MutableLiveData<List<CalendarDayListData.DayInfo>>()
 
-    fun setCompleteDateList(value: List<CalendarData.CalendarDate?>) {
+    fun setCompleteDateList(value: List<CalendarDayListData.DayInfo>) {
         completeDateList.postValue(value)
     }
 
@@ -58,10 +59,8 @@ class CalendarWeekViewPagerAdapter(
 
             view.dateRecyclerView.adapter = CalendarDateRecyclerViewAdapter().apply {
                 isMonth = _isMonth
-                //dateList = completeDateList//testWeekList//dateWeekList
                 completeDateList.observe(lifecycleOwner) {
-                    Log.d("want//completeList-> dateRecyclerView로 보냄", "${it}")
-                    this.setCompleteDateList(completeDateList.value ?: listOf())
+                    this.setCompleteDateList( completeDateList.value ?: listOfNotNull(), 0, 7)
                 }
                     setWeekCalendar(Calendar.getInstance(Locale.KOREA).apply {
                         add(Calendar.DAY_OF_MONTH, (position - FIRST_POSITION) * 7) // 7일을 더하면 됨.....

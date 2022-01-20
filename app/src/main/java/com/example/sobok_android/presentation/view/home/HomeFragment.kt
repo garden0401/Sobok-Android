@@ -31,6 +31,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
+
         Log.d("onviewcreated", "도착")
 
         calendarViewModel.getCalendarList()
@@ -55,20 +58,28 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             binding.viewCalendar.setCompleteDateList(calendarViewModel.completeDateList)
         }
 
-
+        binding.viewCalendar.sendCalendar.observe(viewLifecycleOwner) {
+            calendarViewModel.postSendDate(DateTimeUtil.convertUSDateToDashFormatString(it.time))
+            binding.viewCalendar.layoutCalendarTopBinding.tvCalendarTopSelectDate.text = DateTimeUtil.convertDateToMonthFormat(it.time)
+        }
 
 //        binding.viewCalendar.setSendDateGetter {
 //            calendarViewModel.postSendDate(DateTimeUtil.convertUSDateToDashFormatString(it.time))
 //        }
 
-        binding.viewCalendar.sendDate.observe(viewLifecycleOwner) {
-            //calendarViewModel.postSendDate(DateTimeUtil.convertUSDateToDashFormatString(it.time))
-            binding.viewCalendar.layoutCalendarTopBinding.tvCalendarTopSelectDate.text =  calendarViewModel.sendDate.value
-            Log.d("sleepy////sendDate-observe HomeFragment입니다", "${DateTimeUtil.convertUSDateToDashFormatString(it.time)}")
-            Log.d("서버통신코드를 여기 넣고 싶어요!!!!", "senddate${DateTimeUtil.convertUSDateToDashFormatString(it.time)}")
-            //Log.d("calednar서버 받으러 출발!", "ㄱㅇㅇㅇ")
-            //calendarViewModel.getCalendarList()
+//        binding.viewCalendar.sendDate.observe(viewLifecycleOwner) {
+//            //calendarViewModel.postSendDate(DateTimeUtil.convertUSDateToDashFormatString(it.time))
+//            binding.viewCalendar.layoutCalendarTopBinding.tvCalendarTopSelectDate.text =  calendarViewModel.sendDate.value
+//            Log.d("sleepy////sendDate-observe HomeFragment입니다", "${DateTimeUtil.convertUSDateToDashFormatString(it.time)}")
+//            Log.d("서버통신코드를 여기 넣고 싶어요!!!!", "senddate${DateTimeUtil.convertUSDateToDashFormatString(it.time)}")
+//            //Log.d("calednar서버 받으러 출발!", "ㄱㅇㅇㅇ")
+//            //calendarViewModel.getCalendarList()
+//
+//        }
 
+        calendarViewModel.sendDate.observe(viewLifecycleOwner) {
+            binding.viewCalendar.layoutCalendarTopBinding.tvCalendarTopSelectDate.text =  calendarViewModel.sendDate.value
+            calendarViewModel.getCalendarList()
         }
 
 

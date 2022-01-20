@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.sobok_android.data.model.response.calendar.ResCalendarData
 import com.example.sobok_android.domain.model.calendar.CalendarData
 import com.example.sobok_android.domain.repository.calendar.CalendarRepository
+import com.example.sobok_android.presentation.view.calendar.CalendarDayListData
 import com.example.sobok_android.util.DateTimeUtil
 import kotlinx.coroutines.launch
 import java.util.*
@@ -23,10 +23,10 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
         _selectDate.postValue(value)
     }
 
-    private var _completeDateList = mutableListOf<CalendarData.CalendarDate?>()
-    var completeDateList: List<CalendarData.CalendarDate?> =
+    private var _completeDateList = CalendarDayListData(0, 0, listOf())
+    var completeDateList: CalendarDayListData =
         _completeDateList
-    get() = _completeDateList
+        get() = _completeDateList
 
 
     private var _isMonth = MutableLiveData<Boolean>(true)
@@ -37,11 +37,16 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
         _isMonth.value = value
     }
 
-    private var _sendDate= MutableLiveData<String>(DateTimeUtil.convertUSDateToDashFormatString(Calendar.getInstance(Locale.KOREA).time))
-    val sendDate : LiveData<String> = _sendDate
-        fun postSendDate(value: String) {
-            _sendDate.value = value
-        }
+    private var _sendDate = MutableLiveData<String>(
+        DateTimeUtil.convertUSDateToDashFormatString(
+            Calendar.getInstance(Locale.KOREA).time
+        )
+    )
+    val sendDate: LiveData<String> = _sendDate
+    fun postSendDate(value: String) {
+        Log.d("서버로 보낼 날짜", "${value}")
+        _sendDate.value = value
+    }
 
     fun getCalendarList() = viewModelScope.launch {
         kotlin.runCatching { calendarRepository.getCalendarList(requireNotNull(_sendDate.value)) } //_curMonthFirstDaycalendar를 변환해서 보내기
@@ -67,7 +72,7 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
     val curCalendar: LiveData<Calendar>
         get() = _curCalendar
 
-    private var curMonth: Int = Calendar.getInstance(Locale.KOREA).get(Calendar.MONTH)
+    var curMonth: Int = Calendar.getInstance(Locale.KOREA).get(Calendar.MONTH)
 
     private val _curPageFirstDayCalendar =
         MutableLiveData<Calendar>(Calendar.getInstance(Locale.KOREA))
@@ -84,17 +89,24 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
 
     private var _dynamicCalendar: Calendar = Calendar.getInstance(Locale.KOREA)
 
+
+    private var start: Int = 0
+    private var end: Int = 0
+
     private fun setDynamicCalendar(value: Calendar) {
-        Log.d("@@@@22setDynamicCalendar", "${value.time}")
         _dynamicCalendar = value.clone() as Calendar
-        if (_dynamicCalendar.get(Calendar.DAY_OF_WEEK) == 1)
+        end = _dynamicCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        if (_dynamicCalendar.get(Calendar.DAY_OF_WEEK) == 1) {
             _dynamicCalendar.add(Calendar.DAY_OF_MONTH, -6)
-        else
+            start = 6
+        } else {
+            start = _dynamicCalendar.get(Calendar.DAY_OF_WEEK) - 2
             _dynamicCalendar.add(
                 Calendar.DAY_OF_MONTH,
                 2 - _dynamicCalendar.get(Calendar.DAY_OF_WEEK)
             )
-        Log.d("@@@@_dynamicCalendar이전 달 날짜", "${_dynamicCalendar.time}")
+        }
+        end += (start - 1)
         calCulCalendarDateList(_dynamicCalendar)
 
     }
@@ -108,37 +120,45 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
             maxIdx = 0
         }
 
-        val addDateList = mutableListOf<CalendarData.CalendarDate?>()
+
+        val addDateList = mutableListOf<CalendarDayListData.DayInfo>()
         val calCulCalendar: Calendar = dynamicCalendar.clone() as Calendar
         val count = when (_isMonth.value) {
             true -> 42
             else -> 7
         }
 
-        repeat(count) {
-            if (maxIdx == 0) {
-                addDateList.add(null)
-            } else {
-                if (calCulCalendar.get(Calendar.MONTH) != curMonth) {
-                    addDateList.add(null)
-                } else {
+        var day = 1
+        repeat(count) { // 0~41
+            if (it < start) {
+                addDateList.add(CalendarDayListData.DayInfo("null", "none"))
+            } else if (it > end) {
 
-                    if (idx <= maxIdx) {
-                        if (DateTimeUtil.convertDateToDayOfMonth(_remoteDateList.value!!.data[idx].scheduleDate) ==
-                            calCulCalendar.get(Calendar.DAY_OF_MONTH)
-                        ) {
-                            addDateList.add(_remoteDateList.value!!.data[idx++])
-                        } else {
-                            addDateList.add(null)
-                        }
+            } else {
+                if (idx <= maxIdx) {
+                    if (DateTimeUtil.convertDateToDayOfMonth(_remoteDateList.value!!.data[idx].scheduleDate)
+                        == day
+                    ) {
+                        addDateList.add(
+                            CalendarDayListData.DayInfo(
+                                day.toString(),
+                                remoteDateList.value!!.data[idx++].isComplete
+                            )
+                        )
+                        ++day
                     } else {
-                        addDateList.add(null)
+                        addDateList.add(CalendarDayListData.DayInfo(day.toString(), "none"))
+                        ++day
                     }
+                } else {
+                    addDateList.add(CalendarDayListData.DayInfo(day.toString(), "none"))
+                    ++day
                 }
             }
-            calCulCalendar.add(Calendar.DAY_OF_MONTH, 1)
         }
-        _completeDateList = addDateList
-        Log.d("want//addList", "${addDateList}")
+
+        Log.d("계산결과", "${addDateList}")
+        _completeDateList = CalendarDayListData(start, end, addDateList)
     }
+
 }

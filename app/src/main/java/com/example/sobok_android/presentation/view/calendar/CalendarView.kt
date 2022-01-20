@@ -33,42 +33,25 @@ import java.util.*
 class CalendarView(
     context: Context, attrs: AttributeSet? = null
 ) : LinearLayout(context, attrs) {
-//    private val calendarData = MutableLiveData<ResCalendar>()
-//
-//    fun setCalendarData(data: ResCalendar) {
-//        calendarData.postValue(data)
-//    }
 
 
     private val _sendDate = MutableLiveData<Calendar>()
     val sendDate: LiveData<Calendar>
         get() = _sendDate
-//    fun setSendDate(value: Calendar) {
-//        Log.d("////want SendDate 캘린더 뷰에서 ", "${DateTimeUtil.convertUSDateToDashFormatString(value.time)}")
-//        _sendDate.value =value
-//    }
-
-//    private var sendDateGetter: ((Calendar) -> Unit)? = null
-//    fun setSendDateGetter(listener: (Calendar) -> Unit) {
-//        sendDateGetter = listener
-//    }
-
 
     //이게 뭐지?
-    private fun setAdapterData(data : List<CalendarData.CalendarDate?>) {
+    private fun setAdapterData(data : CalendarDayListData) {
         if(_isMonth.value!!) {
             Log.d("month가 true-> mothViewPagerAdpater로", "${data}")
             calendarMonthViewPagerAdapter.setCompleteDateList(data)
-            //calendarMonthViewPagerAdapter.notifyDataSetChanged()
         }else {
-            calendarWeekViewPagerAdapter.setCompleteDateList(data)
-            calendarWeekViewPagerAdapter.notifyDataSetChanged()
+            //calendarWeekViewPagerAdapter.setCompleteDateList(data)
         }
     }
 
-    private val completeDateList = MutableLiveData<List<CalendarData.CalendarDate?>>()
+    private val completeDateList = MutableLiveData<CalendarDayListData>()
 
-    fun setCompleteDateList(value: List<CalendarData.CalendarDate?>) {
+    fun setCompleteDateList(value: CalendarDayListData) {
         completeDateList.postValue(value)
     }
 
@@ -79,6 +62,12 @@ class CalendarView(
     private var postSelectDate: ((String) -> Unit)? = null
     fun setPostSelectDate(value: (String) -> Unit) {
         postSelectDate = value
+    }
+
+    var sendCalendar = MutableLiveData<Calendar>()
+    private var sendCalendarGetter : ((Calendar) -> Unit)? = null
+    fun setSendCalendar(value: (Calendar) -> Unit) {
+        sendCalendarGetter = value
     }
 
     private var _isMonth = MutableLiveData(true)
@@ -134,6 +123,9 @@ class CalendarView(
                             Log.d("sleepy///Month에서 넘어온 sendDate!!! -> 이게 observe로 감", "${it.time}")
                             _sendDate.postValue(it)
                         }
+                        calendarMonthViewPagerAdapter.setPostSendCalendar {
+                            sendCalendar.value = it
+                        }
                         calendarMonthViewPagerAdapter.setCurrentPostion(FIRST_POSITION)
                         setCurrentItem(FIRST_POSITION, false)
                     }else -> {
@@ -146,11 +138,6 @@ class CalendarView(
                     }
                 }
             }
-
-
-            //setCurrentItem(FIRST_POSITION, false)
-
-            //isUserInputEnabled = false
         }
     }
 
