@@ -4,30 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.sobok_android.R
-import com.example.sobok_android.databinding.ActivitySignInBinding
+import com.example.sobok_android.databinding.ActivitySignUpNickNameBinding
+import com.example.sobok_android.databinding.ActivitySignUpWelcomeBinding
 import com.example.sobok_android.presentation.base.BindingActivity
 import com.example.sobok_android.presentation.view.MainActivity
 
-class SignInActivity : BindingActivity<ActivitySignInBinding>(R.layout.activity_sign_in) {
+class SignUpWelcomeActivity : BindingActivity<ActivitySignUpWelcomeBinding>(R.layout.activity_sign_up_welcome) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        btnSignUpEvent()
-        btnSignInEvent()
+        btnAppStart()
     }
 
-    private fun btnSignUpEvent() {
-        binding.tvSignUp.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
-
-        }
-    }
-
-    private fun btnSignInEvent() {
-        binding.btnSignIn.setOnClickListener {
+    private fun btnAppStart() {
+        binding.btnAppStart.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-
         }
     }
 }
