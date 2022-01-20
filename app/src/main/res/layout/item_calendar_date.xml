@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isEmpty"
+            type="Boolean" />
+
+        <variable
+            name="isComplete"
+            type="Boolean" />
+
+        <variable
+            name="isNone"
+            type="Boolean" />
+
+        <variable
+            name="isToday"
+            type="Boolean" />
+
+        <variable
+            name="date"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_calendar_date_circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foregroundGravity="center"
+                android:src="@{isComplete ? @drawable/ic_date_done_not_select : @drawable/ic_date_doing_not_select}"
+                android:visibility="@{isEmpty ? View.INVISIBLE : isNone ? View.INVISIBLE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--android:src="@{isComplete ? @drawable/selector_calendar_date_done : @drawable/selector_calendar_date_doing}"
+            calendarDateImageSrc="@{complete}"-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_calendar_date"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_calendar_date_circle"
+                app:layout_constraintEnd_toEndOf="@id/iv_calendar_date_circle"
+                app:layout_constraintStart_toStartOf="@id/iv_calendar_date_circle"
+                app:layout_constraintTop_toTopOf="@id/iv_calendar_date_circle">
+
+                <TextView
+                    android:id="@+id/tv_calendar_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:gravity="center"
+                    android:textColor="@color/black_sub"
+                    android:textSize="16sp"
+                    android:visibility="@{isEmpty ? View.INVISIBLE : View.VISIBLE}"
+                    app:layout_constraintBottom_toTopOf="@id/underline_today"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="20" />
+
+                <View
+                    android:id="@+id/underline_today"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:background="@color/black_sub"
+                    android:visibility="@{isToday ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/tv_calendar_date"
+                    app:layout_constraintStart_toStartOf="@id/tv_calendar_date" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
