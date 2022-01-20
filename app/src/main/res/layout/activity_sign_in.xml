@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="isEditable"
+            type="Boolean" />
 
     </data>
 
@@ -54,7 +59,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp" />
+            android:layout_marginBottom="3dp"
+            android:visibility="@{isEditable? View.VISIBLE : View.INVISIBLE}"/>
 
         <EditText
             android:id="@+id/et_sign_in_pw"
@@ -85,7 +91,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp" />
+            android:layout_marginBottom="3dp"
+            android:visibility="@{isEditable? View.VISIBLE : View.INVISIBLE}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_sign_in"
