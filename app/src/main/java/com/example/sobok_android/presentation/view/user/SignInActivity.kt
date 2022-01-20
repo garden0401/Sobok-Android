@@ -26,7 +26,6 @@ class SignInActivity : BindingActivity<ActivitySignInBinding>(R.layout.activity_
         binding.tvSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
-
         }
     }
 
@@ -38,9 +37,6 @@ class SignInActivity : BindingActivity<ActivitySignInBinding>(R.layout.activity_
                 signInViewModel.password = binding.etSignInPw.text.toString()
                 signInViewModel.postSignIn()
             }
-
-
-
         }
     }
 
