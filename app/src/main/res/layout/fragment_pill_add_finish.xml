@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.view.pill.add.PillAddFinishActivity">
+        tools:context=".presentation.view.pill.add.PillAddFinishFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_top_tab"
@@ -153,6 +153,7 @@
                         android:layout_marginTop="15dp"
                         android:paddingBottom="30dp"
                         android:fontFamily="@font/pretendard_medium"
+                        android:textColor="@color/gray500_sub"
                         android:text="@string/can_save_5pills"
                         android:textAlignment="center"
                         android:textSize="15sp"

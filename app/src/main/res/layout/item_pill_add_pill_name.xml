@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <data>
-
+                <import type="android.view.View" />
+                <variable
+                    name="isEditable"
+                    type="Boolean" />
         </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,13 +14,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_border_gray"
-            android:layout_marginBottom="11dp">
+            android:layout_marginBottom="10dp">
 
                 <EditText
                     android:descendantFocusability="beforeDescendants"
                     android:focusableInTouchMode="true"
                     android:focusable="true"
                     android:id="@+id/tv_pill_name"
+                    android:maxLength="10"
+                    android:imeOptions="actionDone"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:hint="@string/pill_add_write_pill_name"
@@ -29,7 +34,7 @@
                     android:textColor="@color/gray900_sub"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_close"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,6 +46,19 @@
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="3dp"
                     android:background="@drawable/ic_close_48"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_editable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:visibility="@{isEditable? View.VISIBLE : View.INVISIBLE}"
+                    android:background="@drawable/ic_text_close_48"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
