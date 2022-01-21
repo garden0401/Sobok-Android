@@ -33,9 +33,16 @@ data class ResHomePillListData(
             @SerializedName("color")
             val color: String,
             @SerializedName("stickerId")
-            val stickerId: List<Int?>,
+            val stickerId: List<StickerId>,
             @SerializedName("stickerTotalCount")
             val stickerTotalCount: Int
-        )
+        ){
+            data class StickerId(
+                @SerializedName("likeScheduleId")
+                val likeScheduleId: Int,
+                @SerializedName("stickerId")
+                val stickerId: Int
+            )
+        }
     }
 }
