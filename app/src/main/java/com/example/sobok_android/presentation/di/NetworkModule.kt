@@ -1,5 +1,6 @@
 package com.example.sobok_android.presentation.di
 
+import com.example.sobok_android.data.api.CalendarService
 import com.example.sobok_android.data.api.ShareService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -18,7 +19,7 @@ val netWorkModule = module {
                     chain.request().newBuilder()
                         .addHeader(
                             "accesstoken",
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjYsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJuYW1lIjpudWxsLCJpZEZpcmViYXNlIjoiTnBRVmhYdUg3eVUwUkpVdUV6Zks3NldWckFGMiIsImlhdCI6MTY0MjA5MjkwMiwiZXhwIjoxNjQ0Njg0OTAyLCJpc3MiOiJ3ZXNvcHQifQ.fZ4bodbWJ3AlgD_c0oE5OyAW2WaXDeQHtApZLaZjdGI"
+                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImVtYWlsIjoiZWRAZ21haWwuY29tIiwibmFtZSI6bnVsbCwiaWRGaXJlYmFzZSI6InVOR2llMWxKWDNTREpTQnFSWHhLZUhqMnJhMzMiLCJpYXQiOjE2NDE4ODYzNjUsImV4cCI6MTY0NDQ3ODM2NSwiaXNzIjoid2Vzb3B0In0.K9xOhsd1G3sHAo89LRbLHaPySX8PeOW3kxvbbYaVeNA"
                         )
                         .build()
                 )
@@ -35,6 +36,9 @@ val netWorkModule = module {
     }
     single<ShareService> {
         get<Retrofit>().create(ShareService::class.java)
+    }
+    single<CalendarService> {
+        get<Retrofit>().create(CalendarService::class.java)
     }
 
 }

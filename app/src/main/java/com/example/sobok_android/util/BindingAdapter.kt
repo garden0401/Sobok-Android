@@ -54,4 +54,32 @@ object BindingAdapter {
         textView.text = times
         Log.d("bindding-adapter", "$times")
     }
+
+
+    @JvmStatic
+    @BindingAdapter("stickerCount")
+    fun setStickerImage(imageView: ImageView, stickerCount: Int) {
+        with(imageView) {
+            when (stickerCount) {
+                1 -> {
+                    setImageResource(R.drawable.ic_sticker_1_aos)
+                }
+                2 -> {
+                    setImageResource(R.drawable.ic_sticker_2_aos)
+                }
+                3 -> {
+                    setImageResource(R.drawable.ic_sticker_3_aos)
+                }
+                4 -> {
+                    setImageResource(R.drawable.ic_sticker_4_aos)
+                }
+                5 -> {
+                    setImageResource(R.drawable.ic_sticker_5_aos)
+                }
+                6 -> {
+                    setImageResource(R.drawable.ic_sticker_6_aos)
+                }
+            }
+        }
+    }
 }

@@ -4,85 +4,127 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
-      <variable
-          name="pillColor"
-          type="String" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isHome"
+            type="Boolean" />
+
         <variable
             name="isEdit"
             type="Boolean" />
+
         <variable
             name="pillInfo"
-            type="com.example.sobok_android.data.model.response.share.response.ResSharePillListData.ScheduleInfo.PillInfo" />
+            type="com.example.sobok_android.domain.model.home.PillListData.ScheduleInfo.Schedule" />
+
+        <variable
+            name="stickerOne"
+            type="Integer" />
+
+        <variable
+            name="stickerTwo"
+            type="Integer" />
+
+        <variable
+            name="stickerThree"
+            type="Integer" />
+
+        <variable
+            name="stickerFour"
+            type="Integer" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_pill_list"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rectangle_pill_list">
 
         <ImageView
             android:id="@+id/iv_home_pill_list_color"
             pillListColor="@{pillInfo.color}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="17dp"
             android:layout_marginTop="28dp"
-            android:layout_marginStart="17dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_home_pill_list_pill_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@{pillInfo.pillName}"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="19dp"
             android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/black_sub"
             android:textSize="18sp"
-            android:textColor="#1f2022"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="19dp" />
+            tools:text="@{pillInfo.pillName}" />
 
-        //체크표시 버튼
+        <!--        체크표시 버튼-->
         <ImageView
             android:id="@+id/iv_home_pill_list_check"
-            android:src="@drawable/selector_home_pill_list_check"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            tools:background="@drawable/selector_home_pill_list_check"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="2dp"
-            android:visibility="@{isEdit ? View.INVISIBLE : View.VISIBLE}"/>
-        
-        //context 버튼
+            android:src="@drawable/selector_home_pill_list_check"
+            android:visibility="@{isHome ? (isEdit ? View.INVISIBLE : View.VISIBLE) : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/selector_home_pill_list_check" />
+
+        <!--        context 버튼-->
+
         <ImageView
             android:id="@+id/iv_home_pill_list_edit"
-            android:src="@drawable/ic_edit_40"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="6dp"
-            android:visibility="@{isEdit ? View.VISIBLE : View.INVISIBLE}" />
+            android:src="@drawable/ic_edit_40"
+            android:visibility="@{isHome ? (isEdit ? View.VISIBLE : View.INVISIBLE) : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        // 공유탭 부분
+        <!--        공유탭 부분-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="@{isHome? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/iv_share_sticker_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_sticker_send_emotion"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-
-
-
-
-
+            <TextView
+                android:id="@+id/tv_ate_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_pill_list_ate"
+                android:fontFamily="@font/pretendard_semi_bold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:text="@{pillInfo.check ? @string/already_ate : @string/not_ate}"
+                android:textColor="@{pillInfo.check ? @color/dark_mint_main : @color/gray500_sub}"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_share_sticker_send"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_share_sticker_send"
+                app:layout_constraintTop_toTopOf="@id/iv_share_sticker_send" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -91,92 +133,95 @@
             android:id="@+id/tv_home_pill_list_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+"
-            android:textSize="14sp"
-            android:textColor="#848c92"
+            android:layout_marginStart="7dp"
             android:fontFamily="@font/pretendard_medium"
-            app:layout_constraintEnd_toStartOf="@id/tv_home_pill_list_sticker_count"
-            android:layout_marginEnd="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="13dp" />
+            android:text="+"
+            android:textColor="@color/gray600_sub"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_home_pill_list_sticker_count"
+            app:layout_constraintStart_toEndOf="@id/cl_sticker_list" />
 
         <TextView
             android:id="@+id/tv_home_pill_list_sticker_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="15"
-            android:textSize="15sp"
-            android:textColor="#848c92"
-            android:fontFamily="@font/pretendard_medium"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="18dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:paddingBottom="11dp"
+            android:textColor="@color/gray600_sub"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="13dp" />
+            app:layout_constraintStart_toEndOf="@id/tv_home_pill_list_plus" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_sticker_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/iv_home_pill_list_check"
-            android:layout_marginTop="12dp"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="13dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintEnd_toStartOf="@id/tv_home_pill_list_plus"
-            android:layout_marginEnd="7dp">
+            android:layout_marginEnd="51dp"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_home_pill_list_check">
 
 
             <ImageView
                 android:id="@+id/iv_home_pill_list_sticker_one"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintDimensionRatio="1:1"
+                android:layout_height="0dp"
                 android:layout_marginEnd="4dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/iv_home_pill_list_sticker_two"
-                android:src="@mipmap/ic_launcher"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:stickerCount="@{stickerOne}" />
 
             <ImageView
                 android:id="@+id/iv_home_pill_list_sticker_two"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_home_pill_list_sticker_one"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/iv_home_pill_list_sticker_three"
+                android:layout_height="0dp"
                 android:layout_marginEnd="4dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/iv_home_pill_list_sticker_one"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/iv_home_pill_list_sticker_three"
                 app:layout_constraintHorizontal_weight="1"
-                android:src="@mipmap/ic_launcher" />
+                app:layout_constraintStart_toEndOf="@id/iv_home_pill_list_sticker_one"
+                app:layout_constraintTop_toTopOf="@id/iv_home_pill_list_sticker_one"
+                app:stickerCount="@{stickerTwo}" />
 
             <ImageView
                 android:id="@+id/iv_home_pill_list_sticker_three"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_home_pill_list_sticker_two"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/iv_home_pill_list_sticker_four"
+                android:layout_height="0dp"
                 android:layout_marginEnd="4dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/iv_home_pill_list_sticker_two"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/iv_home_pill_list_sticker_four"
                 app:layout_constraintHorizontal_weight="1"
-                android:src="@mipmap/ic_launcher" />
+                app:layout_constraintStart_toEndOf="@id/iv_home_pill_list_sticker_two"
+                app:layout_constraintTop_toTopOf="@id/iv_home_pill_list_sticker_two"
+                app:stickerCount="@{stickerThree}" />
 
             <ImageView
                 android:id="@+id/iv_home_pill_list_sticker_four"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/iv_home_pill_list_sticker_three"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_home_pill_list_sticker_three"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
-                android:src="@mipmap/ic_launcher" />
+                app:layout_constraintStart_toEndOf="@id/iv_home_pill_list_sticker_three"
+                app:layout_constraintTop_toTopOf="@id/iv_home_pill_list_sticker_three"
+                app:stickerCount="@{stickerFour}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

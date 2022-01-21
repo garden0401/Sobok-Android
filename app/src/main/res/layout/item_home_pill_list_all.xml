@@ -15,28 +15,28 @@
             android:id="@+id/tv_home_pill_list_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="36dp"
             android:layout_marginStart="20dp"
-            tools:text="오전 7:00"
+            android:layout_marginTop="36dp"
             android:fontFamily="@font/pretendard_bold"
+            android:textColor="@color/black_sub"
             android:textSize="23sp"
-            android:textColor="#1f2022"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="오전 7:00" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_home_pill_list_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_home_pill_list_time"
-            android:layout_marginTop="6dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_pill_list_time"
             tools:itemCount="2"
-            tools:listitem="@layout/item_home_pill_list_detail"/>
+            tools:listitem="@layout/item_home_pill_list_detail" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

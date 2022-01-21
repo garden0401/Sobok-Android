@@ -1,4 +1,4 @@
-package com.example.sobok_android.data.model.response.share.response
+package com.example.sobok_android.data.model.response.home
 
 
 import com.google.gson.annotations.SerializedName
@@ -11,15 +11,15 @@ data class ResSharePillListData(
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: List<ScheduleInfo>
+    val data: List<Data>
 ) {
-    data class ScheduleInfo(
+    data class Data(
         @SerializedName("scheduleTime")
         val scheduleTime: String,
         @SerializedName("scheduleList")
-        val scheduleList: List<PillInfo>
+        val scheduleList: List<Schedule>
     ) {
-        data class PillInfo(
+        data class Schedule(
             @SerializedName("scheduleId")
             val scheduleId: Int,
             @SerializedName("pillId")
@@ -33,7 +33,18 @@ data class ResSharePillListData(
             @SerializedName("color")
             val color: String,
             @SerializedName("stickerId")
-            val stickerId: List<Int>
-        )
+            val stickerId: List<StickerId>,
+            @SerializedName("stickerTotalCount")
+            val stickerTotalCount: Int,
+            @SerializedName("isLikedSchedule")
+            val isLikedSchedule: Boolean
+        ) {
+            data class StickerId(
+                @SerializedName("likeScheduleId")
+                val likeScheduleId: Int,
+                @SerializedName("stickerId")
+                val stickerId: Int
+            )
+        }
     }
 }

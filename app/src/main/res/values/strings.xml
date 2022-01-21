@@ -55,4 +55,25 @@
     <!-- Home 약 리스트   -->
     <string name="edit">수정</string>
     <string name="edit_finish">완료</string>
+    <string name="not_ate">아직 안 먹었어요</string>
+    <string name="already_ate">먹었어요</string>
+
+    <!-- Calendar -->
+    <string name="monday">월</string>
+    <string name="tuesday">화</string>
+    <string name="wednesday">수</string>
+    <string name="thursday">목</string>
+    <string name="friday">금</string>
+    <string name="saturday">토</string>
+    <string name="sunday">일</string>
+    <string name="month">월</string>
+    <string name="week">주</string>
+
+    <!-- Home -->
+    <string name="home_main_msg">소중한 %s님\n오늘도 약 꼭 챙겨 드세요</string>
+    
+    <!-- Share -->
+    <string name="share_empty_msg_title">소중한 사람을 추가해 보세요!</string>
+    <string name="share_empty_msg_content">소중한 사람에게 캘린더 공유를 요청하면\n상대방의 복약 기록을 확인하고,\n응원을 보낼 수 있어요</string>
+    <string name="share_request_add">추가하기</string>
 </resources>
