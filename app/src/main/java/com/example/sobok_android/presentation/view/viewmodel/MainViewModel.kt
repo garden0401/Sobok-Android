@@ -23,7 +23,7 @@ class MainViewModel(val pillAddRepository: PillAddRepository)  : ViewModel() {
     val pillCount: LiveData<Int> get() = _pillCount
     var isStickerClick : LiveData<Boolean> = _isStickerClick
 
-    lateinit var sendPillCount: Int
+    var sendPillCount: Int = 0
 
 
     fun setIsStickerClick(value: Boolean) {
@@ -51,7 +51,8 @@ class MainViewModel(val pillAddRepository: PillAddRepository)  : ViewModel() {
     fun getPillCount() = viewModelScope.launch {
         runCatching { pillAddRepository.getPillCount() }
             .onSuccess {
-                _pillCount.postValue(it.pillCount)
+                _pillCount.postValue(it.pillCount) // 서버랑 통신을 잘 했나 안했나 확인용
+                // _pillCount를 받은 pillCount를  Acticity 나 Fragment에서 observe한다.
                 Log.d("server-pill-add-pill-count-success", "약 개수 불러오기 성공")
             }
             .onFailure {

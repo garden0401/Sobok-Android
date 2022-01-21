@@ -14,20 +14,21 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
     private var pillAddFinishFragment: PillAddFinishFragment = PillAddFinishFragment()
     private var pillAddNavigateData = PillAddNavigateData(false, false, 0)
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initTransactionEvent()
 
         // intent get으로 Data Class 값 가져와야함.
+        pillAddViewModel.setPillAddNavigetData(
+            PillAddNavigateData(
+                intent.getBooleanExtra("canAddPill", false),
+                intent.getBooleanExtra("isMyPill", false),
+                intent.getIntExtra("pillCount", 0)
+        ))
 
-        pillAddViewModel.isMyPill = intent.getBooleanExtra("isMyPill", false)
-        pillAddViewModel.canAddPill = intent.getBooleanExtra("canAddPill", false)
-        pillAddViewModel.pillCount = intent.getIntExtra("pillCount", 0)
         Log.d("Main!!!!!!!!!!!!!!!! 값", "${pillAddViewModel.isMyPill}")
-        pillAddNavigateData.isMyPill = pillAddViewModel.isMyPill
-        pillAddNavigateData.canAddPill = pillAddViewModel.canAddPill
-        Log.d("PillAddActivity에 값이 들어오길 바란다..", "$pillAddNavigateData")
     }
 
     private fun initTransactionEvent() {
@@ -41,7 +42,7 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
 
     fun replacePillAddFinishFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_pill_finish, pillAddFinishFragment).commit()
+            .replace(R.id.fcv_pill_add, pillAddFinishFragment).commit()
     }
 
 

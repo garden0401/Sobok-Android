@@ -20,7 +20,6 @@ import com.example.sobok_android.presentation.view.pill.add.adapter.PillListAdap
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillNameAdapter
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillTimeAdapter
 import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
-import com.example.sobok_android.presentation.view.share.request.ShareRequestActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.text.SimpleDateFormat
@@ -54,15 +53,14 @@ class PillAddFormFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeNavigateData()
+
         binding.tvPillDateEveryday.isSelected = true
         binding.tvPillDateSpecificDay.isSelected = false
         binding.tvPillDateSpecificPeriod.isSelected = false
         binding.pillCycleMoreConstraintLayout.visibility = View.GONE
         binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE
 
-        // pillPerson 값 넣어주기
-
-        observePillCount()
         initPillNameAdapter()
         initPillTimeAdapter()
         initPillListAdapter()
@@ -94,12 +92,6 @@ class PillAddFormFragment :
             fillPillCycle = checkFillPillCycle()
 
             nameList = pillNameAdapter.realPillNameList
-            Log.d("nameListtttttttttttt", "$nameList")
-
-
-            Log.d("pillLIstttttttttt", "$_pillList")
-
-
 
             if (fillPillName && fillPillDate && fillPillCycle && pillTimeAdapter.itemCount > 0) {
 
@@ -121,7 +113,9 @@ class PillAddFormFragment :
                 pillAddViewModel.setPillList(_pillList)
                 Log.d("프래그먼트에서 리스트를 뷰모델에 저장합니다", "${pillAddViewModel.pillList}")
                 // 다음으로 이동!!!!!!!!!!!!!!!
+
                 val pillAddActivity= (activity as PillAddActivity)
+
                 pillAddActivity.replacePillAddFinishFragment()
 
 
@@ -132,19 +126,21 @@ class PillAddFormFragment :
         navigateToHome()
     }
 
-    private fun observePillCount() {
-        if (pillAddViewModel.isMyPill) {
-            binding.ivPillPersonMore.visibility = View.GONE
-            binding.clPillPerson.isClickable = false
-        }
-        if (pillAddViewModel.canAddPill) {
-            Log.d("Add Activity1", "${pillAddViewModel.canAddPill}")
-            binding.wrapScroll.visibility = View.VISIBLE
-            binding.clCannotAddPill.visibility = View.GONE
-        } else {
-            Log.d("Add Activity2", "${pillAddViewModel.canAddPill}")
-            binding.wrapScroll.visibility = View.GONE
-            binding.clCannotAddPill.visibility = View.VISIBLE
+    private fun observeNavigateData() {
+        pillAddViewModel.pillAddNavigateData.observe(viewLifecycleOwner) {
+            if (it.isMyPill) {
+                binding.ivPillPersonMore.visibility = View.GONE
+                binding.clPillPerson.isClickable = false
+            }
+            if (it.canAddPill) {
+                Log.d("Add Activity1", "${it.canAddPill}")
+                binding.wrapScroll.visibility = View.VISIBLE
+                binding.clCannotAddPill.visibility = View.GONE
+            } else {
+                Log.d("Add Activity2", "${it.canAddPill}")
+                binding.wrapScroll.visibility = View.GONE
+                binding.clCannotAddPill.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -156,14 +152,14 @@ class PillAddFormFragment :
     private fun initPillNameAdapter() {
         pillNameAdapter = PillNameAdapter()
         binding.rcvPillName.adapter = pillNameAdapter
+
+        val list = mutableListOf<String>("null")
+        pillNameAdapter.realPillNameList = list
     }
 
     private fun initPillTimeAdapter() {
         pillTimeAdapter = PillTimeAdapter()
         binding.rcvPillTime.adapter = pillTimeAdapter
-
-        pillNameAdapter.realPillNameList.add("null")
-        pillNameAdapter.pillNameList = pillNameAdapter.realPillNameList
     }
 
     private fun navigateToHome() {
@@ -365,8 +361,9 @@ class PillAddFormFragment :
 
         binding.clAddPillName.setOnClickListener {
             if (pillNameAdapter.itemCount < 5) {
-                pillNameAdapter.realPillNameList.add("null")
-                pillNameAdapter.pillNameList = pillNameAdapter.realPillNameList
+                val list = pillNameAdapter.realPillNameList
+                list.add("null")
+                pillNameAdapter.realPillNameList = list
             }
         }
     }

@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
 
     // repository함수를 불러오면.. data 불러오는거
-    private val _pillList = MutableLiveData<MutableList<PillListData.PillInfo>>()
+    private var _pillList : MutableList<PillListData.PillInfo> = mutableListOf()
     private val _pillTime = MutableLiveData<Int>()
     private val _pillCount = MutableLiveData<Int>()
     var isMyPill:Boolean = false
@@ -23,18 +23,15 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
     var pillCount: Int = 0
     val _pillAddNavigateData = MutableLiveData<PillAddNavigateData>()
     val pillAddNavigateData: MutableLiveData<PillAddNavigateData> = _pillAddNavigateData
-    var pillList: LiveData<MutableList<PillListData.PillInfo>> = _pillList
+    val pillList: MutableList<PillListData.PillInfo>
+        get() = _pillList
     val pillTime: LiveData<Int> get() = _pillTime
     private val _isComplete = MutableLiveData<Boolean>()
     val isComplete: LiveData<Boolean> get() = _isComplete
 
-    fun init() {
-        val mainViewModel: MainViewModel
-        // canAddPill =
-    }
     fun setPillList(value: MutableList<PillListData.PillInfo>) {
-        _pillList.value = value
-
+        _pillList = value
+        Log.d("set 됐습니다.", "$_pillList")
     }
 
     fun setIsComplete(complete: Boolean) {
@@ -42,23 +39,10 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
     }
 
     fun getPillAddNavigetData(navigateData: PillAddNavigateData): PillAddNavigateData {
-
         return navigateData
     }
 
     fun setPillAddNavigetData(navigateData: PillAddNavigateData) {
         _pillAddNavigateData.value = navigateData
     }
-/*
-    fun getPillList() = viewModelScope.launch {
-        runCatching { pillAddRepository.getPillList() }
-            .onSuccess {
-                _pillList.postValue(it) // _pillList = it
-            }
-            .onFailure {
-                Log.d("server-pill-add-read-fail", "실패할일이 없다")
-            }
-    }
-    */
-
 }
