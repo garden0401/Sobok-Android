@@ -54,7 +54,6 @@ class PillAddFormFragment :
 
     var nameList = listOf<String>()
 
-
     var periodString = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
