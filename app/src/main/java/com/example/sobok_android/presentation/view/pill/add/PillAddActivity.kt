@@ -1,50 +1,49 @@
 package com.example.sobok_android.presentation.view.pill.add
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ActivityPillAddBinding
 import com.example.sobok_android.presentation.base.BindingActivity
 import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
-import org.koin.androidx.viewmodel.compat.ScopeCompat.viewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activity_pill_add) {
+    private val pillAddViewModel: PillAddViewModel by viewModel()
+    private lateinit var pillAddFormFragment: PillAddFormFragment
+    private var pillAddFinishFragment: PillAddFinishFragment = PillAddFinishFragment()
+    private var pillAddNavigateData = PillAddNavigateData(false, false, 0)
 
-    private val pillAddViewModel : PillAddViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
-        // 여기서 viewModel 함수 불러온다
 
-        binding.clPillPerson.setOnClickListener {
-            // 약추가할사람 목록 피커 dialog
-            // 데이터 필요
-        }
-        binding.clAddPillName.setOnClickListener {
-            // 함께 먹는 약 추가..
-        }
-        binding.clPillDate.setOnClickListener {
-            // 기간 선택
-        }
-        binding.tvPillDateEveryday.setOnClickListener {
-            // 매일 선택
-        }
-        binding.tvPillDateSpecificDay.setOnClickListener {
-            // 특정요일 선택
-            // 특정 요일 피커 등장
-        }
-        binding.tvPillDateSpecificPeriod.setOnClickListener {
-            // 특정 기간 선택
-            // 특정 기간 피커 등장
-        }
+        initTransactionEvent()
 
-        // 약 복약시간 리사이클러뷰..의 삭제 추가
+        // intent get으로 Data Class 값 가져와야함.
+        pillAddViewModel.setPillAddNavigetData(
+            PillAddNavigateData(
+                intent.getBooleanExtra("canAddPill", false),
+                intent.getBooleanExtra("isMyPill", false),
+                intent.getIntExtra("pillCount", 0)
+        ))
 
-        binding.clAddPillTime.setOnClickListener {
-            // 시간 추가
-        }
-
+        Log.d("Main!!!!!!!!!!!!!!!! 값", "${pillAddViewModel.isMyPill}")
     }
+
+    private fun initTransactionEvent() {
+        pillAddFormFragment = PillAddFormFragment()
+        pillAddFinishFragment = PillAddFinishFragment()
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fcv_pill_add, pillAddFormFragment)
+            .commit()
+    }
+
+    fun replacePillAddFinishFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fcv_pill_add, pillAddFinishFragment).commit()
+    }
+
+
 }

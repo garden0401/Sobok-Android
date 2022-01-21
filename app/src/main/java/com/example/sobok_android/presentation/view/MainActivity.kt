@@ -2,6 +2,7 @@ package com.example.sobok_android.presentation.view
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -23,6 +24,7 @@ import com.example.sobok_android.presentation.view.home.HomeFragment
 import com.example.sobok_android.presentation.view.pill.add.PillAddBottomSheetFragment
 import com.example.sobok_android.presentation.view.home.HomeStickerBottomSheetAdapter
 import com.example.sobok_android.presentation.view.home.HomeStickerBottomSheetFragment
+import com.example.sobok_android.presentation.view.pill.add.PillAddActivity
 import com.example.sobok_android.presentation.view.notice.NoticeFragment
 import com.example.sobok_android.presentation.view.share.ShareFragment
 import com.example.sobok_android.presentation.view.share.request.ShareRequestActivity
@@ -38,6 +40,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private lateinit var homeStickerBottomSheet: HomeStickerBottomSheetFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         getGroupData()
         initHomeStickerBottomSheet()
@@ -45,6 +48,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         observeIsStickerClickEvent()
         observeIsShareRequest()
         observeIsShareRequestClick()
+        observePillAddNavigateData()
     }
 
     private fun getGroupData() {
@@ -92,7 +96,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             Log.d("checkobserve", "${it}")
             if (it) {
                 homeStickerBottomSheet.show(supportFragmentManager, homeStickerBottomSheet.tag)
-
             }
         }
     }
@@ -100,6 +103,17 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private fun observeIsShareRequest() {
         mainViewModel.isShareRequest.observe(this) {
 
+        }
+    private fun observePillAddNavigateData() {
+        mainViewModel.pillAddNavigateData.observe(this) {
+            val intent = Intent(this, PillAddActivity::class.java)
+            // 여기
+            intent.putExtra("isMyPill", it.isMyPill)
+            intent.putExtra("canAddPill", it.canAddPill)
+            intent.putExtra("pillCount", it.pillCount)
+            Log.d("observe Log CanAddpill", "${it.canAddPill}")
+            Log.d("observe Log IsMyPill", "${it.isMyPill}")
+            startActivity(intent)
         }
     }
 
