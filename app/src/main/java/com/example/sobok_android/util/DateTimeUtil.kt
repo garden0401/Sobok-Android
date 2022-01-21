@@ -16,6 +16,9 @@ object DateTimeUtil {
     private val dayOfWeekFormat = SimpleDateFormat("E", Locale.KOREA)
     private val dayOfMonthFormat = SimpleDateFormat("dd", Locale.KOREA)
     private val simpleMonthFormat = SimpleDateFormat("M월", Locale.KOREA)
+    private val pillAddFinishFormat = SimpleDateFormat("yyyy년 M월 dd일", Locale.KOREA)
+    private val testFormat = SimpleDateFormat("yyyy.MM.dd", Locale.KOREA)
+    private val hourFormat = SimpleDateFormat("HH:mm", Locale.KOREA)
 
     //2022-01-15 토 22:11:59
     //2021-12-15T00:00:00.000Z
@@ -78,6 +81,14 @@ object DateTimeUtil {
                 }
             }
         return preHour + hour + time.substring(2,5)
+    }
+
+    fun convertToPillAddFinishDate(str: String) : String {
+        return pillAddFinishFormat.format(testFormat.parse(str)!!).toString()
+    }
+
+    fun convertToPillAddFinishTime(str: String) : String {
+        return pillAddFinishFormat.format(hourFormat.parse(str)!!).toString()
     }
 
 }

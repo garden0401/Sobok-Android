@@ -15,13 +15,14 @@ import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentPillAddFormBinding
 import com.example.sobok_android.domain.model.pill.pilladd.PillListData
 import com.example.sobok_android.presentation.base.BindingFragment
-import com.example.sobok_android.presentation.view.MainActivity
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillListAdapter
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillNameAdapter
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillTimeAdapter
 import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
+import com.example.sobok_android.util.DateTimeUtil
 import com.google.android.material.datepicker.MaterialDatePicker
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,6 +45,12 @@ class PillAddFormFragment :
     private var selectPillCycle: Int = 0
     private var setSpecificDay: Boolean = false
     private var setSpecificPeriod: Boolean = false
+
+    var sendStartDate: String = ""
+    var sendEndDate: String = ""
+    var sendCycle: String = ""
+    var sendDay: String = ""
+    var sendSpecific: String = ""
 
     var nameList = listOf<String>()
 
@@ -94,18 +101,19 @@ class PillAddFormFragment :
             nameList = pillNameAdapter.realPillNameList
 
             if (fillPillName && fillPillDate && fillPillCycle && pillTimeAdapter.itemCount > 0) {
-
+                sendStartDate = DateTimeUtil.convertToPillAddFinishDate(sendStartDate)
+                sendEndDate = DateTimeUtil.convertToPillAddFinishDate(sendEndDate)
                 for (i in 0 until nameList.size) {
                     _pillList.add(
                         PillListData.PillInfo(
                             nameList[i],
                             false,
                             "red",
-                            "start",
-                            "end",
-                            "cycle",
-                            "day",
-                            "specific",
+                            sendStartDate,
+                            sendEndDate,
+                            sendCycle,
+                            sendDay,
+                            sendSpecific,
                             timeList = pillTimeAdapter.pillTimeList
                         )
                     )
@@ -117,7 +125,6 @@ class PillAddFormFragment :
                 val pillAddActivity= (activity as PillAddActivity)
 
                 pillAddActivity.replacePillAddFinishFragment()
-
 
             } else {
                 Toast.makeText(requireContext(), "약에 대한 정보를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -146,7 +153,6 @@ class PillAddFormFragment :
 
     private fun initPillListAdapter() {
         pillListAdapter = PillListAdapter()
-
     }
 
     private fun initPillNameAdapter() {
@@ -169,9 +175,20 @@ class PillAddFormFragment :
     }
 
     fun checkFillPillCycle(): Boolean {
-        if (selectPillCycle == 0) return true
-        if (selectPillCycle == 1 && setSpecificDay) return true
-        if (selectPillCycle == 2 && setSpecificPeriod) return true
+        if (selectPillCycle == 0) {
+            sendCycle = "매일"
+            sendDay = "월, 화, 수, 목, 금, 토, 일"
+            return true
+        }
+        if (selectPillCycle == 1 && setSpecificDay) {
+            sendCycle = "특정 날짜"
+            return true
+        }
+        if (selectPillCycle == 2 && setSpecificPeriod) {
+            sendCycle = "특정 기간"
+            sendSpecific = binding.tvPillAddSpecificCycle.toString()
+            return true
+        }
         return false
     }
 
@@ -182,7 +199,8 @@ class PillAddFormFragment :
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
-                pillTimeAdapter.makeText(SimpleDateFormat("HH:mm").format(cal.time))
+                val string = (SimpleDateFormat("HH:mm", Locale.getDefault()).format(cal.time))
+                pillTimeAdapter.makeText(DateTimeUtil.convertPillListStringToKoreaTime(string))
             }
 
             TimePickerDialog(
@@ -203,9 +221,10 @@ class PillAddFormFragment :
             picker.show(parentFragmentManager, picker.toString())
             picker.addOnNegativeButtonClickListener { picker.dismiss() }
             picker.addOnPositiveButtonClickListener {
-                val startDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.first)
-                val endDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.second)
-                binding.tvPillDate.text = "$startDate ~ $endDate"
+                // date here
+                sendStartDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.first)
+                sendEndDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.second)
+                binding.tvPillDate.text = "$sendStartDate ~ $sendEndDate"
                 fillPillDate = true
             }
         }
@@ -285,6 +304,7 @@ class PillAddFormFragment :
                 periodString += cycleStringList[period_string_list.value]
                 binding.tvPillAddSpecificCycle.text = periodString
 
+
                 // 복약기간 true
                 setSpecificPeriod = true
 
@@ -300,25 +320,26 @@ class PillAddFormFragment :
     private fun showDialogSpecificDay() {
         binding.pillCycleMoreConstraintLayout.setOnClickListener {
             lateinit var dialog: AlertDialog
-            val arrayColors = arrayOf("월", "화", "수", "목", "금", "토", "일")
+            val arrayDays = arrayOf("월", "화", "수", "목", "금", "토", "일")
             val arrayChecked = booleanArrayOf(false, false, false, false, false, false, false)
             val builder = AlertDialog.Builder(requireContext())
 
-            builder.setMultiChoiceItems(arrayColors, arrayChecked) { _, which, isChecked ->
+            builder.setMultiChoiceItems(arrayDays, arrayChecked) { _, which, isChecked ->
                 arrayChecked[which] = isChecked
             }
 
             binding.tvPillAddSpecificDay.text = ""
 
             builder.setPositiveButton("OK") { _, _ ->
-                for (i in arrayColors.indices) {
+                for (i in arrayDays.indices) {
                     val checked = arrayChecked[i]
                     if (checked) {
                         binding.tvPillAddSpecificDay.text =
-                            "${binding.tvPillAddSpecificDay.text} ${arrayColors[i]}"
+                            "${binding.tvPillAddSpecificDay.text} ${arrayDays[i]}"
                     }
                 }
             }
+            sendDay = binding.tvPillAddSpecificDay.toString()
             setSpecificDay = true
             dialog = builder.create()
             dialog.show()
