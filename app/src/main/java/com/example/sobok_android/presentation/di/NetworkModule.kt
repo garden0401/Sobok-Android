@@ -19,7 +19,7 @@ val netWorkModule = module {
                     chain.request().newBuilder()
                         .addHeader(
                             "accesstoken",
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjcsImVtYWlsIjoic29ib2tAZ21haWwuY29tIiwibmFtZSI6bnVsbCwiaWRGaXJlYmFzZSI6Im52NzdlS0Z3T1FURU0zTVRvcUlNbW9QQlR6bDEiLCJpYXQiOjE2NDIwOTMxMDcsImV4cCI6MTY0NDY4NTEwNywiaXNzIjoid2Vzb3B0In0.eXLGkqQlrEqlWZCvMdJCtaTRNUCOwg7vT6clQkD6NZ4"
+                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImVtYWlsIjoiZWRAZ21haWwuY29tIiwibmFtZSI6bnVsbCwiaWRGaXJlYmFzZSI6InVOR2llMWxKWDNTREpTQnFSWHhLZUhqMnJhMzMiLCJpYXQiOjE2NDE4ODYzNjUsImV4cCI6MTY0NDQ3ODM2NSwiaXNzIjoid2Vzb3B0In0.K9xOhsd1G3sHAo89LRbLHaPySX8PeOW3kxvbbYaVeNA"
                         )
                         .build()
                 )
