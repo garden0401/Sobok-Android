@@ -61,6 +61,7 @@ class MonthView(context: Context, attrs: AttributeSet? = null) :
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
         )
         layoutManager = GridLayoutManager(context, 7, GridLayoutManager.VERTICAL, false)
+        overScrollMode = OVER_SCROLL_NEVER
     }
 
     init {
