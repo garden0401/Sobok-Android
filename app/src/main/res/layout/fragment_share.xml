@@ -19,14 +19,93 @@
             android:background="@color/mint_main"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
-                android:text="공유 프래그먼트"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_member_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:textAppearance="@style/MemberNotSelectTextStyle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/edit" />
+
+                <TextView
+                    android:id="@+id/tv_member_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:textAppearance="@style/MemberNotSelectTextStyle"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_member_one"
+                    app:layout_constraintStart_toEndOf="@id/tv_member_one"
+                    app:layout_constraintTop_toTopOf="@id/tv_member_one"
+                    tools:text="@string/edit" />
+
+                <TextView
+                    android:id="@+id/tv_member_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:textAppearance="@style/MemberNotSelectTextStyle"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_member_two"
+                    app:layout_constraintStart_toEndOf="@id/tv_member_two"
+                    app:layout_constraintTop_toTopOf="@id/tv_member_two"
+                    tools:text="@string/edit" />
+
+                <TextView
+                    android:id="@+id/tv_member_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:textAppearance="@style/MemberNotSelectTextStyle"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_member_three"
+                    app:layout_constraintStart_toEndOf="@id/tv_member_three"
+                    app:layout_constraintTop_toTopOf="@id/tv_member_three"
+                    tools:text="@string/edit" />
+
+                <TextView
+                    android:id="@+id/tv_member_five"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:textAppearance="@style/MemberNotSelectTextStyle"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_member_four"
+                    app:layout_constraintStart_toEndOf="@id/tv_member_four"
+                    app:layout_constraintTop_toTopOf="@id/tv_member_four"
+                    tools:text="@string/edit" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/iv_share_request_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="3dp"
+                android:src="@drawable/ic_plus_48_white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
