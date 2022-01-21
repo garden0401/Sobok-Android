@@ -18,8 +18,8 @@ class CalendarDateRecyclerViewAdapter : RecyclerView.Adapter<CalendarDateRecycle
 
     private var isSetCalenar : Boolean = false
 
-    private var newSelectedPosition : Int = 10 // 오늘날짜로 바꿔야 함
-    private var oldSelectedPosition: Int = 10
+    private var newSelectedPosition : Int = 26 // 오늘날짜로 바꿔야 함
+    private var oldSelectedPosition: Int = 26
 
     private var _isNext: Boolean = false
     private var currentMonthGetter : ((Boolean, Calendar) -> Unit)? = null
@@ -61,6 +61,7 @@ class CalendarDateRecyclerViewAdapter : RecyclerView.Adapter<CalendarDateRecycle
         Log.d("point/setMonthCalendar밖에서 1일로 만들어 줌!!!!!!-month", "${value.time}")
         _comCalendar = value.clone() as Calendar //TODO clone 추가
         _comCalendar.set(Calendar.DAY_OF_MONTH, 1) // 1월 1일로 만듬
+        //TODO _comCalendar에서 YEAR랑 MONTH꺼내서 계싼 와우 !!
         curMonth = _comCalendar.get(Calendar.MONTH)
         _isNext = false
         Log.d("check/맨 처음 날짜", "${_comCalendar.time}")
@@ -154,7 +155,7 @@ class CalendarDateRecyclerViewAdapter : RecyclerView.Adapter<CalendarDateRecycle
 
                 binding.date = item.day
 
-                if(item.day == "20") { // 오늘이면
+                if(item.day == "21") { // 오늘이면
                     binding.isNone = true
                     binding.isToday = true
                     binding.tvCalendarDate.setTextAppearance(R.style.CalendarTodayTextStyle)
