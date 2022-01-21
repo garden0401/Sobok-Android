@@ -4,20 +4,36 @@
 
     <data>
 
+        <import type="android.view.View"/>
+        <variable
+            name="noticeInfoData"
+            type="com.example.sobok_android.presentation.view.notice.model.NoticeInfoData" />
+
+        <variable
+            name="isButtonClick"
+            type="Boolean" />
+
+        <variable
+            name="stateMessage"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_notice_list"
+        android:layout_marginTop="8dp">
 
         <ImageView
             android:id="@+id/iv_notice_list_state_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_calendar_alarm_mint"
+            app:isCalendar="@{noticeInfoData.isCalendar}"
+            app:isButtonClick="@{isButtonClick}"
+            android:src="@{noticeInfoData.isCalendar ? @drawable/ic_calendar_alarm_mint : @drawable/ic_fill_alarm_mint }"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="22dp"
             android:layout_marginStart="18dp" />
 
         <TextView
@@ -26,12 +42,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
             android:textSize="15sp"
-            android:textColor="#333738"
-            android:text="지민지민님이 캘린더 공유를 요청했어요 테스"
+            android:textColor="@color/gray900_sub"
+            android:text="@{stateMessage}"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="22dp"
             app:layout_constraintStart_toEndOf="@id/iv_notice_list_state_img"
-            android:layout_marginStart="9dp" />
+            android:layout_marginStart="10dp" />
 
         <TextView
             android:id="@+id/tv_notice_list_state_time"
@@ -39,42 +55,47 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
             android:textSize="12sp"
-            android:textColor="#a1a9ae"
-            android:text="오후 12:35"
+            android:textColor="@color/gray500_sub"
+            android:text="@{noticeInfoData.createdAt}"
             app:layout_constraintTop_toBottomOf="@id/tv_notice_list_state_msg"
+            android:layout_marginTop="4dp"
             app:layout_constraintStart_toEndOf="@id/iv_notice_list_state_img"
-            android:layout_marginStart="9dp" />
+            android:layout_marginStart="10dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_notice_reject"
+            android:stateListAnimator="@null"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_notice_btn_reject"
-            android:text="거절"
+            android:text="@string/reject"
             android:textColor="#00abb6"
-            android:textSize="13sp"
+            android:textSize="16sp"
             android:fontFamily="@font/pretendard_semi_bold"
             app:layout_constraintTop_toBottomOf="@id/iv_notice_list_state_img"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_notice_accept"
             android:layout_marginTop="13dp"
-            android:layout_marginStart="18dp" />
+            android:layout_marginStart="18dp"
+            android:visibility="@{isButtonClick ? View.GONE : View.VISIBLE}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_notice_accept"
+            android:stateListAnimator="@null"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_notice_btn_accept"
-            android:text="수락"
+            android:text="@{noticeInfoData.isCalendar ? @string/accept : @string/confirm}"
             android:textColor="#ffffff"
-            android:textSize="13sp"
+            android:textSize="16sp"
             android:fontFamily="@font/pretendard_semi_bold"
             app:layout_constraintStart_toEndOf="@+id/btn_notice_reject"
             app:layout_constraintTop_toBottomOf="@id/iv_notice_list_state_img"
             android:layout_marginTop="13dp"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="18dp" />
+            android:layout_marginEnd="18dp"
+            android:visibility="@{isButtonClick ? View.GONE : View.VISIBLE}"/>
 
         <View
             android:layout_width="0dp"
