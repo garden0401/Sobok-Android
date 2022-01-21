@@ -58,7 +58,7 @@ class CalendarDateRecyclerViewAdapter : RecyclerView.Adapter<CalendarDateRecycle
     private var _calculCalendar :Calendar = Calendar.getInstance(Locale.KOREA)
 
     fun setMonthCalendar(value: Calendar) {
-        Log.d("point/setMonthCalendar밖에서 1일로 만들기!!!!!!-month", "${value.time}")
+        Log.d("point/setMonthCalendar밖에서 1일로 만들기!!!!!-month", "${value.time}")
         _comCalendar = value.clone() as Calendar //TODO clone 추가
         _comCalendar.set(Calendar.DAY_OF_MONTH, 1) // 1월 1일로 만듬
         curMonth = _comCalendar.get(Calendar.MONTH)
