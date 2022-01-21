@@ -1,5 +1,6 @@
 package com.example.sobok_android.presentation.di
 
+import com.example.sobok_android.data.api.PillAddService
 import com.example.sobok_android.data.api.ShareService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -18,7 +19,7 @@ val netWorkModule = module {
                     chain.request().newBuilder()
                         .addHeader(
                             "accesstoken",
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjYsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJuYW1lIjpudWxsLCJpZEZpcmViYXNlIjoiTnBRVmhYdUg3eVUwUkpVdUV6Zks3NldWckFGMiIsImlhdCI6MTY0MjA5MjkwMiwiZXhwIjoxNjQ0Njg0OTAyLCJpc3MiOiJ3ZXNvcHQifQ.fZ4bodbWJ3AlgD_c0oE5OyAW2WaXDeQHtApZLaZjdGI"
+                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjcsImVtYWlsIjoic29ib2tAZ21haWwuY29tIiwibmFtZSI6bnVsbCwiaWRGaXJlYmFzZSI6Im52NzdlS0Z3T1FURU0zTVRvcUlNbW9QQlR6bDEiLCJpYXQiOjE2NDIwOTMxMDcsImV4cCI6MTY0NDY4NTEwNywiaXNzIjoid2Vzb3B0In0.eXLGkqQlrEqlWZCvMdJCtaTRNUCOwg7vT6clQkD6NZ4"
                         )
                         .build()
                 )
@@ -35,6 +36,9 @@ val netWorkModule = module {
     }
     single<ShareService> {
         get<Retrofit>().create(ShareService::class.java)
+    }
+    single<PillAddService> {
+        get<Retrofit>().create(PillAddService::class.java)
     }
 
 }
