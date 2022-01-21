@@ -18,8 +18,8 @@ class CalendarDateRecyclerViewAdapter : RecyclerView.Adapter<CalendarDateRecycle
 
     private var isSetCalenar : Boolean = false
 
-    private var newSelectedPosition : Int = 10 // 오늘날짜로 바꿔야 함
-    private var oldSelectedPosition: Int = 10
+    private var newSelectedPosition : Int = 26 // 오늘날짜로 바꿔야 함
+    private var oldSelectedPosition: Int = 26
 
     private var _isNext: Boolean = false
     private var currentMonthGetter : ((Boolean, Calendar) -> Unit)? = null
@@ -155,7 +155,7 @@ class CalendarDateRecyclerViewAdapter : RecyclerView.Adapter<CalendarDateRecycle
 
                 binding.date = item.day
 
-                if(item.day == "20") { // 오늘이면
+                if(item.day == "21") { // 오늘이면
                     binding.isNone = true
                     binding.isToday = true
                     binding.tvCalendarDate.setTextAppearance(R.style.CalendarTodayTextStyle)

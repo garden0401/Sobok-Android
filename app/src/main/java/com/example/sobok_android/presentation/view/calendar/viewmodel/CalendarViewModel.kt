@@ -122,7 +122,7 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
 
 
         val addDateList = mutableListOf<CalendarDayListData.DayInfo>()
-        val calCulCalendar: Calendar = dynamicCalendar.clone() as Calendar
+        //val calCulCalendar: Calendar = dynamicCalendar.clone() as Calendar
         val count = when (_isMonth.value) {
             true -> 42
             else -> 7

@@ -41,6 +41,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         calendarViewModel.remoteDateList.observe(viewLifecycleOwner) {
             calendarViewModel.postCurPageFirstDayCalendar(Calendar.getInstance(Locale.KOREA)) //TODO ???????
+            //TODO: setCompletedDateList는 계산이 끝나고 나서 즉 observe하고 viewClanedar로 보내야 함
             binding.viewCalendar.setCompleteDateList(calendarViewModel.completeDateList)
         }
 
