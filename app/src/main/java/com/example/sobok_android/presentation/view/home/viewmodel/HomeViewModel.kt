@@ -20,7 +20,7 @@ class HomeViewModel(private val calendarRepository: CalendarRepository): ViewMod
         _isEditClick.value = value
     }
 
-    private val _selectedDate = MutableLiveData<String>("2022-01-14")
+    private val _selectedDate = MutableLiveData<String>("2022-01-21")
     var selectedDate : LiveData<String> = _selectedDate
 
     fun setSelectedDate(value: String) {
