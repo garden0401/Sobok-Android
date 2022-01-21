@@ -31,30 +31,16 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
-        Log.d("onviewcreated", "도착")
-
         calendarViewModel.getCalendarList()
 
+        observeIsHome()
         initAdapter()
-        observeIsEditClickEvent()
-
-        binding.isHome = true // 뷰모델에 넣어야 함 -> 기본 true
-
-
-
-        //calendarViewModel.postCurPageFirstDayCalendar(Calendar.getInstance(Locale.KOREA))
-
-        //계산을 해서
+        //observeIsEditClickEvent()
+        //observeSelectedDate()
+        //observeHomePillList()
 
         calendarViewModel.remoteDateList.observe(viewLifecycleOwner) {
-            //서버에서 받아오는 순간
-            //계산을 해야지
-            Log.d("want////RemoteDateList@@@@@@@@@2", "${it}")
-            calendarViewModel.postCurPageFirstDayCalendar(Calendar.getInstance(Locale.KOREA))
-            Log.d("want////completeList@@@@@@@@@2", "${calendarViewModel.completeDateList}")
+            calendarViewModel.postCurPageFirstDayCalendar(Calendar.getInstance(Locale.KOREA)) //TODO ???????
             binding.viewCalendar.setCompleteDateList(calendarViewModel.completeDateList)
         }
 
@@ -63,19 +49,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             binding.viewCalendar.layoutCalendarTopBinding.tvCalendarTopSelectDate.text = DateTimeUtil.convertDateToMonthFormat(it.time)
         }
 
-//        binding.viewCalendar.setSendDateGetter {
-//            calendarViewModel.postSendDate(DateTimeUtil.convertUSDateToDashFormatString(it.time))
-//        }
-
-//        binding.viewCalendar.sendDate.observe(viewLifecycleOwner) {
-//            //calendarViewModel.postSendDate(DateTimeUtil.convertUSDateToDashFormatString(it.time))
-//            binding.viewCalendar.layoutCalendarTopBinding.tvCalendarTopSelectDate.text =  calendarViewModel.sendDate.value
-//            Log.d("sleepy////sendDate-observe HomeFragment입니다", "${DateTimeUtil.convertUSDateToDashFormatString(it.time)}")
-//            Log.d("서버통신코드를 여기 넣고 싶어요!!!!", "senddate${DateTimeUtil.convertUSDateToDashFormatString(it.time)}")
-//            //Log.d("calednar서버 받으러 출발!", "ㄱㅇㅇㅇ")
-//            //calendarViewModel.getCalendarList()
-//
-//        }
 
         calendarViewModel.sendDate.observe(viewLifecycleOwner) {
             binding.viewCalendar.layoutCalendarTopBinding.tvCalendarTopSelectDate.text =  calendarViewModel.sendDate.value
@@ -85,15 +58,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         binding.viewCalendar.selectDate.observe(viewLifecycleOwner) {
             calendarViewModel.postSelectDate(it)
-            Log.d("please/viewCalendar", "${it}")
         }
 
         calendarViewModel.selectDate.observe(viewLifecycleOwner) {
-           // binding.viewCalendar.layoutCalendarTopBinding.tvCalendarTopSelectDate.text =  DateTimeUtil.convertSimpleDetailDateFormatToSimpleDateFormat(it)
             Log.d("please/날짜observe", "${it}")
         }
-
-
 
         //월간 주간 처리
         calendarViewModel.postIsMonth(true) // 추후 수정
@@ -106,83 +75,70 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             Log.d("observeIsMonth", "$it")
             binding.viewCalendar.layoutCalendarTopBinding.isMonth = it
             binding.viewCalendar.setIsMonth(it)
-            //calendarViewModel.getCalendarList()
         }
 
     }
 
+    private fun observeIsHome() {
+        mainViewModel.isHome.observe(viewLifecycleOwner) {
+            binding.isHome = it
+            homePillListAllAdapter.setIsHome(it)
+            if(it) {
+                //TODO: UserName 연결
+                binding.userName = "유저"
+                observeIsEditClickEvent()
+                setTvBtnHomePillListEditClickListener()
+                observeHomePillList()
 
-    private fun initAdapter() {
-        homePillListAllAdapter = HomePillListAllAdapter()
+                //TODO: CalendarViewModel로 변경 예정
+                homeViewModel.selectedDate.observe(viewLifecycleOwner) {
+                    getHomePillList()
+                }
+            }else {
+                //TODO: 클릭한 친구 ID 보내기
+                observeSelectedMemberName()
+                observeSharePillList()
 
-        binding.rvHomePillListAll.adapter = homePillListAllAdapter
-
-        // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
-        homePillListAllAdapter.setStickerClickListener {
-            mainViewModel.setIsStickerClick(it)
-            Log.d("lala", "success${it}")
+                //TODO: CalendarViewModel로 변경 예정
+                homeViewModel.selectedDate.observe(viewLifecycleOwner) {
+                    getSharePillList()
+                }
+            }
         }
 
+    }
+
+    private fun observeSelectedMemberName() {
+        mainViewModel.selectedMemberName.observe(viewLifecycleOwner) {
+            binding.userName = it
+        }
+    }
 
 
-        homePillListAllAdapter.homePillListAll =
-            listOf(
-                HomePillListData(
-                    "7시",
-                    listOf(
-                        HomePillListData.PillDetailData("홍삼", true, "1"),
-                        HomePillListData.PillDetailData("홍상2", false, "2"),
-                        HomePillListData.PillDetailData("홍상3", false, "3"),
-                    )
-                ),
-                HomePillListData(
-                    "12시",
-                    listOf(
-                        HomePillListData.PillDetailData("텐텐", false, "4"),
-                        HomePillListData.PillDetailData("텐텐3", true, "5"),
-                    )
-                ),
-                HomePillListData(
-                    "18시",
-                    listOf(
-                        HomePillListData.PillDetailData("비타민", false, "1"),
-                        HomePillListData.PillDetailData("비타민2", false, "3"),
-                        HomePillListData.PillDetailData("텐텐2", true, "4"),
-                        HomePillListData.PillDetailData("비타민3", true, "2"),
-                    )
-                ),
-                HomePillListData(
-                    "18시",
-                    listOf(
-                        HomePillListData.PillDetailData("비타민", false, "5"),
-                        HomePillListData.PillDetailData("비타민3", true, "2"),
-                    )
-                ),
-                HomePillListData(
-                    "18시",
-                    listOf(
-                        HomePillListData.PillDetailData("비타민", false, "1"),
-                        HomePillListData.PillDetailData("비타민2", false, "3"),
-                        HomePillListData.PillDetailData("비타민3", true, "2"),
-                    )
-                ),
-                HomePillListData(
-                    "18시",
-                    listOf(
-                        HomePillListData.PillDetailData("비타민", false, "4"),
-                        HomePillListData.PillDetailData("비타민2", false, "5"),
-                        HomePillListData.PillDetailData("비타민3", true, "2"),
-                    )
-                ),
-            )
+    private fun initAdapter() {
+        //homePillListAllAdapter.homePillListAll =
         // 홈(메인) 수정<->완료, 수정 터치 시 체크 버튼<->컨텍스트 버튼
         binding.isEditText = true//-> 수정
 
+        homePillListAllAdapter = HomePillListAllAdapter()
+        binding.rvHomePillListAll.adapter = homePillListAllAdapter
+
+        setStickerClickListener()//TODO: 홈인지 공유인지 구분해서 바텀시트가 달라져야 함!
+    }
+
+    private fun setTvBtnHomePillListEditClickListener() {
         // 메인 약 리스트 수정버튼<->완료 버튼
         binding.tvBtnHomePillListEdit.setOnClickListener {
             Log.d("초기값" ,"${it.isSelected}") // false -> 수정
             it.isSelected = !it.isSelected // 수정인 상태에서 클릭을하면 true로 바뀜
             homeViewModel.setIsEditClick(it.isSelected) // 수정을 눌렀다! true
+        }
+    }
+
+    private fun setStickerClickListener() {
+        // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
+        homePillListAllAdapter.setStickerClickListener {
+            mainViewModel.setIsStickerClick(it)
         }
     }
 
@@ -193,8 +149,26 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             homePillListAllAdapter.setIsEdit(it)
             Log.d("observeEdit", "${it}")
         }
+    }
 
+    private fun getHomePillList() {
+        homeViewModel.getHomePillListData()
+    }
 
+    private fun observeHomePillList() {
+        homeViewModel.homePillList.observe(viewLifecycleOwner) {
+            homePillListAllAdapter.homePillListAll = it.data
+        }
+    }
+
+    private fun getSharePillList() {
+        homeViewModel.getSharePillListData()
+    }
+
+    private fun observeSharePillList() {
+        homeViewModel.sharePillList.observe(viewLifecycleOwner) {
+            homePillListAllAdapter.homePillListAll = it.data
+        }
     }
 
 
