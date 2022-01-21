@@ -1,5 +1,6 @@
 package com.example.sobok_android.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -14,6 +15,7 @@ import com.example.sobok_android.presentation.base.BindingActivity
 import com.example.sobok_android.presentation.view.pill.add.PillAddBottomSheetFragment
 import com.example.sobok_android.presentation.view.home.HomeStickerBottomSheetAdapter
 import com.example.sobok_android.presentation.view.home.HomeStickerBottomSheetFragment
+import com.example.sobok_android.presentation.view.pill.add.PillAddActivity
 import com.example.sobok_android.presentation.view.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -26,11 +28,13 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private lateinit var homeStickerBottomSheet: HomeStickerBottomSheetFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         initHomeStickerBottomSheet()
         setNavigation()
         navigateToPillAdd()
         observeIsStickerClickEvent()
+        observePillAddNavigateData()
     }
 
     private fun initHomeStickerBottomSheet() {
@@ -60,11 +64,21 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             Log.d("checkobserve", "${it}")
             if (it) {
                 homeStickerBottomSheet.show(supportFragmentManager, homeStickerBottomSheet.tag)
-
             }
         }
+    }
 
-
+    private fun observePillAddNavigateData() {
+        mainViewModel.pillAddNavigateData.observe(this) {
+            val intent = Intent(this, PillAddActivity::class.java)
+            // 여기
+            intent.putExtra("isMyPill", it.isMyPill)
+            intent.putExtra("canAddPill", it.canAddPill)
+            intent.putExtra("pillCount", it.pillCount)
+            Log.d("observe Log CanAddpill", "${it.canAddPill}")
+            Log.d("observe Log IsMyPill", "${it.isMyPill}")
+            startActivity(intent)
+        }
     }
 
 //    // 약 리스트 수정 클릭시 팝업(임시로 홈프래그먼트에 띄워보기)

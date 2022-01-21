@@ -20,15 +20,17 @@ import com.example.sobok_android.presentation.view.pill.add.adapter.PillListAdap
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillNameAdapter
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillTimeAdapter
 import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
+import com.example.sobok_android.presentation.view.share.request.ShareRequestActivity
 import com.google.android.material.datepicker.MaterialDatePicker
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class PillAddFormFragment : BindingFragment<FragmentPillAddFormBinding>(R.layout.fragment_pill_add_form) {
+class PillAddFormFragment :
+    BindingFragment<FragmentPillAddFormBinding>(R.layout.fragment_pill_add_form) {
 
-    private val pillAddViewModel: PillAddViewModel by viewModel()
+    private val pillAddViewModel: PillAddViewModel by sharedViewModel()
     private lateinit var pillNameAdapter: PillNameAdapter
     private lateinit var pillTimeAdapter: PillTimeAdapter
     private lateinit var pillListAdapter: PillListAdapter
@@ -60,7 +62,7 @@ class PillAddFormFragment : BindingFragment<FragmentPillAddFormBinding>(R.layout
 
         // pillPerson 값 넣어주기
 
-
+        observePillCount()
         initPillNameAdapter()
         initPillTimeAdapter()
         initPillListAdapter()
@@ -81,24 +83,6 @@ class PillAddFormFragment : BindingFragment<FragmentPillAddFormBinding>(R.layout
         var _isMyPill: Boolean = false
         var _canAddPill: Boolean = true
         val intent = Intent(requireContext(), PillAddFinishFragment::class.java)
-        _isMyPill = intent.getBooleanExtra("isMyPill", _isMyPill)
-        _canAddPill = intent.getBooleanExtra("canAddPill", _canAddPill)
-
-        if (_isMyPill) {
-            binding.ivPillPersonMore.visibility = View.GONE
-            binding.clPillPerson.isClickable = false
-        }
-
-        if (_canAddPill) {
-            Log.d("Add Activity1", "$_canAddPill")
-            binding.wrapScroll.visibility = View.VISIBLE
-            binding.clCannotAddPill.visibility = View.GONE
-        } else {
-            Log.d("Add Activity2", "$_canAddPill")
-            binding.wrapScroll.visibility = View.GONE
-            binding.clCannotAddPill.visibility = View.VISIBLE
-        }
-
 
         binding.clTop.setOnTouchListener { v, event ->
             binding.rcvPillName.clearFocus()
@@ -115,37 +99,53 @@ class PillAddFormFragment : BindingFragment<FragmentPillAddFormBinding>(R.layout
 
             Log.d("pillLIstttttttttt", "$_pillList")
 
-            pillAddViewModel.setPillList(PillListData(_pillList))
-            Log.d("adapterPillListttt", "${pillListAdapter.pillList}")
-
 
 
             if (fillPillName && fillPillDate && fillPillCycle && pillTimeAdapter.itemCount > 0) {
 
-                for(i in 0 until nameList.size) {
-                    _pillList.add(PillListData.PillInfo(
-                        nameList[i],
-                        false,
-                        "red",
-                        "start",
-                        "end",
-                        "cycle",
-                        "day",
-                        "specific",
-                        timeList = pillTimeAdapter.pillTimeList
-                    ))
+                for (i in 0 until nameList.size) {
+                    _pillList.add(
+                        PillListData.PillInfo(
+                            nameList[i],
+                            false,
+                            "red",
+                            "start",
+                            "end",
+                            "cycle",
+                            "day",
+                            "specific",
+                            timeList = pillTimeAdapter.pillTimeList
+                        )
+                    )
                 }
-                val bundle = Bundle()
-                //bundle.getSerializable("pillList", _pillList)
-                val intent = Intent(requireContext(), PillAddFinishFragment::class.java)
+                pillAddViewModel.setPillList(_pillList)
+                Log.d("프래그먼트에서 리스트를 뷰모델에 저장합니다", "${pillAddViewModel.pillList}")
+                // 다음으로 이동!!!!!!!!!!!!!!!
+                val pillAddActivity= (activity as PillAddActivity)
+                pillAddActivity.replacePillAddFinishFragment()
 
-                startActivity(intent)
 
             } else {
                 Toast.makeText(requireContext(), "약에 대한 정보를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
         navigateToHome()
+    }
+
+    private fun observePillCount() {
+        if (pillAddViewModel.isMyPill) {
+            binding.ivPillPersonMore.visibility = View.GONE
+            binding.clPillPerson.isClickable = false
+        }
+        if (pillAddViewModel.canAddPill) {
+            Log.d("Add Activity1", "${pillAddViewModel.canAddPill}")
+            binding.wrapScroll.visibility = View.VISIBLE
+            binding.clCannotAddPill.visibility = View.GONE
+        } else {
+            Log.d("Add Activity2", "${pillAddViewModel.canAddPill}")
+            binding.wrapScroll.visibility = View.GONE
+            binding.clCannotAddPill.visibility = View.VISIBLE
+        }
     }
 
     private fun initPillListAdapter() {
@@ -370,7 +370,6 @@ class PillAddFormFragment : BindingFragment<FragmentPillAddFormBinding>(R.layout
             }
         }
     }
-
 
     private fun showDialogPillPerson() {
         binding.clPillPerson.setOnClickListener {
