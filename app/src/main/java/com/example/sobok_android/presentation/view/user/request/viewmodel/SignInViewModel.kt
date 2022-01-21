@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sobok_android.data.model.request.ReqSignInSuccessData
+import com.example.sobok_android.data.sharedpref.SobokSharedPreference
 import com.example.sobok_android.domain.model.login.request.SignInSuccessData
 import com.example.sobok_android.domain.repository.login.request.SignInRepository
 import kotlinx.coroutines.launch
@@ -35,6 +36,7 @@ class SignInViewModel(private val signInRepository: SignInRepository) :
         runCatching { signInRepository.postSignInResult(ReqSignInSuccessData(_email, _password)) }
             .onSuccess {
                 _memberInfo.postValue(it.data)
+                SobokSharedPreference.setUserToken(it.data.accesstoken)
                 Log.d("searchResultSuccess-server", "success${it}")
             }
             .onFailure {
