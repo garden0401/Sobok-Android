@@ -12,13 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SobokAndroid"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".presentation.view.pill.add.PillAddActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.view.pill.add.PillAddFinishFragment"
             android:exported="true" />
+            android:name=".presentation.view.user.SignUpWelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.user.SignUpNickNameActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.view.pill.add.PillAddRejectActivity"
             android:exported="false" />
@@ -48,16 +53,16 @@
             android:exported="false" />
         <activity
             android:name=".presentation.view.splash.SplashActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.view.MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.view.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import com.example.sobok_android.data.api.LoginService
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -49,4 +50,7 @@ val netWorkModule = module {
         get<Retrofit>().create(PillAddService::class.java)
     }
 
+    single<LoginService> {
+        get<Retrofit>().create(LoginService::class.java)
+    }
 }
