@@ -1,0 +1,42 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Android CD
+
+on:
+  push:
+    branches: develop
+    
+  pull_request:
+    branches: develop
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+       java-version: 1.8
+       
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+     
+     
+    - name: Build APK
+      run: bash ./gradlew assembleRelease --stacktrace
+     
+     
+    - run: './gradlew assembleRelease'
+    - uses: MeilCli/slack-upload-file@v1
+      with:
+        slack_token: ${{ secrets.SLACK_READ_WRITE_TOKEN }}
+        channels: ${{ secrets.SLACK_CHANNEL_DEPLOY }}
+        file_path: 'app/build/outputs/apk/debug/app-debug.apk'
+        file_name: 'SobokSobok.apk'
+        file_type: 'apk'
+        initial_comment: 'SobokSobok APK가 왔어요'
+
+     
