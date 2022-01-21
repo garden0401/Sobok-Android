@@ -42,6 +42,7 @@ class NoticeListAdapter : RecyclerView.Adapter<NoticeListAdapter.NoticeListViewH
         fun onBind(data : NoticeInfoData) {
             binding.noticeInfoData = data
 
+
             if (data.isCalendar) {
                 binding.stateMessage = "${data.senderName}님이 캘린더 공유를 요청했어요"
             } else binding.stateMessage = "${data.senderName}님이 복약 정보를 전송했어요"

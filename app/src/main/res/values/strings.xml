@@ -61,4 +61,6 @@
     <string name="reject">거절</string>
     <string name="confirm">확인</string>
 
+    <string name="notice_title">소중한 %s님의 알림</string>
+
 </resources>
