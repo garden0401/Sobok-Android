@@ -3,22 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable-hdpi/rectangle_fill_light_mint_radius_6.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable-v24/rectangle_border_gray_600_radius_12.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/ic_back_48.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/ic_close_48.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/ic_close_dark_48.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/ic_date_doing_not_select.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/ic_plus_inactive.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/ic_sticker_1_aos.xml" value="0.14322916666666666" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/rectangle_border_gray_300_radius_12.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/rectangle_border_mint_radius12dp.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/rectangle_border_pill_color_red_radius_12.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/rectangle_fill_gray100_border_gray150.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/rectangle_fill_gray200.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/rectangle_fill_gray_100_radius_12.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/rectangle_fill_gray_100_radius_8.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/rectangle_fill_mint.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_home_pill_list_check.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_alarm.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_home.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_plus.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_menu_share.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_pill_list_ate.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_share_request_search_bar.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/drawable/selector_sticker_send_emotion.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/font/font_pretendard.xml" value="0.2838541666666667" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/font/pretendard.xml" value="0.2838541666666667" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/activity_main.xml" value="0.24974358974358973" />
@@ -29,6 +37,7 @@
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_pill_add_bottom_sheet.xml" value="0.1296875" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_pill_add_calendar.xml" value="0.2390625" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_share.xml" value="0.25364583333333335" />
+        <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_share_empty.xml" value="0.25364583333333335" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_share_request_save.xml" value="0.25364583333333335" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/fragment_share_request_search.xml" value="0.25364583333333335" />
         <entry key="..\:/AndroidStudioProjects/Sobok-Android/app/src/main/res/layout/item_calendar_date.xml" value="0.25364583333333335" />
