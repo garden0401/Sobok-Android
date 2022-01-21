@@ -80,4 +80,8 @@ object DateTimeUtil {
         return preHour + hour + time.substring(2,5)
     }
 
+    fun getToday() : String {
+        return simpleDashDateFormat.format(Calendar.getInstance(Locale.KOREA).time)
+    }
+
 }
