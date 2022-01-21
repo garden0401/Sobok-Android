@@ -13,23 +13,17 @@ import com.example.sobok_android.databinding.ItemPillAddPillNameBinding
 class PillNameAdapter : RecyclerView.Adapter<PillNameAdapter.PillNameViewHolder>() {
 
     private var _pillNameList = mutableListOf<String>()
-    val realPillNameList = mutableListOf<String>()
     var isFillPillName: Boolean = false
 
-    var pillNameList: List<String> = _pillNameList // = : getter의 의미
-        set(value) {
-            Log.d("pill-list-adapter", "set")
-            Log.d("real-pill-list111", "$realPillNameList")
-                _pillNameList.clear()
-                _pillNameList.addAll(value)
-                realPillNameList.clear()
-                realPillNameList.addAll(_pillNameList)
-
-            Log.d("pill-list", "$_pillNameList")
-            Log.d("real-pill-list", "$realPillNameList")
-            notifyDataSetChanged()
-        }
-
+    private val _realPillNameList = mutableListOf<String>()
+var realPillNameList: MutableList<String> = _realPillNameList // = : getter의 의미
+    set(value) {
+        val realValue = value
+        _realPillNameList.clear()
+        _realPillNameList.addAll(realValue)
+        notifyDataSetChanged()
+        field = value
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PillNameViewHolder {
         val binding: ItemPillAddPillNameBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -67,9 +61,7 @@ class PillNameAdapter : RecyclerView.Adapter<PillNameAdapter.PillNameViewHolder>
             }
 
             binding.ivClose.setOnClickListener {
-                Log.d("before delete item", "${realPillNameList[position]}")
                 deleteItem(position)
-                Log.d("after delete item", "${realPillNameList[position]}")
             }
 
             binding.tvPillName.setOnFocusChangeListener { view, hasFocus ->
@@ -86,16 +78,8 @@ class PillNameAdapter : RecyclerView.Adapter<PillNameAdapter.PillNameViewHolder>
         }
     }
     fun deleteItem(position: Int){
-        val _position = position
-        Log.d("###real item list", "${realPillNameList}")
-        Log.d("###pill item list", "${_pillNameList}")
-        realPillNameList.removeAt(_position)
-        _pillNameList.removeAt(_position)
-        //_pillNameList = realPillNameList
-        //_pillNameList.removeAt(_position)
-        Log.d("#####real item list", "${realPillNameList}")
-        Log.d("#####pill item list", "${_pillNameList}")
-
+        realPillNameList.removeAt(position)
+        Log.d("#####real item list 재할당", "${realPillNameList}")
         notifyDataSetChanged()
     }
 }

@@ -30,10 +30,6 @@ class PillListAdapter : RecyclerView.Adapter<PillListAdapter.PillListViewHolder>
         deletePillItemListener = listener
     }
 
-    fun setAdapterPillList(adapterPillList: LiveData<MutableList<PillListData.PillInfo>>) {
-        _pillList = adapterPillList.value!!
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : PillListViewHolder {
         val binding: ItemPillAddPillInfoBinding = DataBindingUtil.inflate(
