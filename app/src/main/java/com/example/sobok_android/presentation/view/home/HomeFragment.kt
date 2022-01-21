@@ -1,10 +1,7 @@
 package com.example.sobok_android.presentation.view.home
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentHomeBinding
 import com.example.sobok_android.presentation.base.BindingFragment
@@ -20,6 +17,8 @@ import java.util.*
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private lateinit var homePillListAllAdapter: HomePillListAllAdapter
     private val calendarViewModel: CalendarViewModel by viewModel()
+
+    private var sendCurMonth = 0
 
     // 고차함수써보기
     // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
@@ -40,30 +39,36 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         //observeHomePillList()
 
         calendarViewModel.remoteDateList.observe(viewLifecycleOwner) {
-            calendarViewModel.postCurPageFirstDayCalendar(Calendar.getInstance(Locale.KOREA)) //TODO ???????
+            //calendarViewModel.postCurPageFirstDayCalendar(Calendar.getInstance(Locale.KOREA)) //TODO ???????
             //TODO: setCompletedDateList는 계산이 끝나고 나서 즉 observe하고 viewClanedar로 보내야 함
-            binding.viewCalendar.setCompleteDateList(calendarViewModel.completeDateList)
+            calendarViewModel.setDynamicCalendar(calendarViewModel.sendDate.value!!.clone() as Calendar)
+        }
+
+        calendarViewModel.completeDateList.observe(viewLifecycleOwner) {
+            binding.viewCalendar.setCompleteDateList(calendarViewModel.completeDateList.value!!)
         }
 
         binding.viewCalendar.sendCalendar.observe(viewLifecycleOwner) {
-            calendarViewModel.postSendDate(DateTimeUtil.convertUSDateToDashFormatString(it.time))
-            binding.viewCalendar.layoutCalendarTopBinding.tvCalendarTopSelectDate.text = DateTimeUtil.convertDateToMonthFormat(it.time)
+            if ((it.get(Calendar.MONTH) + 1) != sendCurMonth) {
+                sendCurMonth = it.get(Calendar.MONTH) + 1
+                calendarViewModel.postSendDate(it)
+                binding.viewCalendar.layoutCalendarTopBinding.tvCalendarTopSelectDate.text =
+                    DateTimeUtil.convertDateToMonthFormat(it.time)
+                calendarViewModel.getCalendarList()
+            }
         }
 
-
-        calendarViewModel.sendDate.observe(viewLifecycleOwner) {
-            binding.viewCalendar.layoutCalendarTopBinding.tvCalendarTopSelectDate.text =  calendarViewModel.sendDate.value
-            calendarViewModel.getCalendarList()
+        binding.viewCalendar.testDate.observe(viewLifecycleOwner) {
+            homeViewModel.setSelectedDate(it)
         }
-
 
         binding.viewCalendar.selectDate.observe(viewLifecycleOwner) {
             calendarViewModel.postSelectDate(it)
         }
 
-        calendarViewModel.selectDate.observe(viewLifecycleOwner) {
-            Log.d("please/날짜observe", "${it}")
-        }
+//        calendarViewModel.selectDate.observe(viewLifecycleOwner) {
+//            Log.d("please/날짜observe", "${it}")
+//        }
 
         //월간 주간 처리
         calendarViewModel.postIsMonth(true) // 추후 수정
@@ -73,7 +78,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
 
         calendarViewModel.isMonth.observe(viewLifecycleOwner) {
-            Log.d("observeIsMonth", "$it")
             binding.viewCalendar.layoutCalendarTopBinding.isMonth = it
             binding.viewCalendar.setIsMonth(it)
         }
@@ -84,9 +88,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         mainViewModel.isHome.observe(viewLifecycleOwner) {
             binding.isHome = it
             homePillListAllAdapter.setIsHome(it)
-            if(it) {
+            if (it) {
                 //TODO: UserName 연결
-                binding.userName = "유저"
+                binding.userName = "소복"
                 observeIsEditClickEvent()
                 setTvBtnHomePillListEditClickListener()
                 observeHomePillList()
@@ -95,7 +99,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 homeViewModel.selectedDate.observe(viewLifecycleOwner) {
                     getHomePillList()
                 }
-            }else {
+            } else {
                 //TODO: 클릭한 친구 ID 보내기
                 observeSelectedMemberName()
                 observeSharePillList()
@@ -120,7 +124,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         //homePillListAllAdapter.homePillListAll =
         // 홈(메인) 수정<->완료, 수정 터치 시 체크 버튼<->컨텍스트 버튼
         binding.isEditText = true//-> 수정
-
+        binding.isEmpty = false
         homePillListAllAdapter = HomePillListAllAdapter()
         binding.rvHomePillListAll.adapter = homePillListAllAdapter
 
@@ -130,7 +134,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private fun setTvBtnHomePillListEditClickListener() {
         // 메인 약 리스트 수정버튼<->완료 버튼
         binding.tvBtnHomePillListEdit.setOnClickListener {
-            Log.d("초기값" ,"${it.isSelected}") // false -> 수정
             it.isSelected = !it.isSelected // 수정인 상태에서 클릭을하면 true로 바뀜
             homeViewModel.setIsEditClick(it.isSelected) // 수정을 눌렀다! true
         }
@@ -148,7 +151,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         homeViewModel.isEditClick.observe(this) {
             binding.isEditText = !it
             homePillListAllAdapter.setIsEdit(it)
-            Log.d("observeEdit", "${it}")
         }
     }
 
@@ -159,6 +161,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private fun observeHomePillList() {
         homeViewModel.homePillList.observe(viewLifecycleOwner) {
             homePillListAllAdapter.homePillListAll = it.data
+            binding.isEmpty = it.data.isEmpty()
         }
     }
 
@@ -169,6 +172,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private fun observeSharePillList() {
         homeViewModel.sharePillList.observe(viewLifecycleOwner) {
             homePillListAllAdapter.homePillListAll = it.data
+            binding.isEmpty = it.data.isEmpty()
         }
     }
 
