@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sobok_android.domain.model.notice.NoticeListData
-import com.example.sobok_android.domain.repository.NoticeRepository
+import com.example.sobok_android.domain.repository.notice.NoticeRepository
 import kotlinx.coroutines.launch
 
 class NoticeViewModel(private val noticeRepository: NoticeRepository): ViewModel() {
