@@ -2,30 +2,18 @@ package com.example.sobok_android.presentation.view
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
-import android.widget.Button
-import android.widget.PopupMenu
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.sobok_android.R
-import com.example.sobok_android.data.sharedpref.SobokSharedPreference
 import com.example.sobok_android.databinding.ActivityMainBinding
-import com.example.sobok_android.domain.model.share.request.SearchResultData
 import com.example.sobok_android.presentation.base.BindingActivity
 import com.example.sobok_android.presentation.view.home.HomeFragment
-import com.example.sobok_android.presentation.view.pill.add.PillAddBottomSheetFragment
-import com.example.sobok_android.presentation.view.home.HomeStickerBottomSheetAdapter
 import com.example.sobok_android.presentation.view.home.HomeStickerBottomSheetFragment
-import com.example.sobok_android.presentation.view.pill.add.PillAddActivity
 import com.example.sobok_android.presentation.view.notice.NoticeFragment
+import com.example.sobok_android.presentation.view.pill.add.PillAddActivity
+import com.example.sobok_android.presentation.view.pill.add.PillAddBottomSheetFragment
 import com.example.sobok_android.presentation.view.share.ShareFragment
 import com.example.sobok_android.presentation.view.share.request.ShareRequestActivity
 import com.example.sobok_android.presentation.view.viewmodel.MainViewModel
@@ -78,7 +66,10 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 }
                 else -> {
                     val pillAddBottomSheetFragment = PillAddBottomSheetFragment()
-                    pillAddBottomSheetFragment.show(supportFragmentManager, pillAddBottomSheetFragment.tag)
+                    pillAddBottomSheetFragment.show(
+                        supportFragmentManager,
+                        pillAddBottomSheetFragment.tag
+                    )
                 }
             }
             true
@@ -104,6 +95,8 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         mainViewModel.isShareRequest.observe(this) {
 
         }
+    }
+
     private fun observePillAddNavigateData() {
         mainViewModel.pillAddNavigateData.observe(this) {
             val intent = Intent(this, PillAddActivity::class.java)
@@ -120,25 +113,25 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private val shareRequestActivityLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        if(it.resultCode == RESULT_OK) {
+        if (it.resultCode == RESULT_OK) {
             //TODO : 팝업
-            if(mainViewModel.isShareRequest.value == true) {
-                    val builder = AlertDialog.Builder(this)
-                    builder.setTitle("캘린더 공유 요청을 보냈어요!")
-                        .setMessage(
-                            "상대방이 요청을 수락하면,\n" +
-                                    "상대방의 캘린더를 볼 수 있어요"
-                        )
-                        .setNegativeButton("확인") { dialog, id ->
-                        }
-                    builder.show()
+            if (mainViewModel.isShareRequest.value == true) {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("캘린더 공유 요청을 보냈어요!")
+                    .setMessage(
+                        "상대방이 요청을 수락하면,\n" +
+                                "상대방의 캘린더를 볼 수 있어요"
+                    )
+                    .setNegativeButton("확인") { dialog, id ->
+                    }
+                builder.show()
             }
         }
     }
 
     private fun observeIsShareRequestClick() {
         mainViewModel.isShareRequestClick.observe(this) {
-            if(it) {
+            if (it) {
                 shareRequestActivityLauncher.launch(Intent(this, ShareRequestActivity::class.java))
             }
         }

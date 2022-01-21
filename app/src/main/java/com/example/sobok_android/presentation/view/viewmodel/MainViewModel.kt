@@ -5,17 +5,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.sobok_android.domain.model.share.request.ShareRequestSuccessData
 import com.example.sobok_android.domain.model.share.request.GroupData
-import com.example.sobok_android.domain.repository.share.request.ShareRequestRepository
-import kotlinx.coroutines.launch
+import com.example.sobok_android.domain.model.share.request.ShareRequestSuccessData
 import com.example.sobok_android.domain.repository.pill.pilladd.PillAddRepository
+import com.example.sobok_android.domain.repository.share.request.ShareRequestRepository
 import com.example.sobok_android.presentation.view.pill.add.PillAddNavigateData
+import kotlinx.coroutines.launch
 
-class MainViewModel(private val shareRequestRepository: ShareRequestRepository) : ViewModel() {
+class MainViewModel(
+    private val shareRequestRepository: ShareRequestRepository,
+    private val pillAddRepository: PillAddRepository
+) : ViewModel() {
     private var _isHome = MutableLiveData<Boolean>(true)
-    val isHome : LiveData<Boolean> = _isHome
-    fun setIsHome(value:Boolean) {
+    val isHome: LiveData<Boolean> = _isHome
+    fun setIsHome(value: Boolean) {
         _isHome.value = value
     }
 
@@ -23,10 +26,10 @@ class MainViewModel(private val shareRequestRepository: ShareRequestRepository) 
     var groupData: LiveData<List<GroupData.MemberInfo>> = _groupData
 
     private var _memberInfoList = MutableLiveData<List<ShareRequestSuccessData.MemberInfo>>()
-    val memberInfoList : LiveData<List<ShareRequestSuccessData.MemberInfo>> = _memberInfoList
+    val memberInfoList: LiveData<List<ShareRequestSuccessData.MemberInfo>> = _memberInfoList
 
     private val _selectedMemberName = MutableLiveData<String>()
-    var selectedMemberName : LiveData<String> = _selectedMemberName
+    var selectedMemberName: LiveData<String> = _selectedMemberName
     fun setSelectedMemberName(value: String) {
         _selectedMemberName.value = value
     }
@@ -34,34 +37,24 @@ class MainViewModel(private val shareRequestRepository: ShareRequestRepository) 
     // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
     private val _isStickerClick = MutableLiveData<Boolean>(false)
     private val _pillCount = MutableLiveData<Int>()
-    var _isMyPill = MutableLiveData<Boolean>()
-    var _canAddPill = MutableLiveData<Boolean>()
-    val isMyPill: MutableLiveData<Boolean> get() = _isMyPill
-    val canAddPill: MutableLiveData<Boolean> get() = _canAddPill
     var _pillAddNavigateData = MutableLiveData<PillAddNavigateData>()
     val pillAddNavigateData: LiveData<PillAddNavigateData> get() = _pillAddNavigateData
     val pillCount: LiveData<Int> get() = _pillCount
-    var isStickerClick : LiveData<Boolean> = _isStickerClick
-
-    var sendPillCount: Int = 0
-
+    var isStickerClick: LiveData<Boolean> = _isStickerClick
 
     fun setIsStickerClick(value: Boolean) {
         _isStickerClick.value = value
     }
 
     private val _isShareRequest = MutableLiveData<Boolean>(false)
-    var isShareRequest : LiveData<Boolean> = _isShareRequest
-    fun setIsMyPill(getisMyPill: Boolean) {
-        _isMyPill.value = getisMyPill
-    }
+    var isShareRequest: LiveData<Boolean> = _isShareRequest
 
     fun setIsShareRequest(value: Boolean) {
         _isShareRequest.value = value
     }
 
     private val _isShareRequestClick = MutableLiveData<Boolean>(false)
-    var isShareRequestClick : LiveData<Boolean> = _isShareRequestClick
+    var isShareRequestClick: LiveData<Boolean> = _isShareRequestClick
 
     fun setIsShareRequestClick(value: Boolean) {
         _isShareRequestClick.value = value
@@ -77,15 +70,6 @@ class MainViewModel(private val shareRequestRepository: ShareRequestRepository) 
                 it.printStackTrace()
                 Log.d("groupData-server", "fail${it.message}")
             }
-    }
-
-
-    fun setCanAddPill(canAddPill: Boolean) {
-        _canAddPill.value = canAddPill
-    }
-
-    fun setPillCount(pillCount: Int) {
-        _pillCount.value = pillCount
     }
 
     fun setNavigateData(navigateData: PillAddNavigateData) {

@@ -34,15 +34,17 @@ class PillAddFinishFragment :
 
     private fun navigateToPillAdd() {
         binding.clAddNewPill.setOnClickListener {
-            val intent = Intent(requireContext(), PillAddFormFragment::class.java)
-            startActivity(intent)
+//            val intent = Intent(requireContext(), PillAddFormFragment::class.java)
+//            startActivity(intent)
+            (requireActivity() as PillAddActivity).replacePillAddFormFragment()
         }
     }
 
     private fun navigateToHome() {
         binding.tvFinish.setOnClickListener {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(requireContext(), MainActivity::class.java)
+//            startActivity(intent)
+            requireActivity().finish()
         }
     }
 }

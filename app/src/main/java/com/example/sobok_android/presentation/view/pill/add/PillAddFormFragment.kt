@@ -164,8 +164,7 @@ class PillAddFormFragment :
 
     private fun navigateToHome() {
         binding.ivCancel.setOnClickListener {
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
+            requireActivity().finish()
         }
     }
 

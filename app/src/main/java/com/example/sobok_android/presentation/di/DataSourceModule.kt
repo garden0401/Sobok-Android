@@ -11,15 +11,9 @@ import com.example.sobok_android.data.datasource.share.request.ShareRequestRemot
 import org.koin.dsl.module
 
 val dataSourceModule = module {
-<<<<<<< HEAD
 
-    single<NoticeDataSource> {
-        NoticeRemoteDataSource(get())
-    }
-    single<PillAddDataSource> { PillAddLocalDataSource() }
-=======
+    single<NoticeDataSource> { NoticeRemoteDataSource(get()) }
     single<PillAddDataSource> { PillAddRemoteDataSource(get()) }
->>>>>>> 24-pill-add-one-page
     single<ShareRequestDataSource> { ShareRequestRemoteDataSource(get()) }
     single<CalendarDataSource> { CalendarRemoteDataSource(get()) }
 }
