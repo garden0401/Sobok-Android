@@ -1,19 +1,31 @@
 package com.example.sobok_android.presentation.view
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.PopupMenu
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.sobok_android.R
+import com.example.sobok_android.data.sharedpref.SobokSharedPreference
 import com.example.sobok_android.databinding.ActivityMainBinding
+import com.example.sobok_android.domain.model.share.request.SearchResultData
 import com.example.sobok_android.presentation.base.BindingActivity
+import com.example.sobok_android.presentation.view.home.HomeFragment
 import com.example.sobok_android.presentation.view.pill.add.PillAddBottomSheetFragment
 import com.example.sobok_android.presentation.view.home.HomeStickerBottomSheetAdapter
 import com.example.sobok_android.presentation.view.home.HomeStickerBottomSheetFragment
+import com.example.sobok_android.presentation.view.notice.NoticeFragment
+import com.example.sobok_android.presentation.view.share.ShareFragment
+import com.example.sobok_android.presentation.view.share.request.ShareRequestActivity
 import com.example.sobok_android.presentation.view.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,10 +39,16 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getGroupData()
         initHomeStickerBottomSheet()
         setNavigation()
-        navigateToPillAdd()
         observeIsStickerClickEvent()
+        observeIsShareRequest()
+        observeIsShareRequestClick()
+    }
+
+    private fun getGroupData() {
+        mainViewModel.getGroupData()
     }
 
     private fun initHomeStickerBottomSheet() {
@@ -41,18 +59,32 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     private fun setNavigation() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fcv_main) as NavHostFragment
-        val navController = navHostFragment.findNavController()
-        binding.bnvMain.setupWithNavController(navController)
+        binding.bnvMain.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.homeFragment -> {
+                    mainViewModel.setIsHome(true)
+                    changeFragment(HomeFragment())
+                }
+                R.id.shareFragment -> {
+                    mainViewModel.setIsHome(false)
+                    changeFragment(ShareFragment())
+                }
+                R.id.noticeFragment -> {
+                    changeFragment(NoticeFragment())
+                }
+                else -> {
+                    val pillAddBottomSheetFragment = PillAddBottomSheetFragment()
+                    pillAddBottomSheetFragment.show(supportFragmentManager, pillAddBottomSheetFragment.tag)
+                }
+            }
+            true
+        }
+
+        binding.bnvMain.selectedItemId = R.id.homeFragment
     }
 
-    private fun navigateToPillAdd() {
-        val bottomSheet = PillAddBottomSheetFragment()
-
-        binding.button.setOnClickListener {
-            bottomSheet.show(supportFragmentManager, bottomSheet.tag)
-        }
+    private fun changeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.fcv_main, fragment).commit()
     }
 
     private fun observeIsStickerClickEvent() {
@@ -63,32 +95,39 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
             }
         }
-
-
     }
 
-//    // 약 리스트 수정 클릭시 팝업(임시로 홈프래그먼트에 띄워보기)
-//    private fun initSetPopup() {
-//        var popup = PopupMenu(this, findViewById(R.id.iv_home_pill_list_edit))
-//        menuInflater?.inflate(R.menu.popup_home_pill_list_edit, popup.menu)
-//
-//        popup.setOnMenuItemClickListener {
-//            when (it?.itemId) {
-//                R.id.pill_edit -> {
-//                    // 다이얼로그
-//                    return@setOnMenuItemClickListener true
-//                }
-//                R.id.pill_delete -> {
-//                    return@setOnMenuItemClickListener true
-//                }
-//                R.id.pill_stop -> {
-//                    return@setOnMenuItemClickListener true
-//
-//                }
-//            }
-//            return@setOnMenuItemClickListener false
-//        }
-//        popup.show()
-//    }
+    private fun observeIsShareRequest() {
+        mainViewModel.isShareRequest.observe(this) {
+
+        }
+    }
+
+    private val shareRequestActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if(it.resultCode == RESULT_OK) {
+            //TODO : 팝업
+            if(mainViewModel.isShareRequest.value == true) {
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("캘린더 공유 요청을 보냈어요!")
+                        .setMessage(
+                            "상대방이 요청을 수락하면,\n" +
+                                    "상대방의 캘린더를 볼 수 있어요"
+                        )
+                        .setNegativeButton("확인") { dialog, id ->
+                        }
+                    builder.show()
+            }
+        }
+    }
+
+    private fun observeIsShareRequestClick() {
+        mainViewModel.isShareRequestClick.observe(this) {
+            if(it) {
+                shareRequestActivityLauncher.launch(Intent(this, ShareRequestActivity::class.java))
+            }
+        }
+    }
 
 }

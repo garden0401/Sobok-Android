@@ -14,6 +14,7 @@ import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentShareRequestSaveBinding
 import com.example.sobok_android.presentation.base.BindingFragment
 import com.example.sobok_android.presentation.view.share.request.viewmodel.ShareRequestViewModel
+import com.example.sobok_android.presentation.view.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.regex.Pattern
 
@@ -21,11 +22,13 @@ import java.util.regex.Pattern
 class ShareRequestSaveFragment :
     BindingFragment<FragmentShareRequestSaveBinding>(R.layout.fragment_share_request_save) {
     private val shareRequestViewModel: ShareRequestViewModel by sharedViewModel()
+    private val mainViewModel: MainViewModel by sharedViewModel()
     private lateinit var onBackPressedCallback: OnBackPressedCallback
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //TODO: 2022-01-19 editText 터치 영역 수정
+        setIsShareRequest()
         setIsShareRequestSearch()
         initNickName()
         setEtShareRequestSaveTextChangedListener()
@@ -34,6 +37,10 @@ class ShareRequestSaveFragment :
         setDeleteClickListener()
         setEtShareRequestSaveClearFocus()
         setEtShareRequestOnFocusChangeListener()
+    }
+
+    private fun setIsShareRequest() {
+        mainViewModel.setIsShareRequest(false)
     }
 
     override fun onAttach(context: Context) {
@@ -69,18 +76,8 @@ class ShareRequestSaveFragment :
                 hideKeyBoard()
                 shareRequestViewModel.setUserName(binding.etShareRequestSave.text.toString())
                 postShareRequest()
-                //TODO:2022-01-19 액티비티 종료
-                //requireActivity().finish()
                 //TODO:2022-01-19 이미 공유된 아이디인 경우 뷰가 없음 [질문]
-                val builder = AlertDialog.Builder(requireContext())
-                builder.setTitle("캘린더 공유 요청을 보냈어요!")
-                    .setMessage(
-                        "상대방이 요청을 수락하면,\n" +
-                                "상대방의 캘린더를 볼 수 있어요"
-                    )
-                    .setNegativeButton("확인") { dialog, id ->
-                    }
-                builder.show()
+                mainViewModel.setIsShareRequest(true)
                 return@setOnKeyListener true
             }
             return@setOnKeyListener false
