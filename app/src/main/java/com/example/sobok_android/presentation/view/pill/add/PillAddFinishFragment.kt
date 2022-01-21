@@ -1,6 +1,7 @@
 package com.example.sobok_android.presentation.view.pill.add
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import com.example.sobok_android.R
@@ -11,19 +12,47 @@ import com.example.sobok_android.presentation.view.pill.add.adapter.PillListAdap
 import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.absoluteValue
 
 class PillAddFinishFragment :
     BindingFragment<FragmentPillAddFinishBinding>(R.layout.fragment_pill_add_finish) {
     private val pillAddViewModel: PillAddViewModel by sharedViewModel()
     private lateinit var pillListAdapter: PillListAdapter
+    private var pillListCount: Int = 0
+    private var pillCount: Int = 0
+    private var possibleCount: Int = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initPillListAdapter()
-        //getPillList()
-        //observePillList()
         navigateToPillAdd()
         navigateToHome()
+
+        // list item 을 가져와서
+        // pillCount - listCount > 0
+        pillListCount = pillListAdapter.itemCount
+        pillCount = pillAddViewModel.pillCount
+        possibleCount = pillCount - pillListCount
+        if(possibleCount > 0) {
+            binding.tvAddPillCountMsg.visibility = View.VISIBLE
+            binding.tvAddPillCountOverMsg.visibility = View.GONE
+            binding.tvAddPillCountMsg.text = "${possibleCount}개 더 추가할 수 있어요"
+        }
+        else if(possibleCount == 0) {
+            binding.clAddNewPill.visibility = View.GONE
+            binding.tvAddPillCountMsg.visibility = View.VISIBLE
+            binding.tvAddPillCountOverMsg.visibility = View.GONE
+            binding.tvAddPillCountMsg.text = "${possibleCount}개 더 추가할 수 있어요"
+        }
+        else{
+            binding.clAddNewPill.visibility = View.GONE
+            binding.tvAddPillCountMsg.visibility = View.GONE
+            binding.tvAddPillCountOverMsg.visibility = View.VISIBLE
+            binding.tvAddPillCountOverMsg.text = "저장 가능한 약 개수가 ${possibleCount.absoluteValue}개 초과되었어요"
+            binding.tvFinish.setBackgroundColor(Color.parseColor("#e3e8eb"))
+            binding.tvFinish.setTextColor(Color.parseColor("#a1a9ae"))
+            binding.tvFinish.isClickable = false
+        }
     }
 
     private fun initPillListAdapter() {
