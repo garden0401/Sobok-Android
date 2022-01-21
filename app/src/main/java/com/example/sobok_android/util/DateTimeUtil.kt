@@ -1,9 +1,6 @@
 package com.example.sobok_android.util
 
-import android.util.Log
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -66,6 +63,21 @@ object DateTimeUtil {
         return listOf(
 
         )
+    }
+
+    fun convertPillListStringToKoreaTime(time: String) : String {
+        var hour = time.substring(0, 2).toInt()
+        var preHour: String = ""
+            when(hour < 12) {
+                true -> {
+                    preHour = "오전 "
+                }
+                else -> {
+                    preHour = "오후 "
+                    hour -= 12
+                }
+            }
+        return preHour + hour + time.substring(2,5)
     }
 
 }
