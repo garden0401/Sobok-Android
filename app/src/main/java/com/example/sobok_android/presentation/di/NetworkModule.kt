@@ -1,5 +1,6 @@
 package com.example.sobok_android.presentation.di
 
+import com.example.sobok_android.data.api.NoticeService
 import com.example.sobok_android.data.api.CalendarService
 import com.example.sobok_android.data.api.ShareService
 import com.google.gson.Gson
@@ -36,6 +37,9 @@ val netWorkModule = module {
     }
     single<ShareService> {
         get<Retrofit>().create(ShareService::class.java)
+    }
+    single<NoticeService> {
+        get<Retrofit>().create(NoticeService::class.java)
     }
     single<CalendarService> {
         get<Retrofit>().create(CalendarService::class.java)

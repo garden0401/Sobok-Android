@@ -76,4 +76,12 @@
     <string name="share_empty_msg_title">소중한 사람을 추가해 보세요!</string>
     <string name="share_empty_msg_content">소중한 사람에게 캘린더 공유를 요청하면\n상대방의 복약 기록을 확인하고,\n응원을 보낼 수 있어요</string>
     <string name="share_request_add">추가하기</string>
+
+    <!-- Notice Button Text  -->
+    <string name="accept">수락</string>
+    <string name="reject">거절</string>
+    <string name="confirm">확인</string>
+
+    <string name="notice_title">소중한 %s님의 알림</string>
+
 </resources>
