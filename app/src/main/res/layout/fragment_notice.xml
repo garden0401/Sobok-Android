@@ -7,12 +7,16 @@
     <data>
         <import type="android.view.View"/>
         <variable
-            name="receiverId"
-            type="Integer" />
+            name="receiverName"
+            type="com.example.sobok_android.presentation.view.notice.model.NoticeInfoData" />
 
         <variable
             name="isEmpty"
             type="Boolean" />
+
+        <variable
+            name="noticeInfo"
+            type="com.example.sobok_android.presentation.view.notice.model.NoticeInfoData" />
 
     </data>
 
@@ -52,11 +56,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_empty_notice"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_notice_title"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:visibility="@{isEmpty ? View.VISIBLE : View.INVISIBLE}">
 
             <ImageView
@@ -66,8 +71,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="143dp"
                 android:src="@drawable/ic_illust_oops"/>
 
             <TextView
@@ -82,8 +85,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="20dp"/>
-
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

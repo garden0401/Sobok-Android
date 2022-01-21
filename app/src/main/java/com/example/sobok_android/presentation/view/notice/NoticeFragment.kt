@@ -63,9 +63,14 @@ class NoticeFragment : BindingFragment<FragmentNoticeBinding>(R.layout.fragment_
             })
             noticeInfoList.sortBy { it.createdAt }
             Log.d("확인", "haha$noticeInfoList")
+
+            if(noticeInfoList.isEmpty()){
+                binding.isEmpty = true
+            } else false
+
+
             noticeListAdapter.noticeList = noticeInfoList
-//            var alist = it.data.calendarInfo + it.data.pillInfo
-//            alist.sortedBy {it }
+
         }
     }
 

@@ -3,10 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View"/>
         <variable
             name="noticeInfoData"
             type="com.example.sobok_android.presentation.view.notice.model.NoticeInfoData" />
 
+        <variable
+            name="isButtonClick"
+            type="Boolean" />
+
+        <variable
+            name="stateMessage"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +28,8 @@
             android:id="@+id/iv_notice_list_state_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:isCalendar="@{noticeInfoData.isCalendar}"
+            app:isButtonClick="@{isButtonClick}"
             android:src="@{noticeInfoData.isCalendar ? @drawable/ic_calendar_alarm_mint : @drawable/ic_fill_alarm_mint }"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +43,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:textSize="15sp"
             android:textColor="@color/gray900_sub"
-            android:text="@{noticeInfoData.senderName}"
+            android:text="@{stateMessage}"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="22dp"
             app:layout_constraintStart_toEndOf="@id/iv_notice_list_state_img"
@@ -45,7 +56,7 @@
             android:fontFamily="@font/pretendard_medium"
             android:textSize="12sp"
             android:textColor="@color/gray500_sub"
-            android:text="오후 12:35"
+            android:text="@{noticeInfoData.createdAt}"
             app:layout_constraintTop_toBottomOf="@id/tv_notice_list_state_msg"
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toEndOf="@id/iv_notice_list_state_img"
@@ -57,7 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_notice_btn_reject"
-            android:text="거절"
+            android:text="@string/reject"
             android:textColor="#00abb6"
             android:textSize="16sp"
             android:fontFamily="@font/pretendard_semi_bold"
@@ -65,7 +76,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_notice_accept"
             android:layout_marginTop="13dp"
-            android:layout_marginStart="18dp" />
+            android:layout_marginStart="18dp"
+            android:visibility="@{isButtonClick ? View.GONE : View.VISIBLE}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_notice_accept"
@@ -73,7 +85,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_notice_btn_accept"
-            android:text="수락"
+            android:text="@{noticeInfoData.isCalendar ? @string/accept : @string/confirm}"
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:fontFamily="@font/pretendard_semi_bold"
@@ -82,7 +94,8 @@
             android:layout_marginTop="13dp"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="18dp" />
+            android:layout_marginEnd="18dp"
+            android:visibility="@{isButtonClick ? View.GONE : View.VISIBLE}"/>
 
         <View
             android:layout_width="0dp"
