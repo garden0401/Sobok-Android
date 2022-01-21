@@ -17,8 +17,6 @@
             android:name=".presentation.view.pill.add.PillAddActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.view.pill.add.PillAddFinishFragment"
-            android:exported="true" />
             android:name=".presentation.view.user.SignUpWelcomeActivity"
             android:exported="false" />
         <activity
@@ -39,9 +37,6 @@
         <activity
             android:name=".presentation.view.pill.add.PillAddCalendarActivity"
             android:exported="false" />
-        <activity
-            android:name=".presentation.view.pill.add.PillAddFormFragment"
-            android:exported="true" />
         <activity
             android:name=".presentation.view.share.ShareNameEditActivity"
             android:exported="false" />
