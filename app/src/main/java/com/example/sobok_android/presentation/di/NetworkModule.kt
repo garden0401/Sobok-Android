@@ -2,12 +2,14 @@ package com.example.sobok_android.presentation.di
 
 import com.example.sobok_android.data.api.NoticeService
 import com.example.sobok_android.data.api.CalendarService
+import com.example.sobok_android.data.api.PillAddService
 import com.example.sobok_android.data.api.ShareService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import com.example.sobok_android.data.api.LoginService
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -44,5 +46,11 @@ val netWorkModule = module {
     single<CalendarService> {
         get<Retrofit>().create(CalendarService::class.java)
     }
+    single<PillAddService> {
+        get<Retrofit>().create(PillAddService::class.java)
+    }
 
+    single<LoginService> {
+        get<Retrofit>().create(LoginService::class.java)
+    }
 }

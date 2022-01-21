@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.view.user.SignUpNickNameActivity">
+
+
+        <ImageView
+            android:id="@+id/iv_back_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_48"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_sign_up_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원가입"
+            android:fontFamily="@font/pretendard_regular"
+            android:textColor="@color/gray900_sub"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:id="@+id/tv_sign_up_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="소복소복에서 사용할\n닉네임을 입력해 주세요"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/gray800_sub"
+            android:textSize="23sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_sign_up_title"
+            android:layout_marginTop="38dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="20dp"/>
+
+        //이메일
+        <TextView
+            android:id="@+id/tv_sign_up_nick_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="닉네임"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:textColor="@color/gray800_sub"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_sign_up_guide"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"/>
+
+        <EditText
+            android:id="@+id/et_sign_up_nick"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_sign_edit"
+            android:hint="소보기"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/gray900_sub"
+            android:fontFamily="@font/pretendard_medium"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_sign_up_nick_title"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="14dp" />
+
+        <ImageView
+            android:id="@+id/iv_text_close_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_text_close_48"
+            app:layout_constraintTop_toTopOf="@id/et_sign_up_nick"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_double_check"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="중복확인"-->
+<!--            android:fontFamily="@font/pretendard_semi_bold"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textColor="@color/dark_mint_main"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/et_sign_up_nick"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginEnd="30dp"/>-->
+
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="@color/dark_mint_main"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_double_check"-->
+<!--            android:layout_marginTop="1dp"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/tv_double_check"-->
+<!--            app:layout_constraintStart_toStartOf="@id/tv_double_check"/>-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sign_up_finish"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="회원가입"
+            android:background="@drawable/rectangle_sign_btn_green"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:textColor="@color/white_sub"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

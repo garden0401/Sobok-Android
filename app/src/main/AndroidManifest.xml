@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sobok_android">
+    package="com.example.sobok_android" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".presentation.di.SobokApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_main"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SobokAndroid"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.view.pill.add.PillAddFinishActivity"
-            android:exported="true" />
+            android:name=".presentation.view.pill.add.PillAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.user.SignUpWelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.user.SignUpNickNameActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.view.pill.add.PillAddRejectActivity"
             android:exported="false" />
@@ -32,9 +38,6 @@
             android:name=".presentation.view.pill.add.PillAddCalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.view.pill.add.PillAddActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.view.share.ShareNameEditActivity"
             android:exported="false" />
         <activity
@@ -45,9 +48,6 @@
             android:exported="false" />
         <activity
             android:name=".presentation.view.splash.SplashActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,6 +55,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.view.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

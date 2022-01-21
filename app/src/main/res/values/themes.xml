@@ -15,12 +15,18 @@
         <item name="android:includeFontPadding">false</item>
         <!-- Pill Add Bottom Sheet -->
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+        <item name="android:timePickerStyle">@style/MyTimePickerTheme</item>
     </style>
 
+    <style name="PillAddCycle">
+        <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+    </style>
 
     <style name="PillAddTitle" parent="@style/TextAppearance.AppCompat">
         <item name="android:textColor">@color/gray800_sub</item>
         <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+
     </style>
 
     <!-- Pill Add Bottom Sheet -->
@@ -99,5 +105,10 @@
         <item name="android:textColor">@color/white_sub</item>
         <item name="android:fontFamily">@font/pretendard_extra_bold</item>
         <item name="android:textSize">17sp</item>
+    </style>
+
+    <!-- Tiem Picker-->
+    <style name="MyTimePickerTheme" parent="android:Widget.Material.Light.TimePicker">
+        <item name="android:timePickerMode">spinner</item>
     </style>
 </resources>
