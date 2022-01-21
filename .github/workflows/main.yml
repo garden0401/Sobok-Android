@@ -34,8 +34,8 @@ jobs:
       with:
         slack_token: ${{ secrets.SLACK_READ_WRITE_TOKEN }}
         channels: ${{ secrets.SLACK_CHANNEL_DEPLOY }}
-        file_path: 'app/build/outputs/apk/debug/app-debug.apk'
-        file_name: 'SobokSobok.apk'
+        file_path: 'app/build/outputs/apk/realease/app-release-unsigned.apk'
+        file_name: 'app-release-unsigned.apk'
         file_type: 'apk'
         initial_comment: 'SobokSobok APK가 왔어요'
 
