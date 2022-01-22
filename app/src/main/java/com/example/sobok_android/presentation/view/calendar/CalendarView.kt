@@ -2,7 +2,6 @@ package com.example.sobok_android.presentation.view.calendar
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,11 +17,9 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.LayoutCalendarTopBinding
-import com.example.sobok_android.domain.model.calendar.CalendarData
 import com.example.sobok_android.presentation.view.calendar.adapter.CalendarMonthViewPagerAdapter
 import com.example.sobok_android.presentation.view.calendar.adapter.CalendarMonthViewPagerAdapter.Companion.MAX_ITEM_COUNT
 import com.example.sobok_android.presentation.view.calendar.adapter.CalendarWeekViewPagerAdapter
-import com.example.sobok_android.util.DateTimeUtil
 import com.example.sobok_android.util.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,17 +31,21 @@ class CalendarView(
     context: Context, attrs: AttributeSet? = null
 ) : LinearLayout(context, attrs) {
 
+    var testDate = MutableLiveData<String>()
+
+    fun setPostTestDate(value: String) {
+        testDate.value = value
+    }
 
     private val _sendDate = MutableLiveData<Calendar>()
     val sendDate: LiveData<Calendar>
         get() = _sendDate
 
     //이게 뭐지?
-    private fun setAdapterData(data : CalendarDayListData) {
-        if(_isMonth.value!!) {
-            Log.d("month가 true-> mothViewPagerAdpater로", "${data}")
+    private fun setAdapterData(data: CalendarDayListData) {
+        if (_isMonth.value!!) {
             calendarMonthViewPagerAdapter.setCompleteDateList(data)
-        }else {
+        } else {
             //calendarWeekViewPagerAdapter.setCompleteDateList(data)
         }
     }
@@ -65,7 +66,7 @@ class CalendarView(
     }
 
     var sendCalendar = MutableLiveData<Calendar>()
-    private var sendCalendarGetter : ((Calendar) -> Unit)? = null
+    private var sendCalendarGetter: ((Calendar) -> Unit)? = null
     fun setSendCalendar(value: (Calendar) -> Unit) {
         sendCalendarGetter = value
     }
@@ -110,27 +111,29 @@ class CalendarView(
             }
 
             _isMonth.observe(fragmentViewLifecycleOwner) {
-                when(it) {
+                when (it) {
                     true -> {
                         adapter = calendarMonthViewPagerAdapter
-                        Log.d("point/CalendarView-monthAdapter", "연결")
                         calendarMonthViewPagerAdapter.setPostSelectData {
                             _selectDate.postValue(it)
 
                         }
-                        //calendarMonthViewPagerAdapter
                         calendarMonthViewPagerAdapter.setSendDateGetter {
-                            Log.d("sleepy///Month에서 넘어온 sendDate!!! -> 이게 observe로 감", "${it.time}")
                             _sendDate.postValue(it)
                         }
                         calendarMonthViewPagerAdapter.setPostSendCalendar {
                             sendCalendar.value = it
                         }
+
+                        calendarMonthViewPagerAdapter.setPostTestDate {
+                            testDate.value = it
+                        }
+
                         calendarMonthViewPagerAdapter.setCurrentPostion(FIRST_POSITION)
                         setCurrentItem(FIRST_POSITION, false)
-                    }else -> {
+                    }
+                    else -> {
                         adapter = calendarWeekViewPagerAdapter
-                        Log.d("point/CalendarView-weekAdapter", "연결")
                         calendarWeekViewPagerAdapter.setPostSelectData {
                             _selectDate.postValue(it)
                         }
@@ -147,14 +150,16 @@ class CalendarView(
         super.onAttachedToWindow()
         lazyPagerAddJob = scope.launch {
             _isMonth.observe(fragmentViewLifecycleOwner) {
-                when(it) {
+                when (it) {
                     true -> {
-                        calendarMonthViewPagerAdapter = CalendarMonthViewPagerAdapter(fragmentViewLifecycleOwner)
+                        calendarMonthViewPagerAdapter =
+                            CalendarMonthViewPagerAdapter(fragmentViewLifecycleOwner)
                         calendarMonthViewPagerAdapter.setIsMonth(_isMonth.value ?: true)
 
                     }
                     else -> {
-                        calendarWeekViewPagerAdapter = CalendarWeekViewPagerAdapter(fragmentViewLifecycleOwner)
+                        calendarWeekViewPagerAdapter =
+                            CalendarWeekViewPagerAdapter(fragmentViewLifecycleOwner)
                         calendarWeekViewPagerAdapter.setIsMonth(_isMonth.value ?: true)
                     }
                 }
@@ -164,7 +169,6 @@ class CalendarView(
                 object : OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
                         super.onPageSelected(position)
-                        Log.d("onpageSelected", "${position}")
                         //calendarMonthViewPagerAdapter.notifyItemChanged(position)
                         calendarMonthViewPagerAdapter.setCurrentPostion(position)
                     }
@@ -172,9 +176,7 @@ class CalendarView(
             )
             TransitionManager.beginDelayedTransition(this@CalendarView)
             addView(calendarViewPager)
-            Log.d("currentItem!!!!!!!!!!1", "${calendarViewPager.currentItem}")
             completeDateList.observe(fragmentViewLifecycleOwner) {
-                Log.d("want/calendarView-completeDateList", "${it}")
                 setAdapterData(it)
             }
         }

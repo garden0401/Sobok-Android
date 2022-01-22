@@ -35,6 +35,7 @@ class ShareFragment : BindingFragment<FragmentShareBinding>(R.layout.fragment_sh
             Log.d("GroupData-", "${it.size}")
             with(binding) {
                 if (it.isNotEmpty()) {
+                    //TODO: member이름 한글자인 경우도 가능하도록 수정
                     tvMemberOne.text = it[0].memberName.substring(0, 2)
                     tvMemberOne.isSelected = true
                     mainViewModel.setSelectedMemberName(tvMemberOne.text.toString())
