@@ -78,21 +78,47 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/tv_add_pill_count_msg"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_pill_count_msg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="11dp"
-                        android:background="@drawable/rectangle_fill_lightmint_radius8dp"
-                        android:fontFamily="@font/pretendard_medium"
-                        android:padding="6dp"
-                        android:text="@string/pill_count_msg"
-                        android:textAlignment="center"
-                        android:textColor="@color/dark_mint_main"
-                        android:textSize="15sp"
-
                         app:layout_constraintStart_toStartOf="@+id/tv_person_take_pill"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_person_take_pill" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_person_take_pill">
+
+                        <TextView
+                            android:id="@+id/tv_add_pill_count_msg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="11dp"
+                            android:background="@drawable/rectangle_fill_lightmint_radius8dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:padding="6dp"
+                            android:text="@string/pill_count_msg"
+                            android:textAlignment="center"
+                            android:textColor="@color/dark_mint_main"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_add_pill_count_over_msg"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="11dp"
+                            android:background="@drawable/rectangle_fill_lightred_radius8dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:padding="6dp"
+                            android:text="@string/pill_count_msg"
+                            android:textAlignment="center"
+                            android:textColor="#ff5c5c"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rcv_pill_list"
@@ -101,9 +127,9 @@
                         android:layout_marginTop="11dp"
                         android:nestedScrollingEnabled="false"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintEnd_toEndOf="@+id/tv_add_pill_count_msg"
-                        app:layout_constraintStart_toStartOf="@+id/tv_add_pill_count_msg"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_add_pill_count_msg"
+                        app:layout_constraintEnd_toEndOf="@+id/cl_pill_count_msg"
+                        app:layout_constraintStart_toStartOf="@+id/cl_pill_count_msg"
+                        app:layout_constraintTop_toBottomOf="@+id/cl_pill_count_msg"
                         tools:itemCount="3"
                         tools:listitem="@layout/item_pill_add_pill_info" />
 

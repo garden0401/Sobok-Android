@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ItemPillAddPillInfoBinding
 import com.example.sobok_android.domain.model.pill.pilladd.PillListData
+import com.example.sobok_android.presentation.di.viewModelModule
 import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
 
 class PillListAdapter : RecyclerView.Adapter<PillListAdapter.PillListViewHolder>() {
@@ -28,6 +29,11 @@ class PillListAdapter : RecyclerView.Adapter<PillListAdapter.PillListViewHolder>
     // 받은 listener 함수를 위에 형식만 만든 함수에 할당해야함.
     fun setDeletePillItemListener(listener : ((Int) -> Unit)) {
         deletePillItemListener = listener
+    }
+
+    private var pillListCountListner : ((Int) -> Unit)? = null
+    fun setPillListCountListerner (listener: ((Int) -> Unit)) {
+        pillListCountListner = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
@@ -54,7 +60,12 @@ class PillListAdapter : RecyclerView.Adapter<PillListAdapter.PillListViewHolder>
             binding.pillInfo = data
 
             binding.ivClose.setOnClickListener {
-                deletePillItemListener?.invoke(position)
+                pillList.removeAt(position)
+                // 고차함수 호출할 곳
+                pillListCountListner?.invoke(itemCount)
+                notifyDataSetChanged()
+
+                //deletePillItemListener?.invoke(position)
             }
         }
     }
