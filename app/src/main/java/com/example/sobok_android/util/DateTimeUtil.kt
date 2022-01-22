@@ -83,12 +83,17 @@ object DateTimeUtil {
         return preHour + hour + time.substring(2,5)
     }
 
+
     fun convertToPillAddFinishDate(str: String) : String {
         return pillAddFinishFormat.format(testFormat.parse(str)!!).toString()
     }
 
     fun convertToPillAddFinishTime(str: String) : String {
         return pillAddFinishFormat.format(hourFormat.parse(str)!!).toString()
+
+    fun getToday() : String {
+        return simpleDashDateFormat.format(Calendar.getInstance(Locale.KOREA).time)
+
     }
 
 }

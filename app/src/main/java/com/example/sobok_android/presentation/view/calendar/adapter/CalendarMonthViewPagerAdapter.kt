@@ -1,6 +1,5 @@
 package com.example.sobok_android.presentation.view.calendar.adapter
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -13,6 +12,13 @@ import java.util.*
 class CalendarMonthViewPagerAdapter(
     private val lifecycleOwner: LifecycleOwner
 ) : RecyclerView.Adapter<CalendarMonthViewPagerAdapter.CalendarViewHolder>() {
+
+    private var postTestDate: ((String) -> Unit)? = null
+
+    fun setPostTestDate(listener: (String) -> Unit) {
+        postTestDate = listener
+    }
+
 
     private var postSelectDate: ((String) -> Unit)? = null
 
@@ -51,7 +57,6 @@ class CalendarMonthViewPagerAdapter(
     var currentPosition: Int = 5
 
     fun setCurrentPostion(value: Int) {
-        Log.d("currentPostion-setting", "$${value}")
         isSetPosition = true
         currentPosition = value
         notifyItemChanged(currentPosition)  // ?????????
@@ -74,8 +79,6 @@ class CalendarMonthViewPagerAdapter(
         holder: CalendarViewHolder,
         position: Int
     ) {
-        Log.d("check/position", "${position}")
-        //holder.setIsRecyclable(false)
         holder.bind(position)
     }
 
@@ -94,7 +97,6 @@ class CalendarMonthViewPagerAdapter(
                 isSetPosition = false
 
                 completeDateList.observe(lifecycleOwner) {
-                    Log.d("MonthVpAdpater에서 completeList-> dateRecyclerView로 보냄", "${it}")
                     this.setCompleteDateList(
                         completeDateList.value?.dayInfoList ?: listOf(),
                         start = completeDateList.value?.start ?: 0,
@@ -103,8 +105,13 @@ class CalendarMonthViewPagerAdapter(
                 }
 
                 setPostSelectData {
-                    postSelectDate?.invoke(it)
-                    Log.d("please/CalendarViewPagerAdpater", "$it")
+                    if (position == currentPosition) {
+                        postSelectDate?.invoke(it)
+                    }
+                }
+
+                setPostTestDate {
+                    postTestDate?.invoke(it)
                 }
             }
 

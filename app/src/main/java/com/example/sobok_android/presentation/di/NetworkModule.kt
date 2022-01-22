@@ -1,15 +1,10 @@
 package com.example.sobok_android.presentation.di
 
-import com.example.sobok_android.data.api.NoticeService
-import com.example.sobok_android.data.api.CalendarService
-import com.example.sobok_android.data.api.PillAddService
-import com.example.sobok_android.data.api.ShareService
-import com.google.gson.Gson
+import com.example.sobok_android.data.api.*
+import com.example.sobok_android.data.sharedpref.SobokSharedPreference
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import com.example.sobok_android.data.api.LoginService
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +17,7 @@ val netWorkModule = module {
                     chain.request().newBuilder()
                         .addHeader(
                             "accesstoken",
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImVtYWlsIjoiZWRAZ21haWwuY29tIiwibmFtZSI6bnVsbCwiaWRGaXJlYmFzZSI6InVOR2llMWxKWDNTREpTQnFSWHhLZUhqMnJhMzMiLCJpYXQiOjE2NDE4ODYzNjUsImV4cCI6MTY0NDQ3ODM2NSwiaXNzIjoid2Vzb3B0In0.K9xOhsd1G3sHAo89LRbLHaPySX8PeOW3kxvbbYaVeNA"
+                            SobokSharedPreference.getUserToken()
                         )
                         .build()
                 )

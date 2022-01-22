@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.sobok_android.domain.model.home.HomePillListData
 import com.example.sobok_android.domain.model.home.PillListData
 import com.example.sobok_android.domain.repository.calendar.CalendarRepository
 import kotlinx.coroutines.launch
@@ -20,7 +19,7 @@ class HomeViewModel(private val calendarRepository: CalendarRepository): ViewMod
         _isEditClick.value = value
     }
 
-    private val _selectedDate = MutableLiveData<String>("2022-01-14")
+    private val _selectedDate = MutableLiveData<String>("2022-01-22")
     var selectedDate : LiveData<String> = _selectedDate
 
     fun setSelectedDate(value: String) {
@@ -35,10 +34,11 @@ class HomeViewModel(private val calendarRepository: CalendarRepository): ViewMod
         runCatching { calendarRepository.getHomePillListData(requireNotNull(_selectedDate.value)) }
             .onSuccess {
                 _homePillList.postValue(it)
-                Log.d("homepillList-server", "${it.data}")
+                Log.d("homepillList-server 성공", "${it.data}")
             }
             .onFailure {
                 it.printStackTrace()
+                Log.d("homepillList-server 실패", "${it}")
             }
     }
 
@@ -53,7 +53,7 @@ class HomeViewModel(private val calendarRepository: CalendarRepository): ViewMod
 
 
     fun getSharePillListData() = viewModelScope.launch { //_memberId.value
-        runCatching { calendarRepository.getSharePillList(requireNotNull(24), requireNotNull(_selectedDate.value)) }
+        runCatching { calendarRepository.getSharePillList(requireNotNull(69), requireNotNull(_selectedDate.value)) }
             .onSuccess {
                 _sharePillList.postValue(it)
                 Log.d("공유-server", "${it.data}")

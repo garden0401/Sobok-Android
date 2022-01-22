@@ -30,8 +30,8 @@ object CalendarMapper {
                             isCheck = it.isCheck,
                             color = it.color,
                             stickerId = it.stickerId.map { PillListData.ScheduleInfo.Schedule.StickerId(
-                                likeScheduleId = -1,
-                                stickerId = it )
+                                likeScheduleId = it.likeScheduleId,
+                                stickerId = it.stickerId )
                             },
                             stickerTotalCount = it.stickerTotalCount,
                             isLikedSchedule = false

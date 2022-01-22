@@ -23,8 +23,10 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
         _selectDate.postValue(value)
     }
 
-    private var _completeDateList = CalendarDayListData(0, 0, listOf())
-    var completeDateList: CalendarDayListData =
+    //LiveData로 변경
+
+    private var _completeDateList = MutableLiveData<CalendarDayListData>(CalendarDayListData(0, 0, listOf()))
+    var completeDateList: LiveData<CalendarDayListData> =
         _completeDateList
         get() = _completeDateList
 
@@ -37,19 +39,16 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
         _isMonth.value = value
     }
 
-    private var _sendDate = MutableLiveData<String>(
-        DateTimeUtil.convertUSDateToDashFormatString(
-            Calendar.getInstance(Locale.KOREA).time
-        )
-    )
-    val sendDate: LiveData<String> = _sendDate
-    fun postSendDate(value: String) {
-        Log.d("서버로 보낼 날짜", "${value}")
+    private var _sendDate = MutableLiveData<Calendar>(Calendar.getInstance(Locale.KOREA))
+
+    // Calendar로 변환
+    val sendDate: LiveData<Calendar> = _sendDate
+    fun postSendDate(value: Calendar) {
         _sendDate.value = value
     }
 
     fun getCalendarList() = viewModelScope.launch {
-        kotlin.runCatching { calendarRepository.getCalendarList(requireNotNull(_sendDate.value)) } //_curMonthFirstDaycalendar를 변환해서 보내기
+        kotlin.runCatching { calendarRepository.getCalendarList(requireNotNull(DateTimeUtil.convertUSDateToDashFormatString(_sendDate.value!!.time))) } //_curMonthFirstDaycalendar를 변환해서 보내기
             .onSuccess {
                 _remoteDateList.postValue(it)
                 Log.d("서버통신", "성공${it}")
@@ -69,23 +68,6 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
     }
 
     private val _curCalendar = MutableLiveData(nowCalendar)
-    val curCalendar: LiveData<Calendar>
-        get() = _curCalendar
-
-    var curMonth: Int = Calendar.getInstance(Locale.KOREA).get(Calendar.MONTH)
-
-    private val _curPageFirstDayCalendar =
-        MutableLiveData<Calendar>(Calendar.getInstance(Locale.KOREA))
-    var curPageFirstDayCalendar: LiveData<Calendar> = _curPageFirstDayCalendar
-        get() = _curPageFirstDayCalendar
-
-    fun postCurPageFirstDayCalendar(value: Calendar) {
-        Log.d("want//postCurPageFirstDay", "${value.time}")
-        _curPageFirstDayCalendar.postValue(value.clone() as Calendar)
-        _curPageFirstDayCalendar.value?.set(Calendar.DAY_OF_MONTH, 1)
-        curMonth = _curPageFirstDayCalendar.value?.get(Calendar.MONTH)!!
-        setDynamicCalendar(_curPageFirstDayCalendar.value!!.clone() as Calendar)
-    }
 
     private var _dynamicCalendar: Calendar = Calendar.getInstance(Locale.KOREA)
 
@@ -93,7 +75,7 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
     private var start: Int = 0
     private var end: Int = 0
 
-    private fun setDynamicCalendar(value: Calendar) {
+    fun setDynamicCalendar(value: Calendar) {
         _dynamicCalendar = value.clone() as Calendar
         end = _dynamicCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         if (_dynamicCalendar.get(Calendar.DAY_OF_WEEK) == 1) {
@@ -108,7 +90,6 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
         }
         end += (start - 1)
         calCulCalendarDateList(_dynamicCalendar)
-
     }
 
     private fun calCulCalendarDateList(dynamicCalendar: Calendar) {
@@ -117,12 +98,12 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
         if (_remoteDateList.value != null) {
             maxIdx = _remoteDateList.value!!.data.size.minus(1)
         } else {
-            maxIdx = 0
+            maxIdx = -1
         }
 
 
         val addDateList = mutableListOf<CalendarDayListData.DayInfo>()
-        val calCulCalendar: Calendar = dynamicCalendar.clone() as Calendar
+        //val calCulCalendar: Calendar = dynamicCalendar.clone() as Calendar
         val count = when (_isMonth.value) {
             true -> 42
             else -> 7
@@ -135,30 +116,28 @@ class CalendarViewModel(private val calendarRepository: CalendarRepository) : Vi
             } else if (it > end) {
 
             } else {
-                if (idx <= maxIdx) {
-                    if (DateTimeUtil.convertDateToDayOfMonth(_remoteDateList.value!!.data[idx].scheduleDate)
-                        == day
-                    ) {
-                        addDateList.add(
-                            CalendarDayListData.DayInfo(
-                                day.toString(),
-                                remoteDateList.value!!.data[idx++].isComplete
+                    if (idx <= maxIdx) {
+                        if (DateTimeUtil.convertDateToDayOfMonth(_remoteDateList.value!!.data[idx].scheduleDate)
+                            == day
+                        ) {
+                            addDateList.add(
+                                CalendarDayListData.DayInfo(
+                                    day.toString(),
+                                    remoteDateList.value!!.data[idx++].isComplete
+                                )
                             )
-                        )
-                        ++day
+                            ++day
+                        } else {
+                            addDateList.add(CalendarDayListData.DayInfo(day.toString(), "none"))
+                            ++day
+                        }
                     } else {
                         addDateList.add(CalendarDayListData.DayInfo(day.toString(), "none"))
                         ++day
                     }
-                } else {
-                    addDateList.add(CalendarDayListData.DayInfo(day.toString(), "none"))
-                    ++day
-                }
             }
         }
-
-        Log.d("계산결과", "${addDateList}")
-        _completeDateList = CalendarDayListData(start, end, addDateList)
+        _completeDateList.value = CalendarDayListData(start, end, addDateList)
     }
 
 }
