@@ -90,6 +90,7 @@ object DateTimeUtil {
 
     fun convertToPillAddFinishTime(str: String) : String {
         return pillAddFinishFormat.format(hourFormat.parse(str)!!).toString()
+    }
 
     fun getToday() : String {
         return simpleDashDateFormat.format(Calendar.getInstance(Locale.KOREA).time)
