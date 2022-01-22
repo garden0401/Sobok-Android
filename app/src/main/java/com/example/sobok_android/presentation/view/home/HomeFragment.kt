@@ -29,7 +29,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         calendarViewModel.getCalendarList()
 
         observeIsHome()
@@ -90,7 +89,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             homePillListAllAdapter.setIsHome(it)
             if (it) {
                 //TODO: UserName 연결
-                binding.userName = "소복"
+                binding.userName = "복이"
                 observeIsEditClickEvent()
                 setTvBtnHomePillListEditClickListener()
                 observeHomePillList()
