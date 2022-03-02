@@ -1,4 +1,4 @@
-package com.example.sobok_android.data.model.response.login.request
+package com.example.sobok_android.data.model.response.login
 
 
 import com.google.gson.annotations.SerializedName

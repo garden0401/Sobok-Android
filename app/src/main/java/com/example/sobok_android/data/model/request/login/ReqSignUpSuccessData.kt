@@ -1,4 +1,4 @@
-package com.example.sobok_android.data.model.request
+package com.example.sobok_android.data.model.request.login
 
 data class ReqSignUpSuccessData(
     val email : String,
