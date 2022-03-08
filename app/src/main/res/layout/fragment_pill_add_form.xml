@@ -60,7 +60,7 @@
                 android:layout_height="0dp"
                 android:overScrollMode="never"
                 android:paddingHorizontal="20dp"
-                app:layout_constraintBottom_toTopOf="@id/btn_save_constraintLayout"
+                app:layout_constraintBottom_toTopOf="@id/cl_btn_next"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -74,183 +74,14 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/tv_pill_person"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="27dp"
-                        android:text="@string/pill_add_pill_person_msg"
-                        android:textAppearance="@style/PillAddTitle"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_pill_person"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/rectangle_border_gray"
-                        app:layout_constraintStart_toStartOf="@+id/tv_pill_person"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_pill_person">
-
-                        <TextView
-                            android:id="@+id/tv_pill_add_name_dialog"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:fontFamily="@font/pretendard_medium"
-                            android:paddingTop="15dp"
-                            android:paddingBottom="14dp"
-                            android:text="@string/pill_add_pill_person_me"
-                            android:textColor="@color/black_sub"
-                            android:textSize="18sp"
-                            app:layout_constraintEnd_toStartOf="@+id/iv_pill_person_more"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/iv_pill_person_more"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginEnd="3dp"
-                            android:layout_marginBottom="3dp"
-                            android:background="@drawable/ic_more_48"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:id="@+id/tv_selected_pill_person"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/pretendard_medium"
-                        android:text="@string/pill_add_selected_pill_person_msg"
-                        android:textColor="@color/gray500_sub"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toStartOf="@+id/cl_pill_person"
-                        app:layout_constraintTop_toBottomOf="@+id/cl_pill_person" />
-
-                    <TextView
-                        android:id="@+id/tv_pill_name_msg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="44dp"
-                        android:text="@string/pill_add_pill_name_msg"
-                        android:textAppearance="@style/PillAddTitle"
-                        app:layout_constraintStart_toStartOf="@+id/tv_selected_pill_person"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_selected_pill_person" />
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcv_pill_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:overScrollMode="never"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintStart_toStartOf="@+id/tv_pill_name_msg"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_pill_name_msg"
-                        tools:itemCount="1"
-                        tools:listitem="@layout/item_pill_add_pill_name" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_add_pill_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/rectangle_fill_gray100_border_gray150"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rcv_pill_name">
-
-                        <TextView
-                            android:id="@+id/tv_add_more_pill"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:fontFamily="@font/pretendard_medium"
-                            android:text="@string/pill_add_more_pill_add"
-                            android:textColor="@color/gray500_sub"
-                            android:textSize="18sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/iv_more_pill"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/iv_more_pill"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginEnd="3dp"
-                            android:layout_marginBottom="3dp"
-                            android:background="@drawable/ic_frame_48"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:id="@+id/tv_pill_date_msg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="44dp"
-                        android:text="@string/pill_add_pill_date_msg"
-                        android:textAppearance="@style/PillAddTitle"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toStartOf="@+id/cl_add_pill_name"
-                        app:layout_constraintTop_toBottomOf="@+id/cl_add_pill_name" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_pill_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/rectangle_border_gray"
-                        app:layout_constraintStart_toStartOf="@+id/tv_pill_date_msg"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_pill_date_msg">
-
-                        <TextView
-                            android:id="@+id/tv_pill_date"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:fontFamily="@font/pretendard_medium"
-                            android:text="@string/pill_add_pill_date"
-                            android:textColor="@color/black_sub"
-                            android:textSize="18sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/iv_pill_date_more"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/iv_pill_date_more"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginEnd="3dp"
-                            android:layout_marginBottom="3dp"
-                            android:background="@drawable/ic_more_48"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
                         android:id="@+id/tv_pill_cycle_msg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="44dp"
+                        android:layout_marginTop="27dp"
                         android:text="@string/pill_add_pill_cycle_msg"
                         android:textAppearance="@style/PillAddTitle"
-                        app:layout_constraintStart_toStartOf="@+id/cl_pill_date"
-                        app:layout_constraintTop_toBottomOf="@+id/cl_pill_date" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_pill_cycle"
@@ -407,7 +238,7 @@
                         android:id="@+id/tv_pill_time_msg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="44dp"
+                        android:layout_marginTop="46dp"
                         android:text="@string/pill_add_pill_time_msg"
                         android:textAppearance="@style/PillAddTitle"
                         app:layout_constraintStart_toStartOf="@+id/cl_pill_cycle"
@@ -450,7 +281,7 @@
             </androidx.core.widget.NestedScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_save_constraintLayout"
+                android:id="@+id/cl_btn_next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white_sub"
@@ -470,7 +301,7 @@
                     android:paddingTop="12dp"
                     android:paddingEnd="24dp"
                     android:paddingBottom="12dp"
-                    android:text="@string/pill_add_finish"
+                    android:text="다음"
                     android:textAlignment="center"
                     android:textColor="@color/white_sub"
                     android:textSize="18sp"
