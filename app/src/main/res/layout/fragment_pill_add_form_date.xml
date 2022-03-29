@@ -46,8 +46,8 @@
             android:id="@+id/tv_pill_date_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="27dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="27dp"
             android:text="언제까지 먹는 약인가요?"
             android:textAppearance="@style/PillAddTitle"
             android:textSize="15sp"
@@ -58,8 +58,8 @@
             android:id="@+id/cl_pill_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/rectangle_border_gray"
             app:layout_constraintStart_toStartOf="@+id/tv_pill_date_msg"
             app:layout_constraintTop_toBottomOf="@+id/tv_pill_date_msg">
@@ -93,6 +93,33 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/cl_pill_date">
+
+            <com.applikeysolutions.cosmocalendar.view.CalendarView
+                android:id="@+id/calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:connectedDayIconPosition="top"
+                app:currentDayIconRes="@drawable/oval_fill_blue"
+                app:currentDaySelectedIconRes="@drawable/oval_fill_blue"
+                app:currentDayTextColor="@color/dark_mint_main"
+                app:firstDayOfTheWeek="monday"
+                app:orientation="horizontal"
+                app:selectedDayBackgroundColor="@color/light_mint"
+                app:selectedDayBackgroundEndColor="@color/light_mint"
+                app:selectedDayBackgroundStartColor="@color/light_mint"
+                app:selectedDayTextColor="@color/black_sub"
+                app:selectionType="range"
+
+                />
+
+        </LinearLayout>
+
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_btn_next"
             android:layout_width="match_parent"
@@ -103,7 +130,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/tv_finish"
+                android:id="@+id/tv_next"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
