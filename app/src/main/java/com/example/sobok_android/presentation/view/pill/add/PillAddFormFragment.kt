@@ -31,7 +31,7 @@ class PillAddFormFragment :
     BindingFragment<FragmentPillAddFormBinding>(R.layout.fragment_pill_add_form) {
 
     private val pillAddViewModel: PillAddViewModel by sharedViewModel()
-    private lateinit var pillNameAdapter: PillNameAdapter
+
     private lateinit var pillTimeAdapter: PillTimeAdapter
     private lateinit var pillListAdapter: PillListAdapter
     private lateinit var pillBottomSheetDialogFragment: PillAddBottomSheetFragment
@@ -67,12 +67,12 @@ class PillAddFormFragment :
         binding.pillCycleMoreConstraintLayout.visibility = View.GONE
         binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE
 
-        initPillNameAdapter()
+        //initPillNameAdapter()
         initPillTimeAdapter()
         initPillListAdapter()
 
-        showDialogPillPerson()
-        addPillPerson()
+        //showDialogPillPerson()
+        //addPillPerson()
 
         cycleEveryday()
         cycleSpecificDay()
@@ -81,23 +81,23 @@ class PillAddFormFragment :
         showDialogSpecificDay()
         showDialogSpecificPeriod()
 
-        showDialogPillDate()
+        //showDialogPillDate()
         showDialogPillTime()
 
         var _isMyPill: Boolean = false
         var _canAddPill: Boolean = true
         val intent = Intent(requireContext(), PillAddFinishFragment::class.java)
 
-        binding.clTop.setOnTouchListener { v, event ->
-            binding.rcvPillName.clearFocus()
-            return@setOnTouchListener false
-        }
 
-        binding.tvFinish.setOnClickListener {
+
+        binding.tvNext.setOnClickListener {
+            /* 약 전송
             fillPillName = (pillNameAdapter.isFillPillName)
+             */
             fillPillCycle = checkFillPillCycle()
-
+            /* 약 전송
             nameList = pillNameAdapter.realPillNameList
+             */
 
             if (fillPillName && fillPillDate && fillPillCycle && pillTimeAdapter.itemCount > 0) {
                 sendStartDate = DateTimeUtil.convertToPillAddFinishDate(sendStartDate)
@@ -123,7 +123,7 @@ class PillAddFormFragment :
 
                 val pillAddActivity= (activity as PillAddActivity)
 
-                pillAddActivity.replacePillAddFinishFragment()
+                pillAddActivity.replacePillAddNameFragment()
 
             } else {
                 Toast.makeText(requireContext(), "약에 대한 정보를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -131,13 +131,15 @@ class PillAddFormFragment :
         }
         navigateToHome()
     }
-
     private fun observeNavigateData() {
         pillAddViewModel.pillAddNavigateData.observe(viewLifecycleOwner) {
+            /*
             if (it.isMyPill) {
                 binding.ivPillPersonMore.visibility = View.GONE
                 binding.clPillPerson.isClickable = false
             }
+
+             */
             if (it.canAddPill) {
                 Log.d("Add Activity1", "${it.canAddPill}")
                 binding.wrapScroll.visibility = View.VISIBLE
@@ -149,11 +151,10 @@ class PillAddFormFragment :
             }
         }
     }
-
     private fun initPillListAdapter() {
         pillListAdapter = PillListAdapter()
     }
-
+/* 이름 fragment
     private fun initPillNameAdapter() {
         pillNameAdapter = PillNameAdapter()
         binding.rcvPillName.adapter = pillNameAdapter
@@ -161,7 +162,7 @@ class PillAddFormFragment :
         val list = mutableListOf<String>("null")
         pillNameAdapter.realPillNameList = list
     }
-
+*/
     private fun initPillTimeAdapter() {
         pillTimeAdapter = PillTimeAdapter()
         binding.rcvPillTime.adapter = pillTimeAdapter
@@ -211,7 +212,7 @@ class PillAddFormFragment :
             ).show()
         }
     }
-
+/* fragment date 기간
     private fun showDialogPillDate() {
         binding.clPillDate.setOnClickListener {
             // 특정간격 피커
@@ -228,7 +229,7 @@ class PillAddFormFragment :
             }
         }
     }
-
+*/
     private fun showDialogSpecificPeriod() {
         binding.pillCycleSpecificMoreConstraintLayout.setOnClickListener {
             val dialog = AlertDialog.Builder(requireContext()).create()
@@ -376,6 +377,20 @@ class PillAddFormFragment :
         }
     }
 
+    private fun cycleEveryday() {
+        binding.tvPillDateEveryday.setOnClickListener {
+            selectPillCycle = 0
+            if (!binding.tvPillDateEveryday.isSelected) {
+                binding.tvPillDateEveryday.isSelected = true // this 전환
+                binding.tvPillDateSpecificDay.isSelected = false // 첫번째 버튼 비활성화
+                binding.tvPillDateSpecificPeriod.isSelected = false // 두번째 버튼 비활성화
+                binding.pillCycleMoreConstraintLayout.visibility = View.GONE
+                binding.pillCycleSpecificMoreConstraintLayout.visibility =
+                    View.GONE // 피커 열린게 있으면 닫기
+            }
+        }
+    }
+/*
     private fun addPillPerson() {
 
         binding.clAddPillName.setOnClickListener {
@@ -386,7 +401,8 @@ class PillAddFormFragment :
             }
         }
     }
-
+*/
+    /* 약 전송 때
     private fun showDialogPillPerson() {
         binding.clPillPerson.setOnClickListener {
             lateinit var dialog: AlertDialog
@@ -402,18 +418,6 @@ class PillAddFormFragment :
             dialog.show()
         }
     }
+*/
 
-    private fun cycleEveryday() {
-        binding.tvPillDateEveryday.setOnClickListener {
-            selectPillCycle = 0
-            if (!binding.tvPillDateEveryday.isSelected) {
-                binding.tvPillDateEveryday.isSelected = true // this 전환
-                binding.tvPillDateSpecificDay.isSelected = false // 첫번째 버튼 비활성화
-                binding.tvPillDateSpecificPeriod.isSelected = false // 두번째 버튼 비활성화
-                binding.pillCycleMoreConstraintLayout.visibility = View.GONE
-                binding.pillCycleSpecificMoreConstraintLayout.visibility =
-                    View.GONE // 피커 열린게 있으면 닫기
-            }
-        }
-    }
 }

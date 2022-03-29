@@ -11,7 +11,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activity_pill_add) {
     private val pillAddViewModel: PillAddViewModel by viewModel()
     private lateinit var pillAddFormFragment: PillAddFormFragment
-    private var pillAddFinishFragment: PillAddFinishFragment = PillAddFinishFragment()
+    private var pillAddFormNameFragment: PillAddFormNameFragment = PillAddFormNameFragment()
+    private var pillAddFormDateFragment: PillAddFormDateFragment = PillAddFormDateFragment()
+
+    //private var pillAddFinishFragment: PillAddFinishFragment = PillAddFinishFragment()
     private var pillAddNavigateData = PillAddNavigateData(false, false, 0)
 
 
@@ -27,28 +30,26 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
                 intent.getBooleanExtra("isMyPill", false),
                 intent.getIntExtra("pillCount", 0)
         ))
-
-        Log.d("Main!!!!!!!!!!!!!!!! 값", "${pillAddViewModel.isMyPill}")
     }
 
     private fun initTransactionEvent() {
         pillAddFormFragment = PillAddFormFragment()
-        pillAddFinishFragment = PillAddFinishFragment()
+        pillAddFormDateFragment = PillAddFormDateFragment()
+        pillAddFormDateFragment = PillAddFormDateFragment()
+        //pillAddFinishFragment = PillAddFinishFragment()
 
         supportFragmentManager.beginTransaction()
             .add(R.id.fcv_pill_add, pillAddFormFragment)
             .commit()
     }
 
-    fun replacePillAddFinishFragment() {
+    fun replacePillAddNameFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_pill_add, pillAddFinishFragment).commit()
+            .replace(R.id.fcv_pill_add, pillAddFormNameFragment).commit()
     }
 
     fun replacePillAddFormFragment() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fcv_pill_add, pillAddFormFragment).commit()
     }
-
-
 }

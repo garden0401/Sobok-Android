@@ -100,7 +100,8 @@ dependencies {
     //lottie
     implementation "com.airbnb.android:lottie:3.6.1"
 
-
+    // calendar library
+    implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
 
 
 
