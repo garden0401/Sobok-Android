@@ -48,6 +48,11 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
             .replace(R.id.fcv_pill_add, pillAddFormNameFragment).commit()
     }
 
+    fun replacePillAddDateFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fcv_pill_add, pillAddFormDateFragment).commit()
+    }
+
     fun replacePillAddFormFragment() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fcv_pill_add, pillAddFormFragment).commit()

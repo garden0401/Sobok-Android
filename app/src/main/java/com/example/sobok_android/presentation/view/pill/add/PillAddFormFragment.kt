@@ -123,10 +123,13 @@ class PillAddFormFragment :
 
                 val pillAddActivity= (activity as PillAddActivity)
 
-                pillAddActivity.replacePillAddNameFragment()
+                pillAddActivity.replacePillAddDateFragment()
 
             } else {
                 Toast.makeText(requireContext(), "약에 대한 정보를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
+                // 원래 이거 두줄 빼야됩니다
+                val pillAddActivity= (activity as PillAddActivity)
+                pillAddActivity.replacePillAddDateFragment()
             }
         }
         navigateToHome()
@@ -146,8 +149,13 @@ class PillAddFormFragment :
                 binding.clCannotAddPill.visibility = View.GONE
             } else {
                 Log.d("Add Activity2", "${it.canAddPill}")
+                /* 원래 이게 맞음
                 binding.wrapScroll.visibility = View.GONE
                 binding.clCannotAddPill.visibility = View.VISIBLE
+                 */
+                // 지금 5개 이상이어도 걍 화면 한
+                binding.wrapScroll.visibility = View.VISIBLE
+                binding.clCannotAddPill.visibility = View.GONE
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.sobok_android.presentation.view.pill.add
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -36,7 +37,9 @@ class PillAddBottomSheetFragment : BottomSheetDialogFragment() {
 
         binding.clPillAddMyPill.setOnClickListener {
             _isMyPill = true
-            getPillCount()
+            // getPillCount()
+            val intent = Intent(activity, PillAddActivity::class.java)
+            startActivity(intent)
         }
         binding.clPillAddSendPill.setOnClickListener {
             _isMyPill = false
