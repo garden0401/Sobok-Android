@@ -89,6 +89,9 @@
         <entry key="app/src/main/res/drawable/oval_pill_list_color_3.xml" value="0.28425925925925927" />
         <entry key="app/src/main/res/drawable/oval_pill_list_color_4.xml" value="0.28425925925925927" />
         <entry key="app/src/main/res/drawable/oval_pill_list_color_5.xml" value="0.28425925925925927" />
+        <entry key="app/src/main/res/drawable/rectangle_border_mint_fill_lightmint_radius_6dp.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rectangle_border_mint_radius12dp.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rectangle_darkmint_border_6dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rectangle_emotion_bg.xml" value="0.28425925925925927" />
         <entry key="app/src/main/res/drawable/rectangle_emotion_end_bg.xml" value="0.2814814814814815" />
         <entry key="app/src/main/res/drawable/rectangle_fill_mint.xml" value="0.26461538461538464" />
@@ -121,9 +124,10 @@
         <entry key="app/src/main/res/layout/fragment_notice.xml" value="0.23798120820987828" />
         <entry key="app/src/main/res/layout/fragment_pill_add_bottom_sheet.xml" value="0.16875" />
         <entry key="app/src/main/res/layout/fragment_pill_add_finish.xml" value="0.16875" />
+        <entry key="app/src/main/res/layout/fragment_pill_add_finish_bottom_sheet.xml" value="0.29842834472656254" />
         <entry key="app/src/main/res/layout/fragment_pill_add_form.xml" value="0.16717325227963525" />
         <entry key="app/src/main/res/layout/fragment_pill_add_form_date.xml" value="0.2966827392578125" />
-        <entry key="app/src/main/res/layout/fragment_pill_add_form_name.xml" value="0.2966485507246377" />
+        <entry key="app/src/main/res/layout/fragment_pill_add_form_name.xml" value="0.2425186157226562" />
         <entry key="app/src/main/res/layout/fragment_share.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_share_empty.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_share_request_save.xml" value="0.3098958333333333" />
@@ -133,7 +137,11 @@
         <entry key="app/src/main/res/layout/item_home_pill_list_detail_content.xml" value="0.25364583333333335" />
         <entry key="app/src/main/res/layout/item_home_sticker_bottom_sheet.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/item_notice_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_pill_add_finish_name.xml" value="0.6323308972344881" />
+        <entry key="app/src/main/res/layout/item_pill_add_finish_time.xml" value="0.7636037854180819" />
         <entry key="app/src/main/res/layout/item_pill_add_pill_info.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/item_pill_add_pill_name.xml" value="0.15534420289855072" />
+        <entry key="app/src/main/res/layout/item_pill_add_pill_time.xml" value="0.15534420289855072" />
         <entry key="app/src/main/res/menu/menu_bottom_navi.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/popup_home_pill_list_edit.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_mail.xml" value="0.2712962962962963" />

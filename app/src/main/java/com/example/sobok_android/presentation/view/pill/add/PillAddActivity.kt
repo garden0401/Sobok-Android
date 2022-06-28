@@ -13,6 +13,7 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
     private lateinit var pillAddFormFragment: PillAddFormFragment
     private var pillAddFormNameFragment: PillAddFormNameFragment = PillAddFormNameFragment()
     private var pillAddFormDateFragment: PillAddFormDateFragment = PillAddFormDateFragment()
+    private var pillAddFinishBottomSheetFragment: PillAddFinishBottomSheetFragment = PillAddFinishBottomSheetFragment()
 
     //private var pillAddFinishFragment: PillAddFinishFragment = PillAddFinishFragment()
     private var pillAddNavigateData = PillAddNavigateData(false, false, 0)
@@ -36,7 +37,7 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
         pillAddFormFragment = PillAddFormFragment()
         pillAddFormDateFragment = PillAddFormDateFragment()
         pillAddFormDateFragment = PillAddFormDateFragment()
-        //pillAddFinishFragment = PillAddFinishFragment()
+        pillAddFinishBottomSheetFragment = PillAddFinishBottomSheetFragment()
 
         supportFragmentManager.beginTransaction()
             .add(R.id.fcv_pill_add, pillAddFormFragment)

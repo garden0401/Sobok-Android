@@ -52,6 +52,7 @@ class HomeStickerBottomSheetFragment : BottomSheetDialogFragment()  {
 
         initAdapter()
 
+
         binding.ivHomeBottomSheetClose.setOnClickListener {
             dismiss()
             stickerBottomSheetCloseClickListener?.invoke(false)
