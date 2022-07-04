@@ -4,6 +4,7 @@ package com.example.sobok_android.presentation.view.pill.add
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener
 import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager
 import com.applikeysolutions.cosmocalendar.selection.SelectionState
@@ -32,8 +33,7 @@ class PillAddFormDateFragment :
         })
 
         binding.tvNext.setOnClickListener {
-            val pillAddActivity= (activity as PillAddActivity)
-            pillAddActivity.replacePillAddNameFragment()
+            findNavController().navigate(R.id.pillAddFormNameFragment)
         }
     }
 }

@@ -35,5 +35,8 @@
     <color name="pill_color_blue">#54ADFF</color>
     <color name="pill_color_pink">#FF67C2</color>
 
+    <!-- status Bar color -->
+    <color name="status_bar_color">#1C3AA9</color>
+
 
 </resources>

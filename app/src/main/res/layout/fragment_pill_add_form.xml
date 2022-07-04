@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel" />
+
+        <variable
+            name="cycleFragment"
+            type="com.example.sobok_android.presentation.view.pill.add.PillAddFormFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

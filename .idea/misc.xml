@@ -110,7 +110,7 @@
         <entry key="app/src/main/res/drawable/selector_sign_edit.xml" value="0.30666666666666664" />
         <entry key="app/src/main/res/font/font_pretendard.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2203125" />
-        <entry key="app/src/main/res/layout/activity_pill_add.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_pill_add.xml" value="0.18075103759765626" />
         <entry key="app/src/main/res/layout/activity_pill_add_calendar.xml" value="0.2966485507246377" />
         <entry key="app/src/main/res/layout/activity_pill_add_reject.xml" value="0.16717325227963525" />
         <entry key="app/src/main/res/layout/activity_pill_edit.xml" value="0.16717325227963525" />
@@ -125,9 +125,10 @@
         <entry key="app/src/main/res/layout/fragment_pill_add_bottom_sheet.xml" value="0.16875" />
         <entry key="app/src/main/res/layout/fragment_pill_add_finish.xml" value="0.16875" />
         <entry key="app/src/main/res/layout/fragment_pill_add_finish_bottom_sheet.xml" value="0.29842834472656254" />
-        <entry key="app/src/main/res/layout/fragment_pill_add_form.xml" value="0.16717325227963525" />
+        <entry key="app/src/main/res/layout/fragment_pill_add_form.xml" value="0.31469369905697897" />
         <entry key="app/src/main/res/layout/fragment_pill_add_form_date.xml" value="0.2966827392578125" />
         <entry key="app/src/main/res/layout/fragment_pill_add_form_name.xml" value="0.2425186157226562" />
+        <entry key="app/src/main/res/layout/fragment_pill_add_info.xml" value="0.16742654508611957" />
         <entry key="app/src/main/res/layout/fragment_share.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_share_empty.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_share_request_save.xml" value="0.3098958333333333" />

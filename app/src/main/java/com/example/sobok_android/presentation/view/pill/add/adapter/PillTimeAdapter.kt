@@ -4,9 +4,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ItemPillAddPillTimeBinding
+import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PillTimeAdapter : RecyclerView.Adapter<PillTimeAdapter.PillTimeViewHolder>() {
 
@@ -33,10 +36,10 @@ class PillTimeAdapter : RecyclerView.Adapter<PillTimeAdapter.PillTimeViewHolder>
     }
 
     override fun onBindViewHolder(holder: PillTimeAdapter.PillTimeViewHolder, position: Int) {
-        holder.onBind(_pillTimeList[position], position)
+        holder.onBind(pillTimeList[position], position)
     }
 
-    override fun getItemCount(): Int = _pillTimeList.size
+    override fun getItemCount(): Int = pillTimeList.size
 
     inner class PillTimeViewHolder(
         val binding: ItemPillAddPillTimeBinding
@@ -53,6 +56,7 @@ class PillTimeAdapter : RecyclerView.Adapter<PillTimeAdapter.PillTimeViewHolder>
 
     fun makeText(time: String) {
         _pillTimeList.add(time)
+
         notifyDataSetChanged()
     }
 
