@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pill_add_finish_bottomsheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".presentation.view.pill.add.PillAddFinishBottomSheetFragment">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/pretendard_semi_bold"
+                    android:text="엄마에게 전송할 약이에요"
+                    android:textSize="22sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_cycle_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="37dp"
+                    android:fontFamily="@font/pretendard_semi_bold"
+                    android:text="약 먹는 주기"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+                <TextView
+                    android:id="@+id/tv_cycle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/rectangle_border_darkmint_fill_lightmint_radius_6dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="5dp"
+                    android:text="특정 간격"
+                    android:textColor="@color/dark_mint_main"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_cycle_msg"
+                    app:layout_constraintTop_toBottomOf="@id/tv_cycle_msg" />
+
+                <TextView
+                    android:id="@+id/tv_cycle_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="1달에 한번"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_cycle"
+                    app:layout_constraintStart_toEndOf="@id/tv_cycle"
+                    app:layout_constraintTop_toTopOf="@id/tv_cycle" />
+
+
+                <TextView
+                    android:id="@+id/time_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/pretendard_semi_bold"
+                    android:text="약 먹는 시간"
+                    android:textSize="15sp"
+                    android:layout_marginHorizontal="26dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_cycle_detail" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_pill_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginHorizontal="26dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintStart_toStartOf="@id/time_msg"
+                    app:layout_constraintTop_toBottomOf="@id/time_msg"
+                    tools:listitem="@layout/item_pill_add_finish_time" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_extend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="26dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rcv_pill_time">
+
+
+                    <TextView
+                        android:id="@+id/tv_period_msg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/pretendard_semi_bold"
+                        android:text="약 먹는 기간"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_period"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="2022.1.9 ~ 2022.4.9"
+                        android:textColor="@color/dark_mint_main"
+                        android:textSize="17sp"
+                        app:layout_constraintStart_toStartOf="@id/tv_period_msg"
+                        app:layout_constraintTop_toBottomOf="@id/tv_period_msg" />
+
+                    <ImageView
+                        android:id="@+id/iv_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="26dp"
+                        android:layout_marginTop="37dp"
+                        android:background="@drawable/rectangle_fill_gray200"
+                        app:layout_constraintTop_toBottomOf="@id/tv_period" />
+
+                    <TextView
+                        android:id="@+id/tv_name_msg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="@font/pretendard_semi_bold"
+                        android:text="약 이름"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="@id/tv_period_msg"
+                        app:layout_constraintTop_toBottomOf="@id/iv_line" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        tools:itemCount="2"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintStart_toStartOf="@id/tv_name_msg"
+                        app:layout_constraintTop_toBottomOf="@id/tv_name_msg"
+                        tools:listitem="@layout/item_pill_add_finish_name" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

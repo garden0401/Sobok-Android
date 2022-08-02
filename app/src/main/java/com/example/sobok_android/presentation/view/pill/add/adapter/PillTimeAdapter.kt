@@ -33,10 +33,10 @@ class PillTimeAdapter : RecyclerView.Adapter<PillTimeAdapter.PillTimeViewHolder>
     }
 
     override fun onBindViewHolder(holder: PillTimeAdapter.PillTimeViewHolder, position: Int) {
-        holder.onBind(_pillTimeList[position], position)
+        holder.onBind(pillTimeList[position], position)
     }
 
-    override fun getItemCount(): Int = _pillTimeList.size
+    override fun getItemCount(): Int = pillTimeList.size
 
     inner class PillTimeViewHolder(
         val binding: ItemPillAddPillTimeBinding
@@ -53,6 +53,7 @@ class PillTimeAdapter : RecyclerView.Adapter<PillTimeAdapter.PillTimeViewHolder>
 
     fun makeText(time: String) {
         _pillTimeList.add(time)
+
         notifyDataSetChanged()
     }
 
