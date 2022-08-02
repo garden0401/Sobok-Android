@@ -12,8 +12,6 @@ import android.widget.NumberPicker
 import android.widget.NumberPicker.OnValueChangeListener
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentPillAddFormBinding
@@ -141,13 +139,6 @@ class PillAddFormFragment :
 
     private fun observeNavigateData() {
         pillAddViewModel.pillAddNavigateData.observe(viewLifecycleOwner) {
-            /*
-            if (it.isMyPill) {
-                binding.ivPillPersonMore.visibility = View.GONE
-                binding.clPillPerson.isClickable = false
-            }
-
-             */
             if (it.canAddPill) {
                 Log.d("Add Activity1", "${it.canAddPill}")
                 binding.wrapScroll.visibility = View.VISIBLE
@@ -169,22 +160,15 @@ class PillAddFormFragment :
         pillListAdapter = PillListAdapter()
     }
 
-    /* 이름 fragment
-        private fun initPillNameAdapter() {
-            pillNameAdapter = PillNameAdapter()
-            binding.rcvPillName.adapter = pillNameAdapter
-
-            val list = mutableListOf<String>("null")
-            pillNameAdapter.realPillNameList = list
-        }
-    */
     private fun initPillTimeAdapter() {
         pillTimeAdapter = PillTimeAdapter()
-        pillTimeAdapter.pillTimeList = pillAddViewModel.pillTimeList
-        Log.d("pill List 내용", "${pillAddViewModel.pillTimeList}")
-        Log.d("pill List adapter 내용", "${pillTimeAdapter.pillTimeList}")
+        val formatTimeList = mutableListOf<String>()
+
+        for(i in 0 until pillAddViewModel.pillTimeList.size) {
+            formatTimeList.add(DateTimeUtil.convertPillListStringToKoreaTime(pillAddViewModel.pillTimeList[i]))
+        }
+        pillTimeAdapter.pillTimeList = formatTimeList
         binding.rcvPillTime.adapter = pillTimeAdapter
-        Log.d("init pill time adapter", "어댑터 초기화")
     }
 
     private fun navigateToHome() {
@@ -218,9 +202,13 @@ class PillAddFormFragment :
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
+
                 val string = (SimpleDateFormat("HH:mm", Locale.getDefault()).format(cal.time))
                 pillTimeAdapter.makeText(DateTimeUtil.convertPillListStringToKoreaTime(string))
                 Log.d("time", "$string")
+                Log.d("make time", "${DateTimeUtil.convertPillListStringToKoreaTime(string)}")
+                // string : 15:29
+                // make time : 오후 3:29
                 pillAddViewModel.pillTimeList.add(string)
             }
 
@@ -333,11 +321,10 @@ class PillAddFormFragment :
 
                 // period_int_list.value = 숫자
                 // period_string_list.value = 일에 한번 주에 한번 달에 한번
-                var string =
+                val string =
                     cycleIntList[period_int_list.value] + sCycleStringList[period_string_list.value]
-                Log.d("string ", "$string")
+
                 serverPeriodString.value = string
-                Log.d("server String ", "${serverPeriodString.value}")
                 pillAddViewModel.setPillPeriod(serverPeriodString)
 
                 // 복약기간 true

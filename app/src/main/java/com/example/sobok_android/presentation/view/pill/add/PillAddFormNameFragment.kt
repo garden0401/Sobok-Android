@@ -3,8 +3,6 @@ package com.example.sobok_android.presentation.view.pill.add
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentPillAddFormNameBinding
@@ -13,7 +11,6 @@ import com.example.sobok_android.presentation.view.MainActivity
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillNameAdapter
 import com.example.sobok_android.util.dp
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import org.koin.android.ext.android.bind
 
 
 class PillAddFormNameFragment :

@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ItemPillAddPillTimeBinding
+import com.example.sobok_android.util.DateTimeUtil
 
 class PillTimeAdapter : RecyclerView.Adapter<PillTimeAdapter.PillTimeViewHolder>() {
 
@@ -53,7 +54,6 @@ class PillTimeAdapter : RecyclerView.Adapter<PillTimeAdapter.PillTimeViewHolder>
 
     fun makeText(time: String) {
         _pillTimeList.add(time)
-
         notifyDataSetChanged()
     }
 

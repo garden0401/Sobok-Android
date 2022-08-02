@@ -28,7 +28,7 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
     private var _pillCycleSpecific = MutableLiveData<String>()
     val pillCycleSpecific: LiveData<String> = _pillCycleSpecific
 
-    private var _pillTimeList: MutableList<String> = mutableListOf("8시", "1시", "7시")
+    private var _pillTimeList: MutableList<String> = mutableListOf("08:00", "13:00", "19:00")
     val pillTimeList: MutableList<String>
         get() = _pillTimeList
 
