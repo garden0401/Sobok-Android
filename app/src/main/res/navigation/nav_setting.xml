@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_setting"
+    app:startDestination="@id/settingMainFragment">
+
+    <fragment
+        android:id="@+id/settingMainFragment"
+        android:name="com.example.sobok_android.presentation.view.myinfo.SettingMainFragment"
+        android:label="SettingMainFragment"
+        tools:layout="@layout/fragment_setting_main">
+        <action
+            android:id="@+id/action_settingMainFragment_to_settingTermsOfUseFragment"
+            app:destination="@id/settingTermsOfUseFragment" />
+        <action
+            android:id="@+id/action_settingMainFragment_to_settingWithdrawalFragment"
+            app:destination="@id/settingWithdrawalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingTermsOfUseFragment"
+        android:name="com.example.sobok_android.presentation.view.myinfo.SettingTermsOfUseFragment"
+        android:label="SettingTermsOfUseFragment"
+        tools:layout="@layout/fragment_setting_terms_of_use"/>
+    <fragment
+        android:id="@+id/settingWithdrawalFragment"
+        android:name="com.example.sobok_android.presentation.view.myinfo.SettingWithdrawalFragment"
+        android:label="SettingWithdrawalFragment"
+        tools:layout="@layout/fragment_setting_withdrawal"/>
+</navigation>
