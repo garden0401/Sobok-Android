@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.view.myinfo.SettingTermsOfUseFragment">
+
+        <TextView
+            android:id="@+id/tv_privacy_policy"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="21dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center_vertical"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/black_sub"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/ib_more_privacy_policy"
+            app:layout_constraintEnd_toStartOf="@id/ib_more_privacy_policy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ib_more_privacy_policy" />
+
+        <ImageButton
+            android:id="@+id/ib_more_privacy_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/ic_more_48_gray500"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sobok_terms_of_service"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center_vertical"
+            android:text="@string/sobok_terms_of_service"
+            android:textColor="@color/black_sub"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/ib_more_sobok_terms_of_service"
+            app:layout_constraintEnd_toStartOf="@id/ib_more_sobok_terms_of_service"
+            app:layout_constraintStart_toStartOf="@id/tv_privacy_policy"
+            app:layout_constraintTop_toBottomOf="@id/tv_privacy_policy" />
+
+        <ImageButton
+            android:id="@+id/ib_more_sobok_terms_of_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_more_48_gray500"
+            app:layout_constraintEnd_toEndOf="@id/ib_more_privacy_policy"
+            app:layout_constraintTop_toBottomOf="@id/ib_more_privacy_policy" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
