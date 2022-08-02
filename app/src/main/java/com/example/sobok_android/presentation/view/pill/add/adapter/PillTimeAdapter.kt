@@ -4,12 +4,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ItemPillAddPillTimeBinding
-import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PillTimeAdapter : RecyclerView.Adapter<PillTimeAdapter.PillTimeViewHolder>() {
 
