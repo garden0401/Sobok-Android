@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="nickName"
+            type="String" />
+
+        <variable
+            name="isTextExist"
+            type="Boolean" />
+
+        <variable
+            name="isError"
+            type="Boolean" />
+
+        <variable
+            name="isDoubleCheckEnable"
+            type="Boolean" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/col_my_nickname_edit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_my_nickname_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".presentation.view.myinfo.MyNicknameEditActivity">
+
+            <ImageButton
+                android:id="@+id/ib_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:background="@drawable/ic_close_48_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/nickname_edit"
+                android:textColor="@color/gray900_sub"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="36dp"
+                android:background="@{isError? @drawable/rectangle_border_pill_color_red_radius_12 : @drawable/selector_share_request_search_bar}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ib_close">
+
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@null"
+                    android:ellipsize="start"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:hint="@{nickName}"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:maxLength="11"
+                    android:textColor="@color/gray900_sub"
+                    android:textColorHint="@color/gray400_sub"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_delete_text"
+                    app:layout_constraintEnd_toStartOf="@id/iv_delete_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/iv_delete_text">
+
+                    <requestFocus />
+                </EditText>
+
+                <ImageView
+                    android:id="@+id/iv_delete_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/ic_text_close_48"
+                    android:visibility="@{isTextExist? View.VISIBLE : View.INVISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/nickname_error_message"
+                android:textColor="@color/pill_color_red"
+                android:textSize="13sp"
+                android:visibility="@{isError? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintStart_toStartOf="@id/cl_search_bar"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_bar" />
+
+            <TextView
+                android:id="@+id/tv_double_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="28dp"
+                android:enabled="@{isDoubleCheckEnable? true: false}"
+                android:fontFamily="@font/pretendard_semi_bold"
+                android:paddingHorizontal="2dp"
+                android:paddingVertical="2dp"
+                android:text="@string/double_check"
+                android:textColor="@color/selector_double_check"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_bar" />
+
+            <View
+                android:id="@+id/underline_double_check"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/selector_double_check"
+                android:enabled="@{isDoubleCheckEnable? true: false}"
+                app:layout_constraintEnd_toEndOf="@id/tv_double_check"
+                app:layout_constraintStart_toStartOf="@id/tv_double_check"
+                app:layout_constraintTop_toBottomOf="@id/tv_double_check" />
+
+            <TextView
+                android:id="@+id/btn_confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/rectangle_fill_mint"
+                android:fontFamily="@font/pretendard_semi_bold"
+                android:gravity="center"
+                android:paddingVertical="12dp"
+                android:text="@string/confirm"
+                android:textColor="@color/white_sub"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
