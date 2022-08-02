@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="dialogText"
+            type="com.example.sobok_android.util.CustomDialog.DialogData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_fill_white_radius_10">
+
+        <TextView
+            android:id="@+id/tv_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="45dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="@{dialogText.title}"
+            android:textColor="@color/gray900_sub"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/h_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="45dp"
+            android:background="@color/gray200_sub"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dialog_title" />
+
+        <TextView
+            android:id="@+id/tv_not_accept"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="@{dialogText.cancel}"
+            android:textColor="@color/gray500_sub"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/v_line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/h_line" />
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/gray200_sub"
+            app:layout_constraintBottom_toBottomOf="@id/tv_not_accept"
+            app:layout_constraintEnd_toStartOf="@id/tv_accept"
+            app:layout_constraintStart_toEndOf="@id/tv_not_accept"
+            app:layout_constraintTop_toTopOf="@id/tv_not_accept" />
+
+        <TextView
+            android:id="@+id/tv_accept"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="@{dialogText.complete}"
+            android:textColor="@color/dark_mint_main"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/v_line"
+            app:layout_constraintTop_toBottomOf="@id/h_line" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
