@@ -6,6 +6,7 @@ import androidx.core.widget.addTextChangedListener
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentSettingWithdrawalBinding
 import com.example.sobok_android.presentation.base.BindingFragment
+import com.example.sobok_android.util.closeKeyboard
 
 class SettingWithdrawalFragment :
     BindingFragment<FragmentSettingWithdrawalBinding>(R.layout.fragment_setting_withdrawal) {
@@ -39,6 +40,9 @@ class SettingWithdrawalFragment :
         with(binding) {
             btnWithdrawal.setOnClickListener {
 
+            }
+            clWithdrawal.setOnClickListener {
+                requireContext().closeKeyboard(etWithdrawalReason)
             }
         }
     }
