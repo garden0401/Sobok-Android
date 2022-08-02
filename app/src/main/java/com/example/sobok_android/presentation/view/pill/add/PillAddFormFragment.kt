@@ -7,16 +7,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.NumberPicker.OnValueChangeListener
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentPillAddFormBinding
@@ -29,7 +26,6 @@ import com.example.sobok_android.util.DateTimeUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class PillAddFormFragment :
     BindingFragment<FragmentPillAddFormBinding>(R.layout.fragment_pill_add_form) {
@@ -72,12 +68,12 @@ class PillAddFormFragment :
         binding.pillCycleMoreConstraintLayout.visibility = View.GONE
         binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE
 
-        //initPillNameAdapter()
+        // initPillNameAdapter()
         initPillTimeAdapter()
         initPillListAdapter()
 
-        //showDialogPillPerson()
-        //addPillPerson()
+        // showDialogPillPerson()
+        // addPillPerson()
 
         cycleEveryday()
         cycleSpecificDay()
@@ -86,14 +82,12 @@ class PillAddFormFragment :
         showDialogSpecificDay()
         showDialogSpecificPeriod()
 
-        //showDialogPillDate()
+        // showDialogPillDate()
         showDialogPillTime()
 
         var _isMyPill: Boolean = false
         var _canAddPill: Boolean = true
         val intent = Intent(requireContext(), PillAddFinishFragment::class.java)
-
-
 
         binding.tvNext.setOnClickListener {
             /* 약 전송
@@ -126,16 +120,15 @@ class PillAddFormFragment :
                 Log.d("프래그먼트에서 리스트를 뷰모델에 저장합니다", "${pillAddViewModel.pillList}")
                 // 다음으로 이동!!!!!!!!!!!!!!!
 
-                val pillAddActivity= (activity as PillAddActivity)
+                val pillAddActivity = (activity as PillAddActivity)
 
-                //pillAddActivity.replacePillAddDateFragment()
+                // pillAddActivity.replacePillAddDateFragment()
                 findNavController().navigate(R.id.pillAddFormDateFragment)
-
             } else {
                 Toast.makeText(requireContext(), "약에 대한 정보를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
                 // 원래 이거 두줄 빼야됩니다
-                val pillAddActivity= (activity as PillAddActivity)
-                //pillAddActivity.replacePillAddDateFragment()
+                val pillAddActivity = (activity as PillAddActivity)
+                // pillAddActivity.replacePillAddDateFragment()
                 findNavController().navigate(R.id.pillAddFormDateFragment)
             }
         }
@@ -171,23 +164,27 @@ class PillAddFormFragment :
             }
         }
     }
+
     private fun initPillListAdapter() {
         pillListAdapter = PillListAdapter()
     }
-/* 이름 fragment
-    private fun initPillNameAdapter() {
-        pillNameAdapter = PillNameAdapter()
-        binding.rcvPillName.adapter = pillNameAdapter
 
-        val list = mutableListOf<String>("null")
-        pillNameAdapter.realPillNameList = list
-    }
-*/
+    /* 이름 fragment
+        private fun initPillNameAdapter() {
+            pillNameAdapter = PillNameAdapter()
+            binding.rcvPillName.adapter = pillNameAdapter
+
+            val list = mutableListOf<String>("null")
+            pillNameAdapter.realPillNameList = list
+        }
+    */
     private fun initPillTimeAdapter() {
-        pillAddViewModel.initPillTimeList()
         pillTimeAdapter = PillTimeAdapter()
         pillTimeAdapter.pillTimeList = pillAddViewModel.pillTimeList
+        Log.d("pill List 내용", "${pillAddViewModel.pillTimeList}")
+        Log.d("pill List adapter 내용", "${pillTimeAdapter.pillTimeList}")
         binding.rcvPillTime.adapter = pillTimeAdapter
+        Log.d("init pill time adapter", "어댑터 초기화")
     }
 
     private fun navigateToHome() {
@@ -237,26 +234,26 @@ class PillAddFormFragment :
 
             Log.d("시간 목록 보여주세여...", "${pillAddViewModel.pillTimeList}")
         }
-
     }
-/* fragment date 기간
-    private fun showDialogPillDate() {
-        binding.clPillDate.setOnClickListener {
-            // 특정간격 피커
-            val builder = MaterialDatePicker.Builder.dateRangePicker()
-            val picker = builder.build()
-            picker.show(parentFragmentManager, picker.toString())
-            picker.addOnNegativeButtonClickListener { picker.dismiss() }
-            picker.addOnPositiveButtonClickListener {
-                // date here
-                sendStartDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.first)
-                sendEndDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.second)
-                binding.tvPillDate.text = "$sendStartDate ~ $sendEndDate"
-                fillPillDate = true
+
+    /* fragment date 기간
+        private fun showDialogPillDate() {
+            binding.clPillDate.setOnClickListener {
+                // 특정간격 피커
+                val builder = MaterialDatePicker.Builder.dateRangePicker()
+                val picker = builder.build()
+                picker.show(parentFragmentManager, picker.toString())
+                picker.addOnNegativeButtonClickListener { picker.dismiss() }
+                picker.addOnPositiveButtonClickListener {
+                    // date here
+                    sendStartDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.first)
+                    sendEndDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.second)
+                    binding.tvPillDate.text = "$sendStartDate ~ $sendEndDate"
+                    fillPillDate = true
+                }
             }
         }
-    }
-*/
+    */
     private fun showDialogSpecificPeriod() {
         binding.pillCycleSpecificMoreConstraintLayout.setOnClickListener {
             val dialog = AlertDialog.Builder(requireContext()).create()
@@ -302,23 +299,25 @@ class PillAddFormFragment :
             period_string_list.wrapSelectorWheel = false
             period_string_list.displayedValues = cycleStringList
 
-            period_string_list.setOnValueChangedListener(OnValueChangeListener { picker, oldVal, newVal ->
-                if (newVal == 0) {
-                    period_int_list.value = 0
-                    period_int_list.displayedValues = cycleIntList.toTypedArray()
-                    period_int_list.maxValue = cycleIntList.size - 1
+            period_string_list.setOnValueChangedListener(
+                OnValueChangeListener { picker, oldVal, newVal ->
+                    if (newVal == 0) {
+                        period_int_list.value = 0
+                        period_int_list.displayedValues = cycleIntList.toTypedArray()
+                        period_int_list.maxValue = cycleIntList.size - 1
+                    }
+                    if (newVal == 1) {
+                        period_int_list.value = 0
+                        period_int_list.displayedValues = cycleInt2List.toTypedArray()
+                        period_int_list.maxValue = cycleInt2List.size - 1
+                    }
+                    if (newVal == 2) {
+                        period_int_list.value = 0
+                        period_int_list.displayedValues = cycleInt3List.toTypedArray()
+                        period_int_list.maxValue = cycleInt3List.size - 1
+                    }
                 }
-                if (newVal == 1) {
-                    period_int_list.value = 0
-                    period_int_list.displayedValues = cycleInt2List.toTypedArray()
-                    period_int_list.maxValue = cycleInt2List.size - 1
-                }
-                if (newVal == 2) {
-                    period_int_list.value = 0
-                    period_int_list.displayedValues = cycleInt3List.toTypedArray()
-                    period_int_list.maxValue = cycleInt3List.size - 1
-                }
-            })
+            )
 
             period_int_list.maxValue = cycleIntList.size - 1
             period_int_list.displayedValues = cycleIntList.toTypedArray()
@@ -334,8 +333,9 @@ class PillAddFormFragment :
 
                 // period_int_list.value = 숫자
                 // period_string_list.value = 일에 한번 주에 한번 달에 한번
-                var string = cycleIntList[period_int_list.value] + sCycleStringList[period_string_list.value]
-                Log.d("string ","$string")
+                var string =
+                    cycleIntList[period_int_list.value] + sCycleStringList[period_string_list.value]
+                Log.d("string ", "$string")
                 serverPeriodString.value = string
                 Log.d("server String ", "${serverPeriodString.value}")
                 pillAddViewModel.setPillPeriod(serverPeriodString)
@@ -384,7 +384,6 @@ class PillAddFormFragment :
     }
 
     private fun cycleSpecificPeriod() {
-
         binding.tvPillDateSpecificPeriod.setOnClickListener {
             selectPillCycle = 2
             // 특정간격 버튼 선택
@@ -400,7 +399,6 @@ class PillAddFormFragment :
     }
 
     private fun cycleSpecificDay() {
-
         binding.tvPillDateSpecificDay.setOnClickListener {
             Log.d("눌리니..", "눌리냐고...")
             selectPillCycle = 1
@@ -423,7 +421,6 @@ class PillAddFormFragment :
             pillAddViewModel.setCycle(1)
 
             if (!binding.tvPillDateEveryday.isSelected) {
-
                 binding.tvPillDateEveryday.isSelected = true // this 전환
                 binding.tvPillDateSpecificDay.isSelected = false // 첫번째 버튼 비활성화
                 binding.tvPillDateSpecificPeriod.isSelected = false // 두번째 버튼 비활성화
@@ -462,5 +459,4 @@ class PillAddFormFragment :
         }
     }
 */
-
 }

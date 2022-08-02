@@ -7,12 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.example.sobok_android.domain.model.pill.pilladd.PillListData
 import com.example.sobok_android.domain.repository.pill.pilladd.PillAddRepository
 import com.example.sobok_android.presentation.view.pill.add.PillAddNavigateData
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
 
@@ -34,7 +28,7 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
     private var _pillCycleSpecific = MutableLiveData<String>()
     val pillCycleSpecific: LiveData<String> = _pillCycleSpecific
 
-    private var _pillTimeList: MutableList<String> = mutableListOf()
+    private var _pillTimeList: MutableList<String> = mutableListOf("8시", "1시", "7시")
     val pillTimeList: MutableList<String>
         get() = _pillTimeList
 
@@ -53,18 +47,7 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
     private val _pillListCount = MutableLiveData<Int>()
     val pillListCount: LiveData<Int> get() = _pillListCount
 
-    fun initPillTimeList() {
-        val formatter = SimpleDateFormat("HH:mm")
-
-        pillTimeList.clear()
-        pillTimeList.add(formatter.parse("8:00").toString())
-        pillTimeList.add(formatter.parse("13:00").toString())
-        pillTimeList.add(formatter.parse("19:00").toString())
-
-        Log.d("timeList", "${pillTimeList}")
-    }
-
-    fun setCycle(takeInterval : Int) {
+    fun setCycle(takeInterval: Int) {
         Log.d("set Cycle", "$takeInterval")
         _pillCycle.value = takeInterval
     }
