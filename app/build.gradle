@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -99,10 +100,14 @@ dependencies {
 
     //lottie
     implementation "com.airbnb.android:lottie:3.6.1"
-
+    
     // calendar library
     implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
 
+
+    //Firebase SDK 추가
+    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
 
     implementation 'androidx.core:core-ktx:1.7.0'
