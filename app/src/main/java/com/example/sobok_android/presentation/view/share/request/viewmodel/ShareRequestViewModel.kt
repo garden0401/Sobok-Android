@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.sobok_android.data.model.request.share.ReqShareRequestData
 import com.example.sobok_android.domain.model.share.request.SearchResultData
 import com.example.sobok_android.domain.model.share.request.ShareRequestSuccessData
 import com.example.sobok_android.domain.repository.share.request.ShareRequestRepository
@@ -37,10 +38,9 @@ class ShareRequestViewModel(private val shareRequestRepository: ShareRequestRepo
             }
     }
 
-    //TODO: server-400 해결
     fun postSearchResult(memberId: Int, memberName: String) = viewModelScope.launch {
         runCatching {
-            shareRequestRepository.postSearchResult(memberId, memberName)
+            shareRequestRepository.postSearchResult(memberId, ReqShareRequestData(memberName))
         }
             .onSuccess {
                 _memberInfo = it.data
