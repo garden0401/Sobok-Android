@@ -16,36 +16,17 @@ class ShareRequestViewModel(private val shareRequestRepository: ShareRequestRepo
     private val _searchResult = MutableLiveData<SearchResultData>()
     var searchResult: LiveData<SearchResultData> = _searchResult
 
-    private val _userName = MutableLiveData<String>()
-    var userName: LiveData<String> = _userName
-    fun setUserName(value: String) {
-        _userName.value = value
-    }
-
-    private var _memberName: String = ""
-    var memberName: String = _memberName
-        set(value) {
-            _memberName = value
-            field = value
-        }
-
-    private var _memberId: Int = 0
-    var memberId: Int = _memberId
-        set(value) {
-            _memberId = value
-            field = value
-        }
-
     private lateinit var _memberInfo: ShareRequestSuccessData.MemberInfo
 
-    private val _isShareRequestSearch = MutableLiveData<Boolean>()
-    var isShareRequestSearch: LiveData<Boolean> = _isShareRequestSearch
-    fun setIsShareRequestSearch(value: Boolean) {
-        _isShareRequestSearch.value = value
+    private val _isShareRequestClick = MutableLiveData<Boolean>(false)
+    var isShareRequestClick: LiveData<Boolean> = _isShareRequestClick
+
+    fun setIsShareRequestClick(value: Boolean) {
+        _isShareRequestClick.value = value
     }
 
-    fun getSearchResult() = viewModelScope.launch {
-        runCatching { shareRequestRepository.getSearchResult(requireNotNull(_userName.value)) }
+    fun getSearchResult(searchWord: String) = viewModelScope.launch {
+        runCatching { shareRequestRepository.getSearchResult(searchWord) }
             .onSuccess {
                 _searchResult.postValue(it)
                 Log.d("searchResult-server", "success${it}")
@@ -56,8 +37,11 @@ class ShareRequestViewModel(private val shareRequestRepository: ShareRequestRepo
             }
     }
 
-    fun postSearchResult() = viewModelScope.launch {
-        runCatching { shareRequestRepository.postSearchResult(_memberId, _memberName) }
+    //TODO: server-400 해결
+    fun postSearchResult(memberId: Int, memberName: String) = viewModelScope.launch {
+        runCatching {
+            shareRequestRepository.postSearchResult(memberId, memberName)
+        }
             .onSuccess {
                 _memberInfo = it.data
                 //TODO sharePreference에 멤버 값 저장
