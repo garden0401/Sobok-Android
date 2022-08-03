@@ -50,6 +50,9 @@
     <string name="share_request_save_error_special">특수문자 입력은 불가능해요</string>
     <string name="share_request_save_text_count">%d/10</string>
     <string name="share_request_save_hint_msg">2~10자의 한글, 영문, 숫자</string>
+    <string name="request">요청하기</string>
+    <string name="share_request_calendar_message">캘린더 공유 요청을 보냈어요!</string>
+    <string name="share_request_calendar_message_detail">상대방이 요청을 수락하면,\n상대방의 캘린더를 볼 수 있어요</string>
 
 
     <!-- Home 약 리스트   -->
