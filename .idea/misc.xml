@@ -108,7 +108,10 @@
         <entry key="app/src/main/res/drawable/selector_calendar_date_doing.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/selector_home_pill_list_check.xml" value="0.27037037037037037" />
         <entry key="app/src/main/res/drawable/selector_menu_alarm.xml" value="0.27037037037037037" />
+        <entry key="app/src/main/res/drawable/selector_menu_home.xml" value="0.176" />
         <entry key="app/src/main/res/drawable/selector_menu_plus.xml" value="0.1555" />
+        <entry key="app/src/main/res/drawable/selector_menu_share.xml" value="0.176" />
+        <entry key="app/src/main/res/drawable/selector_pill_add_date.xml" value="0.176" />
         <entry key="app/src/main/res/drawable/selector_pill_add_finish.xml" value="0.172" />
         <entry key="app/src/main/res/drawable/selector_pill_list_ate.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/selector_sign_edit.xml" value="0.30666666666666664" />
