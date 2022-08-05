@@ -53,6 +53,7 @@
     <string name="request">요청하기</string>
     <string name="share_request_calendar_message">캘린더 공유 요청을 보냈어요!</string>
     <string name="share_request_calendar_message_detail">상대방이 요청을 수락하면,\n상대방의 캘린더를 볼 수 있어요</string>
+    <string name="share_request_limit_message">캘린더 공유는 5명까지만 가능해요</string>
 
 
     <!-- Home 약 리스트   -->

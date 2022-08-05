@@ -1,16 +1,22 @@
 package com.example.sobok_android.presentation.view.share
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentShareBinding
 import com.example.sobok_android.presentation.base.BindingFragment
 import com.example.sobok_android.presentation.view.home.HomeFragment
+import com.example.sobok_android.presentation.view.share.request.ShareRequestActivity
 import com.example.sobok_android.presentation.view.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ShareFragment : BindingFragment<FragmentShareBinding>(R.layout.fragment_share) {
     private val mainViewModel: MainViewModel by sharedViewModel()
+    private var memberNum: Int = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,6 +33,7 @@ class ShareFragment : BindingFragment<FragmentShareBinding>(R.layout.fragment_sh
     private fun observeGroupData() {
         mainViewModel.groupData.observe(viewLifecycleOwner) {
             with(binding) {
+                memberNum = it.size
                 if (it.isEmpty()) {
                     isGroupEmpty = true
                     //TODO: 함수로 정리
@@ -116,8 +123,37 @@ class ShareFragment : BindingFragment<FragmentShareBinding>(R.layout.fragment_sh
 
     private fun setBtnPlusClickListener() {
         binding.ivShareRequestPlus.setOnClickListener {
-            //TODO: 친구 숫자 세서 5명 넘으면 팝업 띄우기
-            //mainViewModel.setIsShareRequestClick(true)
+            if (memberNum < 5) {
+                shareRequestActivityLauncher.launch(
+                    Intent(
+                        requireContext(),
+                        ShareRequestActivity::class.java
+                    )
+                )
+            } else {
+                val builder = AlertDialog.Builder(requireContext()).apply {
+                    setMessage(getString(R.string.share_request_limit_message))
+                    setPositiveButton(getString(R.string.confirm)) { _, _ ->
+                    }
+                }
+                builder.create().show()
+            }
+        }
+    }
+
+    private val shareRequestActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == AppCompatActivity.RESULT_OK) {
+            if (it.data!!.getBooleanExtra("isShareRequest", false)) {
+                val builder = AlertDialog.Builder(requireContext()).apply {
+                    setTitle(getString(R.string.share_request_calendar_message))
+                    setMessage(getString(R.string.share_request_calendar_message_detail))
+                    setPositiveButton(getString(R.string.confirm)) { _, _ ->
+                    }
+                }
+                builder.create().show()
+            }
         }
     }
 
