@@ -42,60 +42,60 @@ class ShareFragment : BindingFragment<FragmentShareBinding>(R.layout.fragment_sh
                 } else {
                     isGroupEmpty = false
                     setCalendarFragment()
+                    //TODO: 로직 단순화
                     if (it.isNotEmpty()) {
-                        //TODO: member이름 한글자인 경우도 가능하도록 수정
-                        tvMemberOne.text = it[0].memberName.substring(0, 2)
+                        tvMemberOne.text = if (it[0].memberName.length > 2) it[0].memberName.substring(0, 2) else it[0].memberName
                         tvMemberOne.isSelected = true
                         mainViewModel.setSelectedMemberName(tvMemberOne.text.toString())
                         tvMemberOne.setTextAppearance(R.style.MemberSelectTextStyle)
-                        tvMemberOne.setOnClickListener {
+                        tvMemberOne.setOnClickListener { _ ->
                             if (!tvMemberOne.isSelected) {
                                 tvMemberOne.isSelected = true
-                                mainViewModel.setSelectedMemberName(tvMemberOne.text.toString())
+                                mainViewModel.setSelectedMemberName(it[0].memberName)
                                 setAllMemberNotSelected()
                                 tvMemberOne.setTextAppearance(R.style.MemberSelectTextStyle)
                             }
                         }
                     }
                     if (it.size > 1) {
-                        tvMemberTwo.text = it[1].memberName.substring(0, 2)
-                        tvMemberTwo.setOnClickListener {
+                        tvMemberTwo.text = if (it[1].memberName.length > 2) it[1].memberName.substring(0, 2) else it[1].memberName
+                        tvMemberTwo.setOnClickListener { _ ->
                             if (!tvMemberTwo.isSelected) {
                                 tvMemberTwo.isSelected = true
-                                mainViewModel.setSelectedMemberName(tvMemberTwo.text.toString())
+                                mainViewModel.setSelectedMemberName(it[1].memberName)
                                 setAllMemberNotSelected()
                                 tvMemberTwo.setTextAppearance(R.style.MemberSelectTextStyle)
                             }
                         }
                     }
                     if (it.size > 2) {
-                        tvMemberThree.text = it[2].memberName.substring(0, 2)
-                        tvMemberThree.setOnClickListener {
+                        tvMemberThree.text = if (it[2].memberName.length > 2) it[2].memberName.substring(0, 2) else it[2].memberName
+                        tvMemberThree.setOnClickListener { _ ->
                             if (!tvMemberThree.isSelected) {
                                 tvMemberThree.isSelected = true
-                                mainViewModel.setSelectedMemberName(tvMemberThree.text.toString())
+                                mainViewModel.setSelectedMemberName(it[2].memberName)
                                 setAllMemberNotSelected()
                                 tvMemberThree.setTextAppearance(R.style.MemberSelectTextStyle)
                             }
                         }
                     }
                     if (it.size > 3) {
-                        tvMemberFour.text = it[3].memberName.substring(0, 2)
-                        tvMemberFour.setOnClickListener {
+                        tvMemberFour.text = if (it[3].memberName.length > 2) it[3].memberName.substring(0, 2) else it[3].memberName
+                        tvMemberFour.setOnClickListener { _ ->
                             if (!tvMemberFour.isSelected) {
                                 tvMemberFour.isSelected = true
-                                mainViewModel.setSelectedMemberName(tvMemberFour.text.toString())
+                                mainViewModel.setSelectedMemberName(it[3].memberName)
                                 setAllMemberNotSelected()
                                 tvMemberFour.setTextAppearance(R.style.MemberSelectTextStyle)
                             }
                         }
                     }
                     if (it.size > 4) {
-                        tvMemberFive.text = it[4].memberName.substring(0, 2)
-                        tvMemberFive.setOnClickListener {
+                        tvMemberFive.text = if (it[4].memberName.length > 2) it[4].memberName.substring(0, 2) else it[4].memberName
+                        tvMemberFive.setOnClickListener { _ ->
                             if (!tvMemberFive.isSelected) {
                                 tvMemberFive.isSelected = true
-                                mainViewModel.setSelectedMemberName(tvMemberFive.text.toString())
+                                mainViewModel.setSelectedMemberName(it[4].memberName)
                                 setAllMemberNotSelected()
                                 tvMemberFive.setTextAppearance(R.style.MemberSelectTextStyle)
                             }
