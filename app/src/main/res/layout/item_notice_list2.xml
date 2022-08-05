@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="정관장"
-            android:text="@{noticeData.pillName}"
+            android:text="@{isPill ? noticeData.pillName : noticeData.senderName}"
             android:fontFamily="@font/pretendard_semi_bold"
             android:textSize="18sp"
             android:textColor="@color/notice_list_title"
@@ -108,6 +108,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp"
+            app:layout_goneMarginTop="0dp"
             android:layout_marginHorizontal="18dp"/>
 
         <TextView

@@ -41,7 +41,8 @@
             app:layout_constraintTop_toBottomOf="@id/tv_notice_title"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="32dp"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:overScrollMode="never">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_no_empty_notice"
