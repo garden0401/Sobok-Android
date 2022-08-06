@@ -11,8 +11,7 @@ import com.example.sobok_android.databinding.ActivityMainBinding
 import com.example.sobok_android.presentation.base.BindingActivity
 import com.example.sobok_android.presentation.view.home.HomeFragment
 import com.example.sobok_android.presentation.view.home.HomeStickerBottomSheetFragment
-import com.example.sobok_android.presentation.view.notice.NoticeFragment
-import com.example.sobok_android.presentation.view.noticeSecond.NoticeFragment2
+import com.example.sobok_android.presentation.view.notice2.NoticeFragment2
 import com.example.sobok_android.presentation.view.pill.add.PillAddActivity
 import com.example.sobok_android.presentation.view.pill.add.PillAddBottomSheetFragment
 import com.example.sobok_android.presentation.view.share.ShareFragment

@@ -8,7 +8,7 @@
         <import type="android.view.View"/>
         <variable
             name="noticeData"
-            type="com.example.sobok_android.presentation.view.noticeSecond.model.NoticeData.Data.Info" />
+            type="com.example.sobok_android.domain.model.notice2.NoticeListData2.Data.Info" />
 
         <variable
             name="noticeMessage"

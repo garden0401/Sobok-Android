@@ -1,9 +1,9 @@
-package com.example.sobok_android.presentation.view.noticeSecond.model
+package com.example.sobok_android.data.model.response.notice2
 
 
 import com.google.gson.annotations.SerializedName
 
-data class NoticeData(
+data class ResNoticeListData2(
     @SerializedName("status")
     val status: Int,
     @SerializedName("success")
@@ -15,7 +15,7 @@ data class NoticeData(
 ) {
     data class Data(
         @SerializedName("infoList")
-        val infoList: Info
+        val infoList: List<Info>
     ) {
         data class Info(
             @SerializedName("noticeId")
@@ -31,9 +31,9 @@ data class NoticeData(
             @SerializedName("senderName")
             val senderName: String,
             @SerializedName("pillName")
-            val pillName: String,
+            val pillName: String? = null,
             @SerializedName("pillId")
-            val pillId: Int
+            val pillId: Int? = null
         )
     }
 }
