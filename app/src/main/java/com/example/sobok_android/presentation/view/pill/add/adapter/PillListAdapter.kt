@@ -6,11 +6,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ItemPillAddPillInfoBinding
+import com.example.sobok_android.domain.model.pill.pilladd.PillInfo
 import com.example.sobok_android.domain.model.pill.pilladd.PillListData
 
 class PillListAdapter : RecyclerView.Adapter<PillListAdapter.PillListViewHolder>() {
-    private var _pillList = mutableListOf<PillListData.PillInfo>()
-    var pillList: MutableList<PillListData.PillInfo> = _pillList // = : getter의 의미
+    private var _pillList = mutableListOf<PillInfo>()
+    var pillList: MutableList<PillInfo> = _pillList // = : getter의 의미
         set(value) {
             _pillList.clear()
             _pillList.addAll(value)
@@ -49,7 +50,7 @@ class PillListAdapter : RecyclerView.Adapter<PillListAdapter.PillListViewHolder>
     inner class PillListViewHolder(
         val binding: ItemPillAddPillInfoBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: PillListData.PillInfo, position: Int) {
+        fun onBind(data: PillInfo, position: Int) {
             binding.pillInfo = data
 
             binding.ivClose.setOnClickListener {

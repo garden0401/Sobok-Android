@@ -2,7 +2,6 @@ package com.example.sobok_android.presentation.view.pill.add
 
 import android.app.AlertDialog
 import android.app.TimePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,31 +10,30 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.NumberPicker.OnValueChangeListener
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.FragmentPillAddFormBinding
-import com.example.sobok_android.domain.model.pill.pilladd.PillListData
+import com.example.sobok_android.domain.model.pill.pilladd.PillInfo
 import com.example.sobok_android.presentation.base.BindingFragment
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillListAdapter
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillTimeAdapter
 import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
 import com.example.sobok_android.util.DateTimeUtil
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class PillAddFormFragment :
     BindingFragment<FragmentPillAddFormBinding>(R.layout.fragment_pill_add_form) {
 
-    private val pillAddViewModel: PillAddViewModel by sharedViewModel()
+    private val pillAddViewModel: PillAddViewModel by activityViewModels()
 
     private lateinit var pillTimeAdapter: PillTimeAdapter
     private lateinit var pillListAdapter: PillListAdapter
-    private lateinit var pillBottomSheetDialogFragment: PillAddBottomSheetFragment
 
-    private val _pillList = mutableListOf<PillListData.PillInfo>()
-    var pillList: List<PillListData.PillInfo> = _pillList
+    private val _pillList = mutableListOf<PillInfo>()
+    var pillList: List<PillInfo> = _pillList
 
     private var fillPillName: Boolean = false
     private var fillPillDate: Boolean = false
@@ -46,19 +44,34 @@ class PillAddFormFragment :
 
     var sendStartDate: String = ""
     var sendEndDate: String = ""
-    var sendCycle: String = ""
-    var sendDay: String = ""
-    var sendSpecific: String = ""
+    var sendCycle: Int = 1
+    var sendDay: String? = null
+    var sendSpecific: String? = null
 
     var nameList = listOf<String>()
 
     var periodString = ""
     private var serverPeriodString = MutableLiveData<String>()
 
+    private var pillDays = MutableLiveData<String>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = pillAddViewModel
+            cycleFragment = this@PillAddFormFragment
+        }
+
         observeNavigateData()
+
+        // 내약추가일때 판단 변수
+        // pillAddViewModel.pillAddNavigateData.value?.isMyPill
+
+        //_pillTimeList = pillAddViewModel.pillTimeList
+
+        Log.d("mycount ", "${pillAddViewModel.getPillAddNavigetData()?.pillCount}")
 
         binding.tvPillDateEveryday.isSelected = true
         binding.tvPillDateSpecificDay.isSelected = false
@@ -66,27 +79,61 @@ class PillAddFormFragment :
         binding.pillCycleMoreConstraintLayout.visibility = View.GONE
         binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE
 
-        // initPillNameAdapter()
         initPillTimeAdapter()
         initPillListAdapter()
 
-        // showDialogPillPerson()
-        // addPillPerson()
-
+        setCycle()
         cycleEveryday()
         cycleSpecificDay()
         cycleSpecificPeriod()
 
         showDialogSpecificDay()
         showDialogSpecificPeriod()
-
-        // showDialogPillDate()
         showDialogPillTime()
 
-        var _isMyPill: Boolean = false
-        var _canAddPill: Boolean = true
-        val intent = Intent(requireContext(), PillAddFinishFragment::class.java)
+        navigateToHome()
+    }
 
+    private fun setCycle() {
+        val cycle = pillAddViewModel.getCycle()
+        when (cycle) {
+            1 -> {
+                binding.tvPillDateEveryday.isSelected = true
+                binding.tvPillDateSpecificDay.isSelected = false
+                binding.tvPillDateSpecificPeriod.isSelected = false
+                binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE
+                binding.pillCycleMoreConstraintLayout.visibility = View.GONE
+
+            }
+            2 -> {
+                binding.tvPillDateEveryday.isSelected = false
+                binding.tvPillDateSpecificDay.isSelected = true
+                binding.tvPillDateSpecificPeriod.isSelected = false
+                binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE
+                binding.pillCycleMoreConstraintLayout.visibility = View.VISIBLE
+                Log.d("?????", "${pillAddViewModel.getPillDays()}")
+                binding.tvPillAddSpecificDay.text =
+                    pillAddViewModel.pillCycleSpecificDaysString.value
+            }
+            3 -> {
+                binding.tvPillDateEveryday.isSelected = false
+                binding.tvPillDateSpecificDay.isSelected = false
+                binding.tvPillDateSpecificPeriod.isSelected = true
+                binding.pillCycleSpecificMoreConstraintLayout.visibility = View.VISIBLE
+                binding.pillCycleMoreConstraintLayout.visibility = View.GONE
+                binding.tvPillAddSpecificCycle.text = pillAddViewModel.getPillPeriod()
+            }
+            else -> {
+                binding.tvPillDateEveryday.isSelected = true
+                binding.tvPillDateSpecificDay.isSelected = false
+                binding.tvPillDateSpecificPeriod.isSelected = false
+                binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE
+                binding.pillCycleMoreConstraintLayout.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun navigateToDate() {
         binding.tvNext.setOnClickListener {
             /* 약 전송
             fillPillName = (pillNameAdapter.isFillPillName)
@@ -99,29 +146,8 @@ class PillAddFormFragment :
             if (fillPillName && fillPillDate && fillPillCycle && pillTimeAdapter.itemCount > 0) {
                 sendStartDate = DateTimeUtil.convertToPillAddFinishDate(sendStartDate)
                 sendEndDate = DateTimeUtil.convertToPillAddFinishDate(sendEndDate)
-                for (i in 0 until nameList.size) {
-                    _pillList.add(
-                        PillListData.PillInfo(
-                            nameList[i],
-                            false,
-                            "red",
-                            sendStartDate,
-                            sendEndDate,
-                            sendCycle,
-                            sendDay,
-                            sendSpecific,
-                            timeList = pillTimeAdapter.pillTimeList
-                        )
-                    )
-                }
                 pillAddViewModel.setPillList(_pillList)
-                Log.d("프래그먼트에서 리스트를 뷰모델에 저장합니다", "${pillAddViewModel.pillList}")
-                // 다음으로 이동!!!!!!!!!!!!!!!
-
-                val pillAddActivity = (activity as PillAddActivity)
-
-                // pillAddActivity.replacePillAddDateFragment()
-                findNavController().navigate(R.id.pillAddFormDateFragment)
+                findNavController().navigate(R.id.action_pillAddForm_to_pillAddFormDate)
             } else {
                 Toast.makeText(requireContext(), "약에 대한 정보를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
                 // 원래 이거 두줄 빼야됩니다
@@ -130,11 +156,10 @@ class PillAddFormFragment :
                 findNavController().navigate(R.id.pillAddFormDateFragment)
             }
         }
-        navigateToHome()
     }
 
     fun gotoSecond() {
-        findNavController().navigate(R.id.action_pillAddFormDateFragment_to_pillAddFormNameFragment)
+        findNavController().navigate(R.id.action_pillAddForm_to_pillAddFormDate)
     }
 
     private fun observeNavigateData() {
@@ -145,13 +170,8 @@ class PillAddFormFragment :
                 binding.clCannotAddPill.visibility = View.GONE
             } else {
                 Log.d("Add Activity2", "${it.canAddPill}")
-                /* 원래 이게 맞음
                 binding.wrapScroll.visibility = View.GONE
                 binding.clCannotAddPill.visibility = View.VISIBLE
-                 */
-                // 지금 5개 이상이어도 걍 화면 한
-                binding.wrapScroll.visibility = View.VISIBLE
-                binding.clCannotAddPill.visibility = View.GONE
             }
         }
     }
@@ -161,14 +181,16 @@ class PillAddFormFragment :
     }
 
     private fun initPillTimeAdapter() {
-        pillTimeAdapter = PillTimeAdapter()
-        val formatTimeList = mutableListOf<String>()
-
-        for(i in 0 until pillAddViewModel.pillTimeList.size) {
-            formatTimeList.add(DateTimeUtil.convertPillListStringToKoreaTime(pillAddViewModel.pillTimeList[i]))
-        }
-        pillTimeAdapter.pillTimeList = formatTimeList
+        pillTimeAdapter = PillTimeAdapter(::deleteTime)
+        Log.d("time list..", "${pillAddViewModel.pillTimeList}")
+        pillTimeAdapter.submitList(pillAddViewModel.pillTimeList)
         binding.rcvPillTime.adapter = pillTimeAdapter
+
+    }
+
+    private fun deleteTime(time: String) {
+        pillAddViewModel.deleteTime(time)
+        pillTimeAdapter.submitList(pillAddViewModel.pillTimeList)
     }
 
     private fun navigateToHome() {
@@ -179,16 +201,16 @@ class PillAddFormFragment :
 
     fun checkFillPillCycle(): Boolean {
         if (selectPillCycle == 0) {
-            sendCycle = "매일"
+            sendCycle = 1
             sendDay = "월, 화, 수, 목, 금, 토, 일"
             return true
         }
         if (selectPillCycle == 1 && setSpecificDay) {
-            sendCycle = "특정 날짜"
+            sendCycle = 2
             return true
         }
         if (selectPillCycle == 2 && setSpecificPeriod) {
-            sendCycle = "특정 기간"
+            sendCycle = 3
             sendSpecific = binding.tvPillAddSpecificCycle.toString()
             return true
         }
@@ -204,12 +226,9 @@ class PillAddFormFragment :
                 cal.set(Calendar.MINUTE, minute)
 
                 val string = (SimpleDateFormat("HH:mm", Locale.getDefault()).format(cal.time))
-                pillTimeAdapter.makeText(DateTimeUtil.convertPillListStringToKoreaTime(string))
-                Log.d("time", "$string")
-                Log.d("make time", "${DateTimeUtil.convertPillListStringToKoreaTime(string)}")
-                // string : 15:29
-                // make time : 오후 3:29
-                pillAddViewModel.pillTimeList.add(string)
+                pillAddViewModel.addTime(string)
+                pillTimeAdapter.submitList(pillAddViewModel.pillTimeList)
+                pillTimeAdapter.notifyDataSetChanged()
             }
 
             TimePickerDialog(
@@ -219,29 +238,9 @@ class PillAddFormFragment :
                 cal.get(Calendar.MINUTE),
                 true
             ).show()
-
-            Log.d("시간 목록 보여주세여...", "${pillAddViewModel.pillTimeList}")
         }
     }
 
-    /* fragment date 기간
-        private fun showDialogPillDate() {
-            binding.clPillDate.setOnClickListener {
-                // 특정간격 피커
-                val builder = MaterialDatePicker.Builder.dateRangePicker()
-                val picker = builder.build()
-                picker.show(parentFragmentManager, picker.toString())
-                picker.addOnNegativeButtonClickListener { picker.dismiss() }
-                picker.addOnPositiveButtonClickListener {
-                    // date here
-                    sendStartDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.first)
-                    sendEndDate = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(it.second)
-                    binding.tvPillDate.text = "$sendStartDate ~ $sendEndDate"
-                    fillPillDate = true
-                }
-            }
-        }
-    */
     private fun showDialogSpecificPeriod() {
         binding.pillCycleSpecificMoreConstraintLayout.setOnClickListener {
             val dialog = AlertDialog.Builder(requireContext()).create()
@@ -351,20 +350,28 @@ class PillAddFormFragment :
             }
 
             binding.tvPillAddSpecificDay.text = ""
-
+            var days = ""
             builder.setPositiveButton("OK") { _, _ ->
                 for (i in arrayDays.indices) {
                     val checked = arrayChecked[i]
                     if (checked) {
                         binding.tvPillAddSpecificDay.text =
                             "${binding.tvPillAddSpecificDay.text} ${arrayDays[i]}"
-                        pillAddViewModel.pillCycleSpecificDaysList.add(arrayDays[i])
+                        //pillAddViewModel.pillCycleSpecificDaysList.add(arrayDays[i])
+                        pillAddViewModel.addPillCycleSpecificDay(arrayDays[i])
+                        days += arrayDays[i] + " "
                     }
                 }
-                Log.d("특정요일 목룍", "${pillAddViewModel.pillCycleSpecificDaysList}")
+                Log.d("특정요일 목룍", "$days")
             }
+            val string = binding.tvPillAddSpecificDay.toString()
+            Log.d("특정요일 목록 확인", pillAddViewModel.pillCycleSpecificDaysString.toString())
+            pillDays.value = string
+            pillAddViewModel.setPillDays(days)
             sendDay = binding.tvPillAddSpecificDay.toString()
+            // 뷰모델에서 set 해주기
             setSpecificDay = true
+
             dialog = builder.create()
             dialog.show()
         }
