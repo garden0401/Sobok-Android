@@ -14,6 +14,8 @@ data class ResNoticeListData2(
     val data: Data
 ) {
     data class Data(
+        @SerializedName("username")
+        val username: String,
         @SerializedName("infoList")
         val infoList: List<Info>
     ) {
@@ -33,7 +35,9 @@ data class ResNoticeListData2(
             @SerializedName("pillName")
             val pillName: String? = null,
             @SerializedName("pillId")
-            val pillId: Int? = null
+            val pillId: Int? = null,
+            @SerializedName("senderGroupId")
+            val senderGroupId: Int? = null
         )
     }
 }

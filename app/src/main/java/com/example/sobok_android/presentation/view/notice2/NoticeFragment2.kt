@@ -74,6 +74,12 @@ class NoticeFragment2 : BindingFragment<FragmentNotice2Binding>(R.layout.fragmen
 
             noticeListAdapter2.noticeList2 = noticeList
 
+//            val userName = mutableListOf<NoticeListData2.Data>()
+//            userName.add(it.data)
+//            binding.userName = userName
+
+            binding.userName = "소중한 " + it.data.username + "님의 알림"
+
             if (noticeListAdapter2.noticeList2.isEmpty()) {
                 binding.isEmpty = true
             } else false

@@ -10,6 +10,10 @@
             name="isEmpty"
             type="Boolean" />
 
+        <variable
+            name="userName"
+            type="String" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +27,7 @@
         android:id="@+id/tv_notice_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@string/notice_title"
+        android:text="@{userName}"
         android:fontFamily="@font/pretendard_bold"
         android:textColor="@color/notice_title"
         android:textSize="24sp"

@@ -26,8 +26,9 @@ object NoticeMapper {
         return NoticeListData2(
             data = NoticeListData2.Data(
                 infoList = resNoticeListData2.data.infoList.map {
-                    NoticeListData2.Data.Info(it.noticeId, it.section, it.isOkay, it.isSend, it.createdAt, it.senderName, it.pillName, it.pillId)
-                }
+                    NoticeListData2.Data.Info(it.noticeId, it.section, it.isOkay, it.isSend, it.createdAt, it.senderName, it.pillName, it.pillId, it.senderGroupId)
+                },
+                username = resNoticeListData2.data.username
             )
         )
     }
