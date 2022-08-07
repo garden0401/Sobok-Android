@@ -4,14 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ActivityMyInfoBinding
-import com.example.sobok_android.domain.model.myinfo.MyPillData
 import com.example.sobok_android.presentation.base.BindingActivity
 import com.example.sobok_android.presentation.view.myinfo.adapter.MyPillManageAdapter
+import com.example.sobok_android.presentation.view.myinfo.viewmodel.MyInfoViewModel
 import com.tomergoldst.tooltips.ToolTip
 import com.tomergoldst.tooltips.ToolTipsManager
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MyInfoActivity : BindingActivity<ActivityMyInfoBinding>(R.layout.activity_my_info) {
+    private val myInfoViewModel: MyInfoViewModel by viewModel()
     private lateinit var myPillManageAdapter: MyPillManageAdapter
     private lateinit var toolTipsManager: ToolTipsManager
     private lateinit var toolTipBuilder: ToolTip.Builder
@@ -22,25 +24,25 @@ class MyInfoActivity : BindingActivity<ActivityMyInfoBinding>(R.layout.activity_
         initData()
         initAdapter()
         initClickEvent()
+        observeMyPillList()
     }
 
     private fun initData() {
         //TODO: 원래닉네임 보내기
         binding.nickName = "닉네임"
-
         toolTipsManager = ToolTipsManager()
+        myInfoViewModel.getMyPillList()
     }
 
     private fun initAdapter() {
         myPillManageAdapter = MyPillManageAdapter()
         binding.rvMyPill.adapter = myPillManageAdapter
-        myPillManageAdapter.myPillList = listOf(
-            MyPillData(1, "비타민", "2"),
-            MyPillData(1, "비타2", "3"),
-            MyPillData(1, "비타3", "1"),
-            MyPillData(1, "비타4", "4"),
-            MyPillData(1, "비타민", "2")
-        )
+    }
+
+    private fun observeMyPillList() {
+        myInfoViewModel.myPillList.observe(this) {
+            myPillManageAdapter.myPillList = it
+        }
     }
 
     private fun initClickEvent() {
