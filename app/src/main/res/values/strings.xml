@@ -86,7 +86,10 @@
     <string name="notice_title">소중한 복이님의 알림</string>
     <string name="notice_empty_message">아직 도착한 알림이 없어요!</string>
     <string name="notice_detail">상세보기</string>
-
+    <string name="notice_detail_title">약 일정</string>
+    <string name="notice_detail_pill_cycle">약 먹는 주기</string>
+    <string name="notice_detail_pill_time">약 먹는 시간</string>
+    <string name="notice_detail_pill_period">약 먹는 기간</string>
 
 
 </resources>

@@ -45,6 +45,7 @@
     <color name="notice_btn_reject">#00abb6</color>
     <color name="notice_btn_accept">#ffffff</color>
     <color name="notice_list_line">#eff2f4</color>
+    <color name="notice_detail_line">#e3e8eb</color>
 
 
 </resources>
