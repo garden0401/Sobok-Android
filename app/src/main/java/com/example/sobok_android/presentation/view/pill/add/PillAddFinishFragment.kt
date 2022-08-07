@@ -18,7 +18,7 @@ class PillAddFinishFragment :
     private var pillListCount: Int = 0
     private var pillCount: Int = 0
     private var possibleCount: Int = 0
-
+/*
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initPillListAdapter()
@@ -48,6 +48,9 @@ class PillAddFinishFragment :
         }
 
     }
+
+ */
+    /*
     private fun setPillCountMsg() {
         if (possibleCount > 0) {
             binding.tvAddPillCountMsg.visibility = View.VISIBLE
@@ -71,6 +74,8 @@ class PillAddFinishFragment :
     }
 
 
+     */
+
     private fun initPillListAdapter() {
         pillListAdapter = PillListAdapter()
         pillListAdapter.pillList = pillAddViewModel.pillList
@@ -85,7 +90,7 @@ class PillAddFinishFragment :
             (requireActivity() as PillAddActivity).replacePillAddFormFragment()
         }
     }
-
+/*
     private fun navigateToHome() {
         binding.tvFinish.setOnClickListener {
 //            val intent = Intent(requireContext(), MainActivity::class.java)
@@ -93,4 +98,6 @@ class PillAddFinishFragment :
             requireActivity().finish()
         }
     }
+
+ */
 }

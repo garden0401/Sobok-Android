@@ -1,12 +1,13 @@
 package com.example.sobok_android.presentation.view.pill.add
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import com.example.sobok_android.databinding.FragmentPillAddBottomSheetBinding
+import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
 import com.example.sobok_android.presentation.view.viewmodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -14,6 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class PillAddBottomSheetFragment : BottomSheetDialogFragment() {
 
     private val mainViewModel: MainViewModel by sharedViewModel()
+    private val pillAddViewModel: PillAddViewModel by sharedViewModel()
 
     lateinit var _binding: FragmentPillAddBottomSheetBinding
     private val binding get() = _binding!!
@@ -22,7 +24,8 @@ class PillAddBottomSheetFragment : BottomSheetDialogFragment() {
     var _pillCount: Int = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentPillAddBottomSheetBinding.inflate(layoutInflater, container, false)
@@ -36,11 +39,15 @@ class PillAddBottomSheetFragment : BottomSheetDialogFragment() {
 
         binding.clPillAddMyPill.setOnClickListener {
             _isMyPill = true
-            getPillCount()
+            // getPillCount()
+            val intent = Intent(activity, PillAddActivity::class.java)
+            startActivity(intent)
         }
         binding.clPillAddSendPill.setOnClickListener {
             _isMyPill = false
             getPillCount()
+            val intent = Intent(activity, PillAddActivity::class.java)
+            startActivity(intent)
         }
         binding.ivCancel.setOnClickListener {
             dismiss()
