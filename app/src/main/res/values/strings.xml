@@ -90,4 +90,15 @@
 
     <string name="notice_title">소중한 복이님의 알림</string>
 
+    <!-- MyInfo -->
+    <string name="my_info">내 정보</string>
+    <string name="my_pill_management">내 약 관리</string>
+    <string name="nickname_edit">닉네임 수정</string>
+    <string name="double_check">중복확인</string>
+    <string name="nickname_error_message">2~10자리의 한글, 영문, 숫자만 사용 가능해요</string>
+    <string name="my_info_note">약 개수 제한\n최대 5개까지 등록할 수 있어요</string>
+    <string name="nickname_already_in_use_message">이미 사용 중인 닉네임이에요</string>
+    <string name="usable_nickname_message">사용 가능한 닉네임이에요</string>
+    <string name="please_double_check">닉네임 중복확인을 해주세요</string>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.example.sobok_android.presentation.view.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.sobok_android.R
@@ -7,6 +8,7 @@ import com.example.sobok_android.databinding.FragmentHomeBinding
 import com.example.sobok_android.presentation.base.BindingFragment
 import com.example.sobok_android.presentation.view.calendar.viewmodel.CalendarViewModel
 import com.example.sobok_android.presentation.view.home.viewmodel.HomeViewModel
+import com.example.sobok_android.presentation.view.myinfo.MyInfoActivity
 import com.example.sobok_android.presentation.view.viewmodel.MainViewModel
 import com.example.sobok_android.util.DateTimeUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -93,6 +95,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 observeIsEditClickEvent()
                 setTvBtnHomePillListEditClickListener()
                 observeHomePillList()
+                setMyInfoBtnClickListener()
 
                 //TODO: CalendarViewModel로 변경 예정
                 homeViewModel.selectedDate.observe(viewLifecycleOwner) {
@@ -142,6 +145,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         // 홈(메인) 약 리스트 스티커 클릭-바텀시트 띄우기(고차함수 써보기-바텀네비 가리면서 올라와야 하니까 MainActivity 에서 띄워주려고)
         homePillListAllAdapter.setStickerClickListener {
             mainViewModel.setIsStickerClick(it)
+        }
+    }
+
+    private fun setMyInfoBtnClickListener() {
+        binding.ivMyInfo.setOnClickListener {
+            startActivity(Intent(requireContext(), MyInfoActivity::class.java))
         }
     }
 

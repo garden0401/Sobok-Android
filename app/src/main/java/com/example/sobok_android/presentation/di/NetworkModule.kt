@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 val netWorkModule = module {
     single{
@@ -47,5 +48,9 @@ val netWorkModule = module {
 
     single<LoginService> {
         get<Retrofit>().create(LoginService::class.java)
+    }
+
+    single<MyInfoService>{
+        get<Retrofit>().create(MyInfoService::class.java)
     }
 }
