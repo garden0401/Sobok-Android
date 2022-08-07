@@ -58,8 +58,7 @@
                 android:id="@+id/tv_pill_date"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/pretendard_medium"
-                android:text="@string/pill_add_pill_date"
-                android:textColor="@color/black_sub"
+                android:textColor="@color/dark_mint_main"
                 android:textSize="17sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -106,7 +105,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/tv_next"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

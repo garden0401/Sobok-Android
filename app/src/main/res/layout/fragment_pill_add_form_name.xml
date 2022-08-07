@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
 
+        <variable
+            name="isMyPill"
+            type="Boolean" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -189,6 +197,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white_sub"
+            android:visibility="@{ isMyPill ? View.GONE : View.VISIBLE}"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <include
