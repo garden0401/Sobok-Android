@@ -18,8 +18,7 @@ val netWorkModule = module {
                     chain.request().newBuilder()
                         .addHeader(
                             "accesstoken",
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTE5LCJuYW1lIjoi7JWI65Oc7JWI65OcIiwiaWF0IjoxNjU5NTAxNTY2LCJleHAiOjE2NjIwOTM1NjYsImlzcyI6InNvYm9rIn0.x69NZPxfx-DQBx-LCVstWSR0d0sp8bOOL8t0jZ9B-gw"
-                            //SobokSharedPreference.getUserToken()
+                            SobokSharedPreference.getUserToken()
                         )
                         .build()
                 )
