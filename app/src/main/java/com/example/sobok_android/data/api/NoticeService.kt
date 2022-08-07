@@ -1,9 +1,10 @@
 package com.example.sobok_android.data.api
 
+import com.example.sobok_android.data.model.request.notice.ReqNoticeCalendarShareData
 import com.example.sobok_android.data.model.response.notice.ResNoticeListData
+import com.example.sobok_android.data.model.response.notice2.ResNoticeCalendarShareData
 import com.example.sobok_android.data.model.response.notice2.ResNoticeListData2
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface NoticeService {
     //GET NoticeResult
@@ -15,4 +16,11 @@ interface NoticeService {
     //GET NoticeList
     @GET("notice/list")
     suspend fun getNoticeList() : ResNoticeListData2
+
+    //PUT NoticeCalendarShare
+    @PUT("group/{sendGroupId}")
+    suspend fun putNoticeCalendarShare(
+        @Path("sendGroupId") sendGroupId: Int,
+        @Body isOkay: ReqNoticeCalendarShareData
+    ) : ResNoticeCalendarShareData
 }
