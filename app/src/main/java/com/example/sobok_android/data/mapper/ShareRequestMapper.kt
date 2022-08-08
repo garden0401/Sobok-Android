@@ -15,8 +15,9 @@ object ShareRequestMapper {
     }
 
     fun mapperToSearchResultSuccessData(resShareRequestSuccessData: ResShareRequestSuccessData): ShareRequestSuccessData {
+        //TODO: 확인 필요
         return ShareRequestSuccessData(
-            data = ShareRequestSuccessData.MemberInfo(resShareRequestSuccessData.data.memberId, resShareRequestSuccessData.data.memberName)
+            data = ShareRequestSuccessData.MemberInfo(resShareRequestSuccessData.data.noticeId, resShareRequestSuccessData.data.memberName)
         )
     }
 
