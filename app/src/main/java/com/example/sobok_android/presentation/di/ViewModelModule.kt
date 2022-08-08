@@ -4,6 +4,7 @@ import com.example.sobok_android.presentation.view.notice.viewmodel.NoticeViewMo
 import org.koin.androidx.viewmodel.dsl.viewModel
 import com.example.sobok_android.presentation.view.calendar.viewmodel.CalendarViewModel
 import com.example.sobok_android.presentation.view.home.viewmodel.HomeViewModel
+import com.example.sobok_android.presentation.view.notice2.viewmodel.NoticeViewModel2
 import com.example.sobok_android.presentation.view.myinfo.viewmodel.MyInfoViewModel
 import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
 import com.example.sobok_android.presentation.view.share.request.viewmodel.ShareRequestViewModel
@@ -22,5 +23,6 @@ val viewModelModule = module {
     viewModel { CalendarViewModel(get()) }
     viewModel { SignInViewModel(get()) }
     viewModel { SignUpViewModel(get()) }
+    viewModel { NoticeViewModel2(get()) }
     viewModel { MyInfoViewModel(get()) }
 }

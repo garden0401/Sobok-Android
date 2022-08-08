@@ -10,4 +10,5 @@ interface CalendarDataSource {
     suspend fun getHomePillList(date: String): ResHomePillListData
 
     suspend fun getSharePillList(memberId: Int, date: String): ResSharePillListData
+
 }

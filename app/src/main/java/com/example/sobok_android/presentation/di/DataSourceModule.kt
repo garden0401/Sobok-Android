@@ -8,6 +8,8 @@ import com.example.sobok_android.data.datasource.login.SignInDataSource
 import com.example.sobok_android.data.datasource.login.SignInRemoteDataSource
 import com.example.sobok_android.data.datasource.login.SignUpDataSource
 import com.example.sobok_android.data.datasource.login.SignUpRemoteDataSource
+import com.example.sobok_android.data.datasource.notice2.NoticeDataSource2
+import com.example.sobok_android.data.datasource.notice2.NoticeRemoteDataSource2
 import com.example.sobok_android.data.datasource.myinfo.MyInfoDataSource
 import com.example.sobok_android.data.datasource.myinfo.MyInfoRemoteDataSource
 import com.example.sobok_android.data.datasource.pill.pilladd.PillAddDataSource
@@ -24,5 +26,6 @@ val dataSourceModule = module {
     single<CalendarDataSource> { CalendarRemoteDataSource(get()) }
     single<SignInDataSource> { SignInRemoteDataSource(get()) }
     single<SignUpDataSource> { SignUpRemoteDataSource(get()) }
+    single<NoticeDataSource2> { NoticeRemoteDataSource2(get()) }
     single<MyInfoDataSource> { MyInfoRemoteDataSource(get())}
 }
