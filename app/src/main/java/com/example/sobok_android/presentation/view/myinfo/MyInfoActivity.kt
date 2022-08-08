@@ -58,6 +58,9 @@ class MyInfoActivity : BindingActivity<ActivityMyInfoBinding>(R.layout.activity_
             ibBack.setOnClickListener {
                 finish()
             }
+            ibSetting.setOnClickListener {
+                startActivity(Intent(this@MyInfoActivity, SettingActivity::class.java))
+            }
         }
     }
 
