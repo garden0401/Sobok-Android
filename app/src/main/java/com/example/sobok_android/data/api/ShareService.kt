@@ -1,8 +1,10 @@
 package com.example.sobok_android.data.api
 
+import com.example.sobok_android.data.model.request.share.ReqShareRequestData
 import com.example.sobok_android.data.model.response.share.ResGroupData
 import com.example.sobok_android.data.model.response.share.request.ResSearchResultData
 import com.example.sobok_android.data.model.response.share.request.ResShareRequestSuccessData
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -18,7 +20,7 @@ interface ShareService {
     @POST("group")
     suspend fun postShareRequest(
         @Query("memberId") memberId: Int,
-        @Query("memberName") memberName: String
+        @Body body: ReqShareRequestData
     ): ResShareRequestSuccessData
 
     //GET GroupData

@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="isGroupEmpty"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,6 +109,7 @@
                 android:layout_marginEnd="7dp"
                 android:layout_marginBottom="3dp"
                 android:src="@drawable/ic_plus_48_white"
+                android:visibility="@{isGroupEmpty? View.INVISIBLE : View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

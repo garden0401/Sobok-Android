@@ -15,6 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".presentation.view.notice2.NoticeDetailPillInfoActivity"
+            android:name=".presentation.view.myinfo.MyInfoActivity"
             android:exported="false"/>
         <activity
             android:name=".presentation.view.pill.add.PillAddActivity"
@@ -41,7 +42,8 @@
             android:name=".presentation.view.pill.add.PillAddCalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.view.share.ShareNameEditActivity"
+            android:name=".presentation.view.myinfo.MyNicknameEditActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".presentation.view.user.SignUpActivity"
