@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import com.example.sobok_android.R
 
 object DialogUtil {
     fun makeDialog(context: Context) = Dialog(context)

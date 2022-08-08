@@ -14,9 +14,14 @@
         android:theme="@style/Theme.SobokAndroid"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.view.myinfo.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.notice2.NoticeDetailPillInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.myinfo.MyInfoActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".presentation.view.pill.add.PillAddActivity"
             android:exported="true" />
@@ -43,19 +48,16 @@
             android:exported="false" />
         <activity
             android:name=".presentation.view.myinfo.MyNicknameEditActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.view.user.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.view.user.SignInActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".presentation.view.splash.SplashActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".presentation.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,7 +65,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".presentation.view.MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

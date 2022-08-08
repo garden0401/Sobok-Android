@@ -96,6 +96,24 @@
     <string name="notice_detail_pill_period">약 먹는 기간</string>
 
 
+    <!-- Setting -->
+    <string name="setting">설정</string>
+    <string name="contact_email">이메일로 문의하기</string>
+    <string name="terms_of_use">약관 및 정책</string>
+    <string name="open_source_license">오픈소스 라이선스</string>
+    <string name="logout">로그아웃</string>
+    <string name="cancel_membership">회원 탈퇴하기</string>
+    <string name="privacy_policy">개인정보처리방침</string>
+    <string name="sobok_terms_of_service">소복소복 서비스 이용약관</string>
+    <string name="withdrawal_question">소복소복을 떠나시나요?</string>
+    <string name="withdrawal_detail_message">탈퇴하면 그 동안의 복약기록와\n받은 스티커를 포함한 모든 정보가 사라져요</string>
+    <string name="withdrawal_reason">탈퇴하려는 이유가 궁금해요 (선택)</string>
+    <string name="withdrawal">회원 탈퇴</string>
+    <string name="withdrawal_reason_hint">적어주시는 여러분의 소중한 의견은 서비스 개선에 큰 도움이 돼요:)</string>
+    <string name="logout_message">정말 로그아웃 하시나요?</string>
+    <string name="cancel">취소</string>
+    <string name="withdrawal_reason_count">%d/2000</string>
+
     <!-- MyInfo -->
     <string name="my_info">내 정보</string>
     <string name="my_pill_management">내 약 관리</string>
