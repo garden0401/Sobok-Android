@@ -33,11 +33,11 @@ class NoticeViewModel2(private val noticeRepository2: NoticeRepository2): ViewMo
 
     // 캘린더 공유 수락&거절
 
-    private var _sendGroupId = MutableLiveData<Int>()
-    val sendGroupId : LiveData<Int> = _sendGroupId
-    fun postSendGroupId(value: Int) {
-        _sendGroupId.value = value
-    }
+//    private var _sendGroupId = MutableLiveData<Int>()
+//    val sendGroupId : LiveData<Int> = _sendGroupId
+//    fun postSendGroupId(value: Int) {
+//        _sendGroupId.value = value
+//    }
 
 
     fun putNoticeCalendarShare(sendGroupId: Int, isOkay: String) = viewModelScope.launch {
@@ -48,6 +48,18 @@ class NoticeViewModel2(private val noticeRepository2: NoticeRepository2): ViewMo
             .onFailure {
                 it.printStackTrace()
                 Log.d("putNoticeCalendarShare-fail", it.toString())
+            }
+    }
+
+    // 알림_ 타인에게 받은 약 수락&거절
+    fun putNoticePillAccept(pillId: Int, isOkay: String) = viewModelScope.launch {
+        kotlin.runCatching { noticeRepository2.putNoticePillAccept(pillId, ReqNoticeCalendarShareData(isOkay)) }
+            .onSuccess {
+                Log.d("putNoticePillAccept-success", it.toString())
+            }
+            .onFailure {
+                it.printStackTrace()
+                Log.d("putNoticePillAccept-fail", it.toString())
             }
     }
 

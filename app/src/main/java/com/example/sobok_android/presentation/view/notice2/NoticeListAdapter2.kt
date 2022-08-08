@@ -148,6 +148,7 @@ class NoticeListAdapter2 : RecyclerView.Adapter<NoticeListAdapter2.NoticeList2Vi
                             .setPositiveButton("확인") {dialog, id ->
                                 // 약 일정 거절하기 서버 연결 및 알림리스트 새로고침
                                 // isOkay 에 refuse
+                                isOkay?.invoke("refuse",data.pillId!!)
                             }
                             .setNegativeButton("취소") {dialog, id ->
                                 dialog.cancel()
@@ -178,6 +179,7 @@ class NoticeListAdapter2 : RecyclerView.Adapter<NoticeListAdapter2.NoticeList2Vi
                             .setPositiveButton("확인") {dialog, id ->
                                 // 약 일정 수락하기 서버 연결 및 알림리스트 새로고침
                                 // isOkay 에 accept
+                                isOkay?.invoke("accept",data.pillId!!)
                             }
                             .setNegativeButton("취소") {dialog, id ->
                                 dialog.cancel()

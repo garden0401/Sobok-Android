@@ -27,6 +27,7 @@ class NoticeFragment2 : BindingFragment<FragmentNotice2Binding>(R.layout.fragmen
         getNoticeList()
         observeNoticeList()
         putNoticeCalendarShare()
+        putNoticePillAccept()
 
     }
 
@@ -103,17 +104,24 @@ class NoticeFragment2 : BindingFragment<FragmentNotice2Binding>(R.layout.fragmen
         }
     }
 
+
+    // 캘린더 공유 수락&거절
     private fun putNoticeCalendarShare() {
-
-
                 noticeListAdapter2.setIsOkay { isOkay, senderGroupId ->
                     noticeViewModel2.putNoticeCalendarShare(senderGroupId, isOkay)
 
                     noticeViewModel2.getNoticeList()
                 }
 
+    }
 
+    // 알림_ 타인에게 받은 약 수락&거절
+    private fun putNoticePillAccept() {
+        noticeListAdapter2.setIsOkay{ isOkay, pillId ->
+            noticeViewModel2.putNoticePillAccept(pillId, isOkay)
 
+            noticeViewModel2.getNoticeList()
+        }
     }
 
 //    override fun onResume() {
