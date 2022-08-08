@@ -50,6 +50,10 @@
     <string name="share_request_save_error_special">특수문자 입력은 불가능해요</string>
     <string name="share_request_save_text_count">%d/10</string>
     <string name="share_request_save_hint_msg">2~10자의 한글, 영문, 숫자</string>
+    <string name="request">요청하기</string>
+    <string name="share_request_calendar_message">캘린더 공유 요청을 보냈어요!</string>
+    <string name="share_request_calendar_message_detail">상대방이 요청을 수락하면,\n상대방의 캘린더를 볼 수 있어요</string>
+    <string name="share_request_limit_message">캘린더 공유는 5명까지만 가능해요</string>
 
 
     <!-- Home 약 리스트   -->
@@ -79,11 +83,46 @@
     <string name="share_empty_msg_content">소중한 사람에게 캘린더 공유를 요청하면\n상대방의 복약 기록을 확인하고,\n응원을 보낼 수 있어요</string>
     <string name="share_request_add">추가하기</string>
 
-    <!-- Notice Button Text  -->
+    <!-- Notice -->
     <string name="accept">수락</string>
     <string name="reject">거절</string>
     <string name="confirm">확인</string>
-
     <string name="notice_title">소중한 복이님의 알림</string>
+    <string name="notice_empty_message">아직 도착한 알림이 없어요!</string>
+    <string name="notice_detail">상세보기</string>
+    <string name="notice_detail_title">약 일정</string>
+    <string name="notice_detail_pill_cycle">약 먹는 주기</string>
+    <string name="notice_detail_pill_time">약 먹는 시간</string>
+    <string name="notice_detail_pill_period">약 먹는 기간</string>
+
+
+    <!-- Setting -->
+    <string name="setting">설정</string>
+    <string name="contact_email">이메일로 문의하기</string>
+    <string name="terms_of_use">약관 및 정책</string>
+    <string name="open_source_license">오픈소스 라이선스</string>
+    <string name="logout">로그아웃</string>
+    <string name="cancel_membership">회원 탈퇴하기</string>
+    <string name="privacy_policy">개인정보처리방침</string>
+    <string name="sobok_terms_of_service">소복소복 서비스 이용약관</string>
+    <string name="withdrawal_question">소복소복을 떠나시나요?</string>
+    <string name="withdrawal_detail_message">탈퇴하면 그 동안의 복약기록와\n받은 스티커를 포함한 모든 정보가 사라져요</string>
+    <string name="withdrawal_reason">탈퇴하려는 이유가 궁금해요 (선택)</string>
+    <string name="withdrawal">회원 탈퇴</string>
+    <string name="withdrawal_reason_hint">적어주시는 여러분의 소중한 의견은 서비스 개선에 큰 도움이 돼요:)</string>
+    <string name="logout_message">정말 로그아웃 하시나요?</string>
+    <string name="cancel">취소</string>
+    <string name="withdrawal_reason_count">%d/2000</string>
+
+    <!-- MyInfo -->
+    <string name="my_info">내 정보</string>
+    <string name="my_pill_management">내 약 관리</string>
+    <string name="nickname_edit">닉네임 수정</string>
+    <string name="double_check">중복확인</string>
+    <string name="nickname_error_message">2~10자리의 한글, 영문, 숫자만 사용 가능해요</string>
+    <string name="my_info_note">약 개수 제한\n최대 5개까지 등록할 수 있어요</string>
+    <string name="nickname_already_in_use_message">이미 사용 중인 닉네임이에요</string>
+    <string name="usable_nickname_message">사용 가능한 닉네임이에요</string>
+    <string name="please_double_check">닉네임 중복확인을 해주세요</string>
 
 </resources>
