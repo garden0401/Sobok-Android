@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="isEmpty"
             type="Boolean" />
@@ -19,49 +20,47 @@
         tools:context=".presentation.view.pill.add.PillAddFormDateFragment">
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_top_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/iv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_48" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_top_tab"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/tv_add_pill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_pill"
+                android:textColor="@color/gray900_sub"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/iv_cancel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="1dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_back_48" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center"
+                android:text="취소"
+                android:textColor="@color/gray900_sub"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/tv_add_pill"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/add_pill"
-                        android:textColor="@color/gray900_sub"
-                        android:textSize="17sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:text="취소"
-                        android:gravity="center"
-                        android:layout_marginHorizontal="20dp"
-                        android:textColor="@color/gray900_sub"
-                        android:textSize="17sp" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -73,6 +72,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:id="@+id/tv_pill_date_msg"
                     android:layout_width="wrap_content"
@@ -80,8 +80,8 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="27dp"
                     android:text="언제까지 먹는 약인가요?"
-                    android:textColor="@color/gray800_sub"
                     android:textAppearance="@font/pretendard_semi_bold"
+                    android:textColor="@color/gray800_sub"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -115,13 +115,15 @@
                         app:currentDayIconRes="@drawable/oval_fill_blue"
                         app:currentDaySelectedIconRes="@drawable/oval_fill_blue"
                         app:currentDayTextColor="@color/dark_mint_main"
+                        app:dayTextColor="@color/black_sub"
                         app:firstDayOfTheWeek="monday"
                         app:orientation="horizontal"
                         app:selectedDayBackgroundColor="@color/light_mint"
                         app:selectedDayBackgroundEndColor="@color/light_mint"
                         app:selectedDayBackgroundStartColor="@color/light_mint"
                         app:selectedDayTextColor="@color/black_sub"
-                        app:selectionType="range" />
+                        app:selectionType="range"
+                        app:weekendDayTextColor="@color/black_sub" />
 
                 </LinearLayout>
 

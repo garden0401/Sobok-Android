@@ -87,6 +87,7 @@
                         android:layout_marginTop="27dp"
                         android:text="@string/pill_add_pill_cycle_msg"
                         android:textAppearance="@style/PillAddTitle"
+                        android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -266,7 +267,7 @@
                         android:id="@+id/cl_add_pill_time"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/rectangle_fill_gray100_border_gray150"
+                        android:background="@drawable/rectangle_fill_gray_100_radius_12"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/rcv_pill_time">
 
@@ -345,6 +346,7 @@
             android:id="@+id/cl_cannot_add_pill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

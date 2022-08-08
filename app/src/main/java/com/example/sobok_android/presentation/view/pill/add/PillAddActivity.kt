@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activity_pill_add) {
     private val pillAddViewModel: PillAddViewModel by viewModel()
-    private lateinit var pillAddFormFragment: PillAddFormFragment
+    private var pillAddFormFragment: PillAddFormFragment = PillAddFormFragment()
     private var pillAddFormNameFragment: PillAddFormNameFragment = PillAddFormNameFragment()
     private var pillAddFormDateFragment: PillAddFormDateFragment = PillAddFormDateFragment()
     private var pillAddFinishBottomSheetFragment: PillAddFinishBottomSheetFragment =

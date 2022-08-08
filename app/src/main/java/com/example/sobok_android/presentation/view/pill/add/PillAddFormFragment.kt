@@ -21,6 +21,7 @@ import com.example.sobok_android.presentation.view.pill.add.adapter.PillListAdap
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillTimeAdapter
 import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
 import com.example.sobok_android.util.DateTimeUtil
+import com.example.sobok_android.util.DateTimeUtil.convertPillListStringToKoreaTime
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -223,7 +224,7 @@ class PillAddFormFragment :
                 cal.set(Calendar.MINUTE, minute)
 
                 val string = (SimpleDateFormat("HH:mm", Locale.getDefault()).format(cal.time))
-                pillAddViewModel.addTime(string)
+                pillAddViewModel.addTime(convertPillListStringToKoreaTime(string))
                 pillTimeAdapter.submitList(pillAddViewModel.pillTimeList)
                 pillTimeAdapter.notifyDataSetChanged()
             }
@@ -353,7 +354,7 @@ class PillAddFormFragment :
                     val checked = arrayChecked[i]
                     if (checked) {
                         pillAddViewModel.addPillCycleSpecificDay(arrayDays[i])
-                        days += arrayDays[i] + ","
+                        days += arrayDays[i] + ", "
                     }
                 }
                 val daysLength:Int = days.length
