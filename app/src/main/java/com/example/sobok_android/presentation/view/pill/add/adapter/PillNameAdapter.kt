@@ -16,14 +16,15 @@ class PillNameAdapter : RecyclerView.Adapter<PillNameAdapter.PillNameViewHolder>
     var isFillPillName: Boolean = false
 
     private val _realPillNameList = mutableListOf<String>()
-var realPillNameList: MutableList<String> = _realPillNameList // = : getter의 의미
-    set(value) {
-        val realValue = value
-        _realPillNameList.clear()
-        _realPillNameList.addAll(realValue)
-        notifyDataSetChanged()
-        field = value
-    }
+    var realPillNameList: MutableList<String> = _realPillNameList // = : getter의 의미
+        set(value) {
+            val realValue = value
+            _realPillNameList.clear()
+            _realPillNameList.addAll(realValue)
+            notifyDataSetChanged()
+            field = value
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PillNameViewHolder {
         val binding: ItemPillAddPillNameBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -55,7 +56,7 @@ var realPillNameList: MutableList<String> = _realPillNameList // = : getter의 �
                 realPillNameList[position] = it.toString()
             }
 
-            if(position == 0) {
+            if (position == 0) {
                 binding.ivClose.visibility = View.GONE
                 isFillPillName = binding.tvPillName.text.isNotEmpty()
             }
@@ -77,7 +78,8 @@ var realPillNameList: MutableList<String> = _realPillNameList // = : getter의 �
             }
         }
     }
-    fun deleteItem(position: Int){
+
+    fun deleteItem(position: Int) {
         realPillNameList.removeAt(position)
         Log.d("#####real item list 재할당", "${realPillNameList}")
         notifyDataSetChanged()

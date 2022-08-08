@@ -1,7 +1,5 @@
 package com.example.sobok_android.domain.model.pill.pilladd
 
-import java.io.Serializable
-
 data class PillListData(
     val pillList: MutableList<PillInfo>
 ) {

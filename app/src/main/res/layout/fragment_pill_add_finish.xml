@@ -202,7 +202,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_finish"
+                    android:id="@+id/tv_next"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangle_fill_mint"
