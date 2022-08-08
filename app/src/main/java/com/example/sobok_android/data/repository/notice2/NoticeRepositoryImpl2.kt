@@ -23,6 +23,16 @@ class NoticeRepositoryImpl2(private val noticeDataSource2: NoticeDataSource2) : 
         }
     }
 
+    override suspend fun putNoticePillAccept(pillId: Int, isOkay: ReqNoticeCalendarShareData): NoticeGenericData {
+        return with(noticeDataSource2.putNoticePillAccept(pillId, isOkay)) {
+            NoticeGenericData(
+                this.status,
+                this.success,
+                this.message
+            )
+        }
+    }
+
     override suspend fun getNoticeDetail(noticeId: Int, pillId: Int): NoticeDetailData {
         return NoticeMapper.mapperToNoticeDetailData(noticeDataSource2.getNoticeDetail(noticeId, pillId))
     }

@@ -25,6 +25,13 @@ interface NoticeService {
         @Body isOkay: ReqNoticeCalendarShareData
     ) : ResNoticeCalendarShareData
 
+    //PUT NoticePillAccept
+    @PUT("notice/list/{pillId}")
+    suspend fun putNoticePillAccept(
+        @Path("pillId") pillId: Int,
+        @Body isOkay: ReqNoticeCalendarShareData
+    ) : ResNoticeCalendarShareData
+
     //GET NoticeDetailPillInfo
     @GET("notice/list/{noticeId}/{pillId}")
     suspend fun getNoticeDetail(

@@ -15,6 +15,10 @@ class NoticeRemoteDataSource2(private val noticeService: NoticeService) : Notice
         return noticeService.putNoticeCalendarShare(sendGroupId, isOkay)
     }
 
+    override suspend fun putNoticePillAccept(pillId: Int, isOkay: ReqNoticeCalendarShareData): ResNoticeCalendarShareData {
+        return noticeService.putNoticePillAccept(pillId, isOkay)
+    }
+
     override suspend fun getNoticeDetail(noticeId: Int, pillId: Int): ResNoticeDetailData {
         return noticeService.getNoticeDetail(noticeId, pillId)
     }

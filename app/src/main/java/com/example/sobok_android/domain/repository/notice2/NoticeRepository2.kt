@@ -10,6 +10,8 @@ interface NoticeRepository2 {
 
     suspend fun putNoticeCalendarShare(sendGroupId: Int, isOkay: ReqNoticeCalendarShareData): NoticeGenericData
 
+    suspend fun putNoticePillAccept(pillId: Int, isOkay: ReqNoticeCalendarShareData): NoticeGenericData
+
     suspend fun getNoticeDetail(noticeId: Int, pillId: Int): NoticeDetailData
 
 }

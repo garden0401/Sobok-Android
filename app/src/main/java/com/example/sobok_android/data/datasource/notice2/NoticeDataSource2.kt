@@ -11,6 +11,8 @@ interface NoticeDataSource2 {
 
     suspend fun putNoticeCalendarShare(sendGroupId: Int, isOkay: ReqNoticeCalendarShareData): ResNoticeCalendarShareData
 
+    suspend fun putNoticePillAccept(pillId: Int, isOkay: ReqNoticeCalendarShareData): ResNoticeCalendarShareData
+
     suspend fun getNoticeDetail(noticeId: Int, pillId: Int): ResNoticeDetailData
 
 }
