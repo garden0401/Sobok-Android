@@ -1,8 +1,12 @@
 package com.example.sobok_android.data.mapper
 
 import com.example.sobok_android.data.model.response.notice.ResNoticeListData
+import com.example.sobok_android.data.model.response.notice2.ResNoticeCalendarShareData
+import com.example.sobok_android.data.model.response.notice2.ResNoticeDetailData
 import com.example.sobok_android.data.model.response.notice2.ResNoticeListData2
 import com.example.sobok_android.domain.model.notice.NoticeListData
+import com.example.sobok_android.domain.model.notice2.NoticeDetailData
+import com.example.sobok_android.domain.model.notice2.NoticeGenericData
 import com.example.sobok_android.domain.model.notice2.NoticeListData2
 
 object NoticeMapper {
@@ -32,4 +36,19 @@ object NoticeMapper {
             )
         )
     }
+
+    fun mapperToNoticeDetailData(resNoticeDetailData: ResNoticeDetailData) : NoticeDetailData {
+        return NoticeDetailData(
+            data = NoticeDetailData.Data(
+                pillName = resNoticeDetailData.data.pillName,
+                takeInterval = resNoticeDetailData.data.takeInterval,
+                scheduleTime = resNoticeDetailData.data.scheduleTime,
+                startDate = resNoticeDetailData.data.startDate,
+                endDate = resNoticeDetailData.data.endDate,
+                scheduleDay = resNoticeDetailData.data.scheduleDay,
+                scheduleSpecific = resNoticeDetailData.data.scheduleSpecific
+            )
+        )
+    }
+
 }
