@@ -39,7 +39,9 @@ class SettingActivity : BindingActivity<ActivitySettingBinding>(R.layout.activit
     private fun initClickEvent() {
         with(binding) {
             ibBack.setOnClickListener {
-                navController.popBackStack()
+                if(!navController.popBackStack()) {
+                    finish()
+                }
             }
         }
     }
