@@ -26,7 +26,7 @@ class NoticeFragment2 : BindingFragment<FragmentNotice2Binding>(R.layout.fragmen
         initNoticeListAdapter()
         getNoticeList()
         observeNoticeList()
-//        putNoticeCalendarShare()
+        putNoticeCalendarShare()
 
     }
 
@@ -104,13 +104,15 @@ class NoticeFragment2 : BindingFragment<FragmentNotice2Binding>(R.layout.fragmen
     }
 
     private fun putNoticeCalendarShare() {
-        noticeListAdapter2.calendarConfirm = object : NoticeListAdapter2.CalendarConfirm {
-            override fun onClick(view: View, position: Int, sendGroupId: Int) {
-                noticeListAdapter2.setIsOkay {
-                    noticeViewModel2.putNoticeCalendarShare(sendGroupId, it)
+
+
+                noticeListAdapter2.setIsOkay { isOkay, senderGroupId ->
+                    noticeViewModel2.putNoticeCalendarShare(senderGroupId, isOkay)
+
+                    noticeViewModel2.getNoticeList()
                 }
-            }
-        }
+
+
 
     }
 

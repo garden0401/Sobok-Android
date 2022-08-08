@@ -17,9 +17,9 @@ import org.koin.androidx.viewmodel.compat.ViewModelCompat.viewModel
 class NoticeListAdapter2 : RecyclerView.Adapter<NoticeListAdapter2.NoticeList2ViewHolder>() {
 
     // isOkay값 -> NoticeFragment 이동을 위한 고차함수
-    private var isOkay : ((String) -> Unit)? = null
+    private var isOkay : ((String, Int) -> Unit)? = null
 
-    fun setIsOkay(listener: (String) -> Unit) {
+    fun setIsOkay(listener: (String, Int) -> Unit) {
         isOkay = listener
     }
 
@@ -30,12 +30,12 @@ class NoticeListAdapter2 : RecyclerView.Adapter<NoticeListAdapter2.NoticeList2Vi
 
     var itemClick: ItemClick? = null
 
-    // sendGroupId값 -> NoticeFragment로 전달
-    interface CalendarConfirm {
-        fun onClick(view: View, position: Int, sendGroupId: Int)
-    }
-
-    var calendarConfirm: CalendarConfirm? = null
+//    // sendGroupId값 -> NoticeFragment로 전달
+//    interface CalendarConfirm {
+//        fun onClick(view: View, position: Int, sendGroupId: Int)
+//    }
+//
+//    var calendarConfirm: CalendarConfirm? = null
 
 
     private val _noticeList2 = mutableListOf<NoticeListData2.Data.Info>()
@@ -70,14 +70,14 @@ class NoticeListAdapter2 : RecyclerView.Adapter<NoticeListAdapter2.NoticeList2Vi
         }
 
         // sendGroupId값 -> NoticeFragment로 전달
-        if (calendarConfirm != null) {
-            holder.binding.btnNoticeAccept.setOnClickListener {
-                calendarConfirm?.onClick(it, position, item.senderGroupId!!)
-            }
-            holder.binding.btnNoticeReject.setOnClickListener {
-                calendarConfirm?.onClick(it, position, item.senderGroupId!!)
-            }
-        }
+//        if (calendarConfirm != null) {
+//            holder.binding.btnNoticeAccept.setOnClickListener {
+//                calendarConfirm?.onClick(it, position, item.senderGroupId!!)
+//            }
+//            holder.binding.btnNoticeReject.setOnClickListener {
+//                calendarConfirm?.onClick(it, position, item.senderGroupId!!)
+//            }
+//        }
     }
 
     override fun getItemCount(): Int = _noticeList2.size
@@ -133,7 +133,9 @@ class NoticeListAdapter2 : RecyclerView.Adapter<NoticeListAdapter2.NoticeList2Vi
                             .setPositiveButton("확인") {dialog, id ->
                                 // 캘린더 공유 거절하기 서버 연결 및 알림리스트 새로고침
                                 // isOkay 에 refuse
-                                isOkay?.invoke("refuse")
+                                isOkay?.invoke("refuse",data.senderGroupId!!)
+
+
                             }
                             .setNegativeButton("취소") {dialog, id ->
                                 dialog.cancel()
@@ -162,7 +164,7 @@ class NoticeListAdapter2 : RecyclerView.Adapter<NoticeListAdapter2.NoticeList2Vi
                             .setPositiveButton("확인") {dialog, id ->
                                 // 캘린더 공유 수락하기 서버 연결 및 알림리스트 새로고침
                                 // isOkay 에 accept
-                                isOkay?.invoke("accept")
+                                isOkay?.invoke("accept", data.senderGroupId!!)
 
                             }
                             .setNegativeButton("취소") {dialog, id ->

@@ -46,9 +46,13 @@ class NoticeDetailPillInfoActivity : BindingActivity<ActivityNoticeDetailPillInf
     }
 
     private fun observeNoticeDetail() {
+
         noticeViewModel2.noticeDetailData.observe(this) {
-            val noticeDetail = mutableListOf<NoticeDetailData>()
-            noticeDetailAdapter.noticeDetail = noticeDetail
+
+            noticeDetailAdapter.noticeDetail = it.data.scheduleTime
+
+
+
 
             binding.noticeDetailData = it
 

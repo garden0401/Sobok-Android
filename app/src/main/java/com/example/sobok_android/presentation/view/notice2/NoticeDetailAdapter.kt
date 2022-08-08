@@ -9,9 +9,9 @@ import com.example.sobok_android.domain.model.notice2.NoticeDetailData
 
 class NoticeDetailAdapter : RecyclerView.Adapter<NoticeDetailAdapter.NoticeDetailViewHolder>() {
 
-    private val _noticeDetail = mutableListOf<NoticeDetailData>()
+    private val _noticeDetail = mutableListOf<String>()
 
-    var noticeDetail: List<NoticeDetailData> = _noticeDetail
+    var noticeDetail: List<String> = _noticeDetail
         set(value) {
             _noticeDetail.clear()
             _noticeDetail.addAll(value)
@@ -37,8 +37,8 @@ class NoticeDetailAdapter : RecyclerView.Adapter<NoticeDetailAdapter.NoticeDetai
 
     class NoticeDetailViewHolder(val binding: ItemNoticeDetailPillTimeBinding)
         : RecyclerView.ViewHolder(binding.root) {
-            fun onBind(data: NoticeDetailData) {
-                binding.noticeDetailData = data.data.scheduleTime.toString()
+            fun onBind(data: String) {
+                binding.noticeDetailData = data
             }
         }
 }
