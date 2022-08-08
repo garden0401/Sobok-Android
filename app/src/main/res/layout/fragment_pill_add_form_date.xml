@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="isEmpty"
+            type="Boolean" />
 
         <variable
             name="fragment"
@@ -15,85 +18,155 @@
         android:layout_height="match_parent"
         tools:context=".presentation.view.pill.add.PillAddFormDateFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_top_tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_close_48" />
-
-            <TextView
-                android:id="@+id/tv_add_pill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/add_pill"
-                android:textColor="@color/gray900_sub"
-                android:textSize="17sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/tv_pill_date_msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="27dp"
-            android:text="언제까지 먹는 약인가요?"
-            android:textAppearance="@style/PillAddTitle"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="@+id/cl_top_tab"
-            app:layout_constraintTop_toBottomOf="@+id/cl_top_tab" />
-
-        <TextView
-            android:id="@+id/tv_pill_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/pretendard_medium"
-            android:textColor="@color/dark_mint_main"
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="@+id/tv_pill_date_msg"
-            app:layout_constraintTop_toBottomOf="@+id/tv_pill_date_msg" />
 
 
-        <LinearLayout
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_top_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="1dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_back_48" />
+
+                    <TextView
+                        android:id="@+id/tv_add_pill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_pill"
+                        android:textColor="@color/gray900_sub"
+                        android:textSize="17sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:text="취소"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="20dp"
+                        android:textColor="@color/gray900_sub"
+                        android:textSize="17sp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="34dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_pill_date">
+            app:layout_constraintBottom_toTopOf="@+id/cl_btn_next"
+            app:layout_constraintTop_toBottomOf="@id/cl_top_tab">
 
-            <com.applikeysolutions.cosmocalendar.view.CalendarView
-                android:id="@+id/calendar_view"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:connectedDayIconPosition="top"
-                app:currentDayIconRes="@drawable/oval_fill_blue"
-                app:currentDaySelectedIconRes="@drawable/oval_fill_blue"
-                app:currentDayTextColor="@color/dark_mint_main"
-                app:firstDayOfTheWeek="monday"
-                app:orientation="horizontal"
-                app:selectedDayBackgroundColor="@color/light_mint"
-                app:selectedDayBackgroundEndColor="@color/light_mint"
-                app:selectedDayBackgroundStartColor="@color/light_mint"
-                app:selectedDayTextColor="@color/black_sub"
-                app:selectionType="range" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_pill_date_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="27dp"
+                    android:text="언제까지 먹는 약인가요?"
+                    android:textColor="@color/gray800_sub"
+                    android:textAppearance="@font/pretendard_semi_bold"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_pill_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:textColor="@color/dark_mint_main"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_pill_date_msg"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_pill_date_msg" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="34dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pill_date">
+
+                    <com.applikeysolutions.cosmocalendar.view.CalendarView
+                        android:id="@+id/calendar_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:connectedDayIconPosition="top"
+                        app:currentDayIconRes="@drawable/oval_fill_blue"
+                        app:currentDaySelectedIconRes="@drawable/oval_fill_blue"
+                        app:currentDayTextColor="@color/dark_mint_main"
+                        app:firstDayOfTheWeek="monday"
+                        app:orientation="horizontal"
+                        app:selectedDayBackgroundColor="@color/light_mint"
+                        app:selectedDayBackgroundEndColor="@color/light_mint"
+                        app:selectedDayBackgroundStartColor="@color/light_mint"
+                        app:selectedDayTextColor="@color/black_sub"
+                        app:selectionType="range" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_3month"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/ll_calendar">
+
+                    <ImageView
+                        android:id="@+id/iv_3month_selector"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/selector_pill_add_3month"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_3month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="시작일로부터 3개월"
+                        android:textAppearance="@font/pretendard_regular"
+                        android:textColor="@color/black_sub"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_3month_selector"
+                        app:layout_constraintStart_toEndOf="@id/iv_3month_selector"
+                        app:layout_constraintTop_toTopOf="@id/iv_3month_selector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="최대 3개월까지 복약 기간을 설정할 수 있어요"
+                        android:textAppearance="@font/pretendard_medium"
+                        android:textColor="@color/gray500_sub"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_3month_selector" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,9 +184,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/rectangle_fill_mint"
+                android:background="@drawable/selector_pill_add_next"
                 android:fontFamily="@font/pretendard_semi_bold"
-                android:onClick="@{()->fragment.gotoThird()}"
                 android:paddingStart="24dp"
                 android:paddingTop="12dp"
                 android:paddingEnd="24dp"

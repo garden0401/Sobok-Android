@@ -111,7 +111,6 @@ class PillAddFormFragment :
                 binding.tvPillDateSpecificPeriod.isSelected = false
                 binding.pillCycleSpecificMoreConstraintLayout.visibility = View.GONE
                 binding.pillCycleMoreConstraintLayout.visibility = View.VISIBLE
-                Log.d("?????", "${pillAddViewModel.getPillDays()}")
                 binding.tvPillAddSpecificDay.text =
                     pillAddViewModel.pillCycleSpecificDaysString.value
             }
@@ -165,11 +164,9 @@ class PillAddFormFragment :
     private fun observeNavigateData() {
         pillAddViewModel.pillAddNavigateData.observe(viewLifecycleOwner) {
             if (it.canAddPill) {
-                Log.d("Add Activity1", "${it.canAddPill}")
                 binding.wrapScroll.visibility = View.VISIBLE
                 binding.clCannotAddPill.visibility = View.GONE
             } else {
-                Log.d("Add Activity2", "${it.canAddPill}")
                 binding.wrapScroll.visibility = View.GONE
                 binding.clCannotAddPill.visibility = View.VISIBLE
             }
@@ -355,21 +352,19 @@ class PillAddFormFragment :
                 for (i in arrayDays.indices) {
                     val checked = arrayChecked[i]
                     if (checked) {
-                        binding.tvPillAddSpecificDay.text =
-                            "${binding.tvPillAddSpecificDay.text} ${arrayDays[i]}"
-                        //pillAddViewModel.pillCycleSpecificDaysList.add(arrayDays[i])
                         pillAddViewModel.addPillCycleSpecificDay(arrayDays[i])
-                        days += arrayDays[i] + " "
+                        days += arrayDays[i] + ","
                     }
                 }
-                Log.d("특정요일 목룍", "$days")
+                val daysLength:Int = days.length
+                days = days.substring(0, daysLength-1)
+                binding.tvPillAddSpecificDay.text = days
+                pillAddViewModel.setPillDays(days)
+                sendSpecific = days
             }
             val string = binding.tvPillAddSpecificDay.toString()
-            Log.d("특정요일 목록 확인", pillAddViewModel.pillCycleSpecificDaysString.toString())
             pillDays.value = string
-            pillAddViewModel.setPillDays(days)
             sendDay = binding.tvPillAddSpecificDay.toString()
-            // 뷰모델에서 set 해주기
             setSpecificDay = true
 
             dialog = builder.create()
@@ -394,10 +389,8 @@ class PillAddFormFragment :
 
     private fun cycleSpecificDay() {
         binding.tvPillDateSpecificDay.setOnClickListener {
-            Log.d("눌리니..", "눌리냐고...")
             selectPillCycle = 1
             pillAddViewModel.setCycle(2)
-            // 특정요일 버튼 선택
             if (!binding.tvPillDateSpecificDay.isSelected) {
                 binding.tvPillDateSpecificDay.isSelected = true // this 전환
                 binding.pillCycleMoreConstraintLayout.visibility = View.VISIBLE // 해당 피커 활성화
@@ -424,33 +417,4 @@ class PillAddFormFragment :
             }
         }
     }
-/*
-    private fun addPillPerson() {
-
-        binding.clAddPillName.setOnClickListener {
-            if (pillNameAdapter.itemCount < 5) {
-                val list = pillNameAdapter.realPillNameList
-                list.add("null")
-                pillNameAdapter.realPillNameList = list
-            }
-        }
-    }
-*/
-    /* 약 전송 때
-    private fun showDialogPillPerson() {
-        binding.clPillPerson.setOnClickListener {
-            lateinit var dialog: AlertDialog
-            val pillPersonArray = arrayOf("엄마", "수현언니", "정원언니", "안드짱") //  이비분
-            val builder = AlertDialog.Builder(requireContext())
-            builder.setSingleChoiceItems(pillPersonArray, -1) { _, which ->
-                val name = pillPersonArray[which]
-                binding.tvPillAddNameDialog.text = name
-                binding.tvSelectedPillPerson.text = name + "에게 전송할 약이에요"
-                dialog.dismiss()
-            }
-            dialog = builder.create()
-            dialog.show()
-        }
-    }
-*/
 }

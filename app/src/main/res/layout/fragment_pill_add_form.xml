@@ -36,16 +36,16 @@
                 android:layout_marginStart="1dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_close_48" />
+                app:srcCompat="@drawable/ic_close_48_black" />
 
             <TextView
                 android:id="@+id/tv_add_pill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:text="@string/add_pill"
                 android:textColor="@color/gray900_sub"
                 android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -101,18 +101,18 @@
                         <TextView
                             android:id="@+id/tv_pill_date_everyday"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="48dp"
                             android:background="@drawable/selector_pill_add_date"
                             android:clickable="true"
                             android:focusable="true"
+                            android:gravity="center"
                             android:paddingStart="8dp"
-                            android:paddingTop="12dp"
                             android:paddingEnd="8dp"
-                            android:paddingBottom="12dp"
                             android:text="@string/pill_add_everyday"
                             android:textAlignment="center"
                             android:textColor="@color/selector_pill_add_date_text"
                             android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/tv_pill_date_specific_day"
                             app:layout_constraintHorizontal_chainStyle="spread_inside"
                             app:layout_constraintStart_toStartOf="parent"
@@ -121,13 +121,12 @@
                         <TextView
                             android:id="@+id/tv_pill_date_specific_day"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="48dp"
                             android:layout_marginStart="12dp"
                             android:background="@drawable/selector_pill_add_date"
+                            android:gravity="center"
                             android:paddingStart="8dp"
-                            android:paddingTop="12dp"
                             android:paddingEnd="8dp"
-                            android:paddingBottom="12dp"
                             android:text="@string/pill_add_specific_day"
                             android:textAlignment="center"
                             android:textColor="@color/selector_pill_add_date_text"
@@ -139,13 +138,12 @@
                         <TextView
                             android:id="@+id/tv_pill_date_specific_period"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="48dp"
                             android:layout_marginStart="12dp"
                             android:background="@drawable/selector_pill_add_date"
+                            android:gravity="center"
                             android:paddingStart="8dp"
-                            android:paddingTop="12dp"
                             android:paddingEnd="8dp"
-                            android:paddingBottom="12dp"
                             android:text="@string/pill_add_specific_period"
                             android:textAlignment="center"
                             android:textColor="@color/selector_pill_add_date_text"
@@ -194,7 +192,7 @@
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
                                 android:layout_marginBottom="3dp"
-                                android:background="@drawable/ic_more_48"
+                                android:background="@drawable/ic_more_right_48_black"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -232,7 +230,7 @@
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
                                 android:layout_marginBottom="3dp"
-                                android:background="@drawable/ic_more_48"
+                                android:background="@drawable/ic_more_right_48_black"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -267,19 +265,39 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_add_pill_time"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:background="@drawable/rectangle_fill_gray100_border_gray150"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/rcv_pill_time">
 
-                        <ImageView
-                            android:id="@+id/iv_plus"
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_frame"
+                            android:layout_height="match_parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <ImageView
+                                android:id="@+id/iv_plus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="7dp"
+                                android:background="@drawable/ic_plus_48_gray600"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="시간 추가"
+                                android:textColor="@color/gray600_sub"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/iv_plus"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -304,12 +322,12 @@
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/rectangle_fill_mint"
                     android:fontFamily="@font/pretendard_semi_bold"
+                    android:onClick="@{()->cycleFragment.gotoSecond()}"
                     android:paddingStart="24dp"
                     android:paddingTop="12dp"
                     android:paddingEnd="24dp"
                     android:paddingBottom="12dp"
                     android:text="다음"
-                    android:onClick="@{()->cycleFragment.gotoSecond()}"
                     android:textAlignment="center"
                     android:textColor="@color/white_sub"
                     android:textSize="18sp"

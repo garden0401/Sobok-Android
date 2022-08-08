@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
 import androidx.navigation.fragment.findNavController
 import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener
 import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager
@@ -23,6 +24,15 @@ class PillAddFormDateFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.isEmpty = binding.tvPillDate.text.isEmpty()
+
+        binding.tvNext.isSelected = binding.tvPillDate.text.isNotEmpty()
+        binding.tvNext.isActivated = false
+
+        binding.tvNext.setOnClickListener {
+            gotoThird()
+        }
 
         binding.calendarView.isShowDaysOfWeekTitle = false
         binding.calendarView.selectionManager = RangeSelectionManager(
@@ -49,13 +59,14 @@ class PillAddFormDateFragment :
                 binding.tvPillDate.text =
                     "$firstYear.$firstMonth.$firstDay - $lastYear.$lastMonth.$lastDay"
 
+                binding.tvNext.isSelected = true
+                binding.tvNext.isActivated = true
+
                 val start = "$firstYear-$firstMonth-$firstDay"
                 val end = "$lastYear-$lastMonth-$lastDay"
 
                 pillAddViewModel.start.value = start
                 pillAddViewModel.end.value = end
-                Log.d("start ", "${pillAddViewModel.start.value}")
-                Log.d("end", "${pillAddViewModel.end.value}")
             }
         )
 
@@ -73,7 +84,7 @@ class PillAddFormDateFragment :
         }
     }
 
-    fun gotoThird() {
+    private fun gotoThird() {
         findNavController().navigate(R.id.action_pillAddFormDateFragment_to_pillAddFormNameFragment)
     }
 }

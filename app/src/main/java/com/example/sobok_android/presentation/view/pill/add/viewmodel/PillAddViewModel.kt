@@ -36,6 +36,10 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
     val pillTimeList: MutableList<String>
         get() = _pillTimeList
 
+    private var _pillNameList: MutableList<String> = mutableListOf()
+    val pillNameList: MutableList<String>
+        get() = _pillNameList
+
     private val _pillCount = MutableLiveData<Int>()
     var isMyPill: Boolean = false
     var canAddPill: Boolean = false
@@ -76,6 +80,14 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
 
     fun addTime(time: String) {
         pillTimeList.add(time)
+    }
+
+    fun deleteName(name: String) {
+        pillNameList.remove(name)
+    }
+
+    fun addName(name: String) {
+        pillNameList.add(name)
     }
 
     fun setPillList(value: MutableList<PillInfo>) {
