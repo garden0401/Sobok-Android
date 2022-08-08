@@ -37,6 +37,17 @@
 
     <!-- status Bar color -->
     <color name="status_bar_color">#1C3AA9</color>
+<!--    Sobok Notice Color-->
+    <color name="notice_title">#1f2022</color>
+    <color name="notice_background">#eff2f4</color>
+    <color name="notice_list_title">#333738</color>
+    <color name="notice_list_content">#333738</color>
+    <color name="notice_list_message">#676e74</color>
+    <color name="notice_list_time">#a1a9ae</color>
+    <color name="notice_btn_reject">#00abb6</color>
+    <color name="notice_btn_accept">#ffffff</color>
+    <color name="notice_list_line">#eff2f4</color>
+    <color name="notice_detail_line">#e3e8eb</color>
 
 
 </resources>

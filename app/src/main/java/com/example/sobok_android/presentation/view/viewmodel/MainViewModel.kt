@@ -46,20 +46,6 @@ class MainViewModel(
         _isStickerClick.value = value
     }
 
-    private val _isShareRequest = MutableLiveData<Boolean>(false)
-    var isShareRequest: LiveData<Boolean> = _isShareRequest
-
-    fun setIsShareRequest(value: Boolean) {
-        _isShareRequest.value = value
-    }
-
-    private val _isShareRequestClick = MutableLiveData<Boolean>(false)
-    var isShareRequestClick: LiveData<Boolean> = _isShareRequestClick
-
-    fun setIsShareRequestClick(value: Boolean) {
-        _isShareRequestClick.value = value
-    }
-
     fun getGroupData() = viewModelScope.launch {
         runCatching { shareRequestRepository.getGroupData() }
             .onSuccess {
