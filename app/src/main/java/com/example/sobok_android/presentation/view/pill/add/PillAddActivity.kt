@@ -1,12 +1,8 @@
 package com.example.sobok_android.presentation.view.pill.add
 
 import android.os.Bundle
-import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.sobok_android.R
 import com.example.sobok_android.databinding.ActivityPillAddBinding
 import com.example.sobok_android.presentation.base.BindingActivity
@@ -18,23 +14,22 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
     private lateinit var pillAddFormFragment: PillAddFormFragment
     private var pillAddFormNameFragment: PillAddFormNameFragment = PillAddFormNameFragment()
     private var pillAddFormDateFragment: PillAddFormDateFragment = PillAddFormDateFragment()
-    private var pillAddFinishBottomSheetFragment: PillAddFinishBottomSheetFragment = PillAddFinishBottomSheetFragment()
+    private var pillAddFinishBottomSheetFragment: PillAddFinishBottomSheetFragment =
+        PillAddFinishBottomSheetFragment()
 
-    //private var pillAddFinishFragment: PillAddFinishFragment = PillAddFinishFragment()
     private var pillAddNavigateData = PillAddNavigateData(false, false, 0)
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // intent get으로 Data Class 값 가져와야함.
         pillAddViewModel.setPillAddNavigetData(
             PillAddNavigateData(
                 intent.getBooleanExtra("canAddPill", false),
                 intent.getBooleanExtra("isMyPill", false),
                 intent.getIntExtra("pillCount", 0)
-        ))
-
+            )
+        )
         initTransactionEvent()
     }
 
@@ -43,35 +38,7 @@ class PillAddActivity : BindingActivity<ActivityPillAddBinding>(R.layout.activit
         pillAddFormDateFragment = PillAddFormDateFragment()
         pillAddFormNameFragment = PillAddFormNameFragment()
         pillAddFinishBottomSheetFragment = PillAddFinishBottomSheetFragment()
-
-
-//        supportFragmentManager.beginTransaction()
-//            .add(R.id.nav_pill_add, pillAddFormFragment)
-//            .commit()
-
     }
 
-    fun replacePillAddNameFragment() {
-        /*
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_pill_add, pillAddFormNameFragment).commit()
-
-         */
-    }
-
-    fun replacePillAddDateFragment() {
-        /*
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_pill_add, pillAddFormDateFragment).commit()
-         */
-    }
-
-    fun replacePillAddFormFragment() {
-        /*
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_pill_add, pillAddFormFragment).commit()
-
-         */
-    }
-
+    override fun onSupportNavigateUp() = findNavController(R.id.nav_pill_add).navigateUp()
 }

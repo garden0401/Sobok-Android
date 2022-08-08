@@ -2,6 +2,7 @@ package com.example.sobok_android.presentation.view.pill.add
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.sobok_android.R
@@ -9,14 +10,18 @@ import com.example.sobok_android.databinding.FragmentPillAddFormNameBinding
 import com.example.sobok_android.presentation.base.BindingFragment
 import com.example.sobok_android.presentation.view.MainActivity
 import com.example.sobok_android.presentation.view.pill.add.adapter.PillNameAdapter
+import com.example.sobok_android.presentation.view.pill.add.viewmodel.PillAddViewModel
 import com.example.sobok_android.util.dp
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import org.koin.android.ext.android.bind
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class PillAddFormNameFragment :
     BindingFragment<FragmentPillAddFormNameBinding>(R.layout.fragment_pill_add_form_name) {
     private lateinit var pillNameAdapter: PillNameAdapter
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private val pillAddViewModel: PillAddViewModel by sharedViewModel()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,6 +32,14 @@ class PillAddFormNameFragment :
         navigateToHome()
         initBottomSheet()
         setBottomSheetStateChanged()
+
+
+        binding.isMyPill = pillAddViewModel.pillAddNavigateData.value?.isMyPill
+        Log.d("ISMYPILL", "${pillAddViewModel.pillAddNavigateData.value?.isMyPill}")
+
+        //binding.includeBottomsheet.tvCycle.text = pillAddViewModel.getPillPeriod()
+        binding.includeBottomsheet.tvCycleDetail.text = pillAddViewModel.pillCycle.value.toString()
+
 
         binding.clBtnNext.setOnClickListener {
             BottomSheetBehavior.from(binding.bottomSheet).state =

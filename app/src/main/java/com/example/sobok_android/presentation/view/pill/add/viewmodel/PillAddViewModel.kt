@@ -10,7 +10,6 @@ import com.example.sobok_android.presentation.view.pill.add.PillAddNavigateData
 
 class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
 
-    // repository함수를 불러오면.. data 불러오는거
     private var _pillList: MutableList<PillInfo> = mutableListOf()
     val pillList: MutableList<PillInfo>
         get() = _pillList
@@ -52,6 +51,9 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
     private val _pillListCount = MutableLiveData<Int>()
     val pillListCount: LiveData<Int> get() = _pillListCount
 
+    val start = MutableLiveData<String>()
+    val end = MutableLiveData<String>()
+
     fun setTimeList(timeList: MutableList<String>) {
         _timeList.value = timeList
     }
@@ -65,12 +67,7 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
     }
 
     fun setCycle(takeInterval: Int) {
-        Log.d("set Cycle", "$takeInterval")
         _pillCycle.value = takeInterval
-    }
-
-    fun setSpecificDay(days: String) {
-
     }
 
     fun deleteTime(time: String) {
@@ -83,7 +80,6 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
 
     fun setPillList(value: MutableList<PillInfo>) {
         _pillList = value
-        Log.d("set 됐습니다.", "$_pillList")
     }
 
     fun setPillTimeList(value: MutableList<String>) {
@@ -124,5 +120,9 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
 
     fun setPillAddNavigetData(navigateData: PillAddNavigateData) {
         _pillAddNavigateData.value = navigateData
+    }
+
+    fun setPillDate() {
+
     }
 }
