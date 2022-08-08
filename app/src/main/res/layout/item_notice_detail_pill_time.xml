@@ -4,6 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
+        <variable
+            name="noticeDetailData"
+            type="String" />
 
     </data>
 
@@ -20,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="오전 10:00"
+            android:text="@{noticeDetailData}"
             android:fontFamily="@font/pretendard_medium"
             android:textSize="18sp"
             android:textColor="@color/gray800_sub"

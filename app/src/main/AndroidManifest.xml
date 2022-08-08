@@ -14,8 +14,8 @@
         android:theme="@style/Theme.SobokAndroid"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".NoticeDetailPillInfoActivity"
-            android:exported="false" />
+            android:name=".presentation.view.notice2.NoticeDetailPillInfoActivity"
+            android:exported="false"/>
         <activity
             android:name=".presentation.view.pill.add.PillAddActivity"
             android:exported="false" />
@@ -48,7 +48,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.view.user.SignInActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".presentation.view.splash.SplashActivity"
             android:exported="false"></activity>

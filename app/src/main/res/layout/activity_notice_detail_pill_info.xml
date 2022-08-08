@@ -4,6 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="noticeDetailData"
+            type="com.example.sobok_android.domain.model.notice2.NoticeDetailData" />
+        
+        <variable
+            name="isSpecific"
+            type="Boolean" />
+
+        <variable
+            name="isCycle"
+            type="String" />
+
+        <variable
+            name="isPeriod"
+            type="String" />
 
     </data>
 
@@ -55,6 +72,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 tools:text="정관장"
+                android:text="@{noticeDetailData.Data.pillName}"
                 android:fontFamily="@font/pretendard_bold"
                 android:textSize="24sp"
                 android:textColor="@color/gray900_sub"
@@ -94,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangle_fill_mint_border_mint_radius6dp"
                 tools:text="특정 요일"
+                android:text="@{isCycle}"
                 android:fontFamily="@font/pretendard_semi_bold"
                 android:textSize="18sp"
                 android:textColor="@color/dark_mint_main"
@@ -108,6 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="월, 화, 수, 목, 금, 토"
+                android:text="@{isSpecific? noticeDetailData.Data.scheduleSpecific : noticeDetailData.Data.scheduleDay}"
                 android:fontFamily="@font/pretendard_medium"
                 android:textSize="18sp"
                 android:textColor="@color/gray800_sub"
@@ -136,7 +156,7 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="3"
                 tools:listitem="@layout/item_notice_detail_pill_time"
-                tools:itemCount="6"
+                tools:itemCount="5"
                 app:layout_constraintTop_toBottomOf="@id/tv_notice_detail_time_title"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="20dp"/>
@@ -157,6 +177,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="2022.01.09 ~ 2022.04.09"
+                android:text="@{isPeriod}"
                 android:fontFamily="@font/pretendard_medium"
                 android:textSize="18sp"
                 android:textColor="@color/dark_mint_main"
