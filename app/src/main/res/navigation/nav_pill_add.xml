@@ -1,26 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_pill_add"
     app:startDestination="@id/pillAddFormFragment">
     <fragment
         android:id="@+id/pillAddFormFragment"
         android:name="com.example.sobok_android.presentation.view.pill.add.PillAddFormFragment"
-        android:label="PillAddFormFragment" >
+        android:label="pillAddFormFragment"
+        tools:layout="@layout/fragment_pill_add_form">
         <action
-            android:id="@+id/cment"
+            android:id="@+id/action_pillAddForm_to_pillAddFormDate"
             app:destination="@id/pillAddFormDateFragment" />
     </fragment>
     <fragment
         android:id="@+id/pillAddFormDateFragment"
         android:name="com.example.sobok_android.presentation.view.pill.add.PillAddFormDateFragment"
-        android:label="PillAddFormDateFragment" >
+        android:label="pillAddFormDateFragment"
+        tools:layout="@layout/fragment_pill_add_form_date">
         <action
             android:id="@+id/action_pillAddFormDateFragment_to_pillAddFormNameFragment"
             app:destination="@id/pillAddFormNameFragment" />
+        <action
+            android:id="@+id/action_date_to_form"
+            app:destination="@id/pillAddFormFragment"
+            app:popUpTo="@id/pillAddFormFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/pillAddFormNameFragment"
         android:name="com.example.sobok_android.presentation.view.pill.add.PillAddFormNameFragment"
-        android:label="PillAddFormNameFragment" />
+        android:label="pillAddFormNameFragment"
+        tools:layout="@layout/fragment_pill_add_form_name">
+        <action
+            android:id="@+id/action_name_to_date"
+            app:destination="@id/pillAddFormDateFragment"
+            app:popUpTo="@id/pillAddFormDateFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

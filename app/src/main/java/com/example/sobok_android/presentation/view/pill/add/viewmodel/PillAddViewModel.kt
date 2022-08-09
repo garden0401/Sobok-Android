@@ -4,16 +4,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.sobok_android.domain.model.pill.pilladd.PillListData
+import com.example.sobok_android.domain.model.pill.pilladd.PillInfo
 import com.example.sobok_android.domain.repository.pill.pilladd.PillAddRepository
 import com.example.sobok_android.presentation.view.pill.add.PillAddNavigateData
 
 class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
 
-    // repository함수를 불러오면.. data 불러오는거
-    private var _pillList: MutableList<PillListData.PillInfo> = mutableListOf()
-    val pillList: MutableList<PillListData.PillInfo>
+    private var _pillList: MutableList<PillInfo> = mutableListOf()
+    val pillList: MutableList<PillInfo>
         get() = _pillList
+
+    private val _timeList = MutableLiveData<MutableList<String>>()
+    val timeList: LiveData<MutableList<String>> = _timeList
 
     private val _pillTime = MutableLiveData<Int>()
     val pillTime: LiveData<Int> = _pillTime
@@ -21,16 +23,24 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
     private val _pillCycle = MutableLiveData<Int>()
     val pillCycle: LiveData<Int> = _pillCycle
 
-    private var _pillCycleSpecificDaysList: MutableList<String> = mutableListOf()
-    val pillCycleSpecificDaysList: MutableList<String>
-        get() = _pillCycleSpecificDaysList
+    private var _pillCycleSpecificDaysList = MutableLiveData<MutableList<String>>()
+    val pillCycleSpecificDaysList: LiveData<MutableList<String>> = _pillCycleSpecificDaysList
+
+    private var _pillCycleSpecificDaysString = MutableLiveData<String>()
+    val pillCycleSpecificDaysString: LiveData<String> = _pillCycleSpecificDaysString
 
     private var _pillCycleSpecific = MutableLiveData<String>()
     val pillCycleSpecific: LiveData<String> = _pillCycleSpecific
 
-    private var _pillTimeList: MutableList<String> = mutableListOf("8시", "1시", "7시")
+    private var _pillTimeList: MutableList<String> = mutableListOf("오전 8:00", "오후 01:00", "오후 7:00")
     val pillTimeList: MutableList<String>
         get() = _pillTimeList
+
+    var pillTimeListView: MutableList<String> = mutableListOf("8:00", "13:00", "19:00")
+
+    private var _pillNameList: MutableList<String> = mutableListOf()
+    val pillNameList: MutableList<String>
+        get() = _pillNameList
 
     private val _pillCount = MutableLiveData<Int>()
     var isMyPill: Boolean = false
@@ -47,20 +57,63 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
     private val _pillListCount = MutableLiveData<Int>()
     val pillListCount: LiveData<Int> get() = _pillListCount
 
+    val start = MutableLiveData<String>()
+    val end = MutableLiveData<String>()
+
+    fun setTimeList(timeList: MutableList<String>) {
+        _timeList.value = timeList
+    }
+
+    fun addPillCycleSpecificDay(day: String) {
+        _pillCycleSpecificDaysList.value?.add(day)
+    }
+
+    fun getCycle(): Int? {
+        return _pillCycle.value
+    }
+
     fun setCycle(takeInterval: Int) {
-        Log.d("set Cycle", "$takeInterval")
         _pillCycle.value = takeInterval
     }
 
-    fun setPillList(value: MutableList<PillListData.PillInfo>) {
+    fun deleteTime(time: String) {
+        pillTimeList.remove(time)
+    }
+
+    fun addTime(time: String) {
+        pillTimeList.add(time)
+    }
+
+    fun deleteName(name: String) {
+        pillNameList.remove(name)
+    }
+
+    fun addName(name: String) {
+        pillNameList.add(name)
+    }
+
+    fun setPillList(value: MutableList<PillInfo>) {
         _pillList = value
-        Log.d("set 됐습니다.", "$_pillList")
+    }
+
+    fun setPillTimeList(value: MutableList<String>) {
+        _pillTimeList = value
     }
 
     fun setPillPeriod(period: MutableLiveData<String>) {
-        Log.d("value : ", "${period.value}")
         _pillCycleSpecific = period
-        Log.d("뭡니까 ", "${_pillCycleSpecific.value}")
+    }
+
+    fun getPillPeriod(): String {
+        return _pillCycleSpecific.value.toString()
+    }
+
+    fun setPillDays(days: String) {
+        _pillCycleSpecificDaysString.value = days
+    }
+
+    fun getPillDays(): String {
+        return _pillCycleSpecificDaysString.value.toString()
     }
 
     fun setIsComplete(complete: Boolean) {
@@ -75,11 +128,15 @@ class PillAddViewModel(val pillAddRepository: PillAddRepository) : ViewModel() {
         _possibleCount.value = count
     }
 
-    fun getPillAddNavigetData(navigateData: PillAddNavigateData): PillAddNavigateData {
-        return navigateData
+    fun getPillAddNavigetData(): PillAddNavigateData? {
+        return _pillAddNavigateData.value
     }
 
     fun setPillAddNavigetData(navigateData: PillAddNavigateData) {
         _pillAddNavigateData.value = navigateData
+    }
+
+    fun setPillDate() {
+
     }
 }

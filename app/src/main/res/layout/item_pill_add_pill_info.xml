@@ -6,7 +6,7 @@
     <data>
         <variable
             name="pillInfo"
-            type="com.example.sobok_android.domain.model.pill.pilladd.PillListData.PillInfo" />
+            type="com.example.sobok_android.domain.model.pill.pilladd.PillInfo" />
 
     </data>
 

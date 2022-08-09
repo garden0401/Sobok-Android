@@ -29,7 +29,7 @@
     <string name="pill_add_pill_date">2020.01.22 ~</string>
     <string name="pill_add_everyday">매일</string>
     <string name="pill_add_specific_day">특정 요일</string>
-    <string name="pill_add_specific_period">특정 기간</string>
+    <string name="pill_add_specific_period">특정 간격</string>
     <string name="pill_add_finish">완료</string>
     <string name="pill_add_pill_cycle_text">월, 수</string>
     <string name="pill_add_finish_my_pill_list_msg">내 약 목록</string>
